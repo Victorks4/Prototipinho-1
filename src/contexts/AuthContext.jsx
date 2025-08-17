@@ -12,6 +12,16 @@ export const useAuth = () => {
   return context;
 };
 
+// Configurar base URL do axios
+const api = axios.create({
+  baseURL: 'http://localhost/Prototipinho-1/hemobyte.api/api',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  },
+  timeout: 10000
+});
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,12 +29,17 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     // Verificar se há usuário salvo no localStorage
     const savedUser = localStorage.getItem("user");
-    if (savedUser) {
+    const savedToken = localStorage.getItem("token");
+    
+    if (savedUser && savedToken) {
       try {
         setUser(JSON.parse(savedUser));
+        // Configurar token no header para futuras requisições
+        api.defaults.headers.common['Authorization'] = `Bearer ${savedToken}`;
       } catch (error) {
         console.error("Erro ao carregar usuário do localStorage:", error);
         localStorage.removeItem("user");
+        localStorage.removeItem("token");
       }
     }
     setLoading(false);
@@ -32,65 +47,69 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, senha) => {
     try {
-      const response = await axios.post(
-        "/api/login.php",
-        {
-          email,
-          senha,
-        },
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      );
+      const response = await api.post('/login.php', {
+        email,
+        senha
+      });
 
       if (response.data.success) {
         const userData = response.data.user;
+        const token = response.data.token;
+        
         setUser(userData);
         localStorage.setItem("user", JSON.stringify(userData));
-        toast.success("Login realizado com sucesso!");
+        localStorage.setItem("token", token);
+        
+        // Configurar token para futuras requisições
+        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        
+        toast.success(response.data.message || "Login realizado com sucesso!");
         return true;
       } else {
-        toast.error(response.data.error || "Erro ao fazer login");
+        toast.error(response.data.message || "Erro ao fazer login");
         return false;
       }
     } catch (error) {
       console.error("Erro no login:", error);
-      toast.error("Erro ao conectar com o servidor");
+      
+      if (error.response && error.response.data) {
+        toast.error(error.response.data.message || "Erro ao fazer login");
+      } else {
+        toast.error("Erro ao conectar com o servidor");
+      }
       return false;
     }
   };
 
   const register = async (userData) => {
     try {
-      const formData = new URLSearchParams();
-      for (const [key, value] of Object.entries(userData)) {
-        formData.append(key, value);
-      }
-
-      const response = await axios.post("/api/cadastrar.php", formData, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      });
+      const response = await api.post('/register.php', userData);
 
       if (response.data.success) {
         const newUser = response.data.user;
+        const token = response.data.token;
+        
         setUser(newUser);
         localStorage.setItem("user", JSON.stringify(newUser));
-        toast.success("Cadastro realizado com sucesso!");
+        localStorage.setItem("token", token);
+        
+        // Configurar token para futuras requisições
+        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        
+        toast.success(response.data.message || "Cadastro realizado com sucesso!");
         return true;
       } else {
-        const errorMessage = Array.isArray(response.data.errors)
-          ? response.data.errors.join("\n")
-          : response.data.error || "Erro ao cadastrar";
-        toast.error(errorMessage);
+        toast.error(response.data.message || "Erro ao cadastrar");
         return false;
       }
     } catch (error) {
       console.error("Erro no cadastro:", error);
-      toast.error("Erro ao conectar com o servidor");
+      
+      if (error.response && error.response.data) {
+        toast.error(error.response.data.message || "Erro ao cadastrar");
+      } else {
+        toast.error("Erro ao conectar com o servidor");
+      }
       return false;
     }
   };
@@ -98,6 +117,11 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    
+    // Remover token do header
+    delete api.defaults.headers.common['Authorization'];
+    
     toast.success("Logout realizado com sucesso!");
   };
 

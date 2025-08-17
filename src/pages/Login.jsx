@@ -5,7 +5,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { FaTint, FaEye, FaEyeSlash, FaSpinner } from "react-icons/fa";
 
 const Login = () => {
-  const { login } = useAuth();
+  const { login, register: registerUser } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +39,7 @@ const Login = () => {
 
     setIsLoading(true);
     try {
-      const success = await login.register(data);
+      const success = await registerUser(data);
       if (success) {
         navigate("/");
       }
@@ -55,7 +55,7 @@ const Login = () => {
         <div className="text-center">
           <Link
             to="/"
-            className="flex items-center justify-center space-x-2 text-primary-500 mb-8 mr-[40px]"
+            className="flex items-center justify-center space-x-2 text-primary-500 mb-8"
           >
             <FaTint className="text-4xl" />
             <span className="text-3xl font-bold">HemoByte</span>
@@ -164,12 +164,12 @@ const Login = () => {
                     Lembrar de mim
                   </span>
                 </label>
-                <a
-                  href="#"
+                <button
+                  type="button"
                   className="text-sm text-primary-500 hover:text-primary-600"
                 >
                   Esqueceu a senha?
-                </a>
+                </button>
               </div>
 
               <button
@@ -260,12 +260,7 @@ const Login = () => {
                   id="telefone"
                   type="tel"
                   {...register("telefone", {
-                    required: "Telefone é obrigatório",
-                    pattern: {
-                      value:
-                        /^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$/,
-                      message: "Telefone inválido",
-                    },
+                    required: "Telefone é obrigatório"
                   })}
                   className="input-custom"
                   placeholder="(75) 99999-9999"
@@ -362,6 +357,7 @@ const Login = () => {
                 ? "Não tem uma conta?"
                 : "Já tem uma conta?"}{" "}
               <button
+                type="button"
                 onClick={() => {
                   setActiveTab(activeTab === "login" ? "register" : "login");
                   reset();
