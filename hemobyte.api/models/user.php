@@ -15,7 +15,7 @@ class User {
     public function __construct($db) {
         $this->conn = $db;
     }
-
+//comitarrr
     // Cadastrar novo usuário
     public function create() {
         try {

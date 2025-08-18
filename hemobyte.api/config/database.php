@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     http_response_code(200);
     exit();
 }
-
+//databases p comitar
 class Database {
     private $host = "localhost";
     private $db_name = "hemobyte_db";

@@ -21,7 +21,7 @@ const api = axios.create({
   },
   timeout: 10000
 });
-
+//comita bosta
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);

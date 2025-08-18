@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
 }
-
+//vqmow domitarrr?????
 // Log para debug
 error_log("Login endpoint called: " . $_SERVER['REQUEST_METHOD']);
 
