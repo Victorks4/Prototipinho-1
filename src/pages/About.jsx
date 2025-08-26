@@ -229,7 +229,7 @@ const About = () => {
                 <h3 className="text-lg font-semibold text-secondary-800 mb-2">
                   Email
                 </h3>
-                <p className="text-secondary-600">contato@hemobyte.com</p>
+                <p className="text-secondary-600">hemobytess@gmail.com</p>
               </div>
 
               <div className="text-center">
