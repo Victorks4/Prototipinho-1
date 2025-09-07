@@ -1,0 +1,921 @@
+/**
+ * Correções UX/UI - HemoByte
+ * Implementa todas as melhorias de acessibilidade e usabilidade identificadas
+ */
+
+/* ==========================================
+   CORREÇÕES DE ACESSIBILIDADE CRÍTICAS
+   ========================================== */
+
+/* Skip Link para navegação por teclado */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #000;
+    color: #fff;
+    padding: 8px 12px;
+    text-decoration: none;
+    z-index: 10000;
+    border-radius: 0 0 4px 4px;
+    font-weight: 600;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+/* Screen Reader Only - para conteúdo acessível */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Melhor foco visível para todos os elementos interativos */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+a:focus,
+.btn:focus {
+    outline: 2px solid #e60000;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(230, 0, 0, 0.2);
+}
+
+/* ==========================================
+   CORREÇÕES DE CONTRASTE
+   ========================================== */
+
+/* Melhor contraste para textos secundários */
+.campaign-details p,
+.impact-card p,
+.story-card p,
+.form-hint {
+    color: #4a4a4a; /* Era #666 - agora WCAG AA compliant */
+}
+
+/* Contraste melhorado para placeholders */
+input::placeholder,
+textarea::placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
+/* Estados de erro mais visíveis */
+.form-group input.invalid,
+.form-group textarea.invalid,
+.form-group select.invalid {
+    border-color: #dc3545;
+    border-width: 2px;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23dc3545' viewBox='0 0 16 16'%3E%3Cpath d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+}
+
+/* Estados de sucesso mais visíveis */
+.form-group input.valid,
+.form-group textarea.valid,
+.form-group select.valid {
+    border-color: #28a745;
+    border-width: 2px;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2328a745' viewBox='0 0 16 16'%3E%3Cpath d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.061L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+}
+
+/* ==========================================
+   BREADCRUMBS DE NAVEGAÇÃO
+   ========================================== */
+
+/* Breadcrumb removido conforme solicitado */
+
+/* ==========================================
+   CORREÇÕES DE RESPONSIVIDADE
+   ========================================== */
+
+/* Tamanhos mínimos para elementos tocáveis */
+@media (max-width: 768px) {
+    button,
+    .btn,
+    .btn-auth,
+    .campaign-button,
+    .participate-button,
+    .alert-button,
+    .cta-button,
+    .main-nav a,
+    .search-button {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 0.75rem 1rem;
+    }
+    
+    /* Navegação principal com tamanhos adequados */
+    .main-nav a {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+    }
+    
+    /* Textos legíveis em mobile */
+    .campaign-status,
+    .story-tag {
+        font-size: 0.875rem; /* Mínimo 14px */
+        padding: 0.4rem 0.8rem;
+    }
+    
+    /* Formulários mais acessíveis em mobile */
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        min-height: 44px;
+        font-size: 1rem; /* Evita zoom no iOS */
+    }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-width: 360px) {
+    .main-nav a {
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+    }
+    
+    .campaign-status,
+    .story-tag {
+        font-size: 0.875rem; /* Mantém legibilidade */
+        padding: 0.3rem 0.6rem;
+    }
+}
+
+/* Responsividade específica para correções */
+@media (max-width: 768px) {
+    /* Breadcrumb removido */
+    
+    .campaigns-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .campaign-card {
+        padding: 1rem;
+    }
+    
+    .auth-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .tab-link {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Breadcrumb removido */
+    
+    .campaign-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .campaign-info p {
+        font-size: 0.85rem;
+    }
+}
+
+/* ==========================================
+   LOADING STATES MELHORADOS
+   ========================================== */
+
+/* Estados de loading para botões */
+.btn[data-loading="true"],
+.btn-auth[data-loading="true"] {
+    position: relative;
+    color: transparent;
+    pointer-events: none;
+}
+
+.btn[data-loading="true"]::after,
+.btn-auth[data-loading="true"]::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    color: white;
+}
+
+/* Indicador de carregamento para formulários */
+.form-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.form-loading::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 10;
+    border-radius: inherit;
+}
+
+.form-loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #e60000;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 11;
+}
+
+/* ==========================================
+   MELHORIAS DE HIERARQUIA VISUAL
+   ========================================== */
+
+/* Escala tipográfica melhorada */
+h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.875rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+}
+
+/* Responsividade da tipografia */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.875rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.25rem;
+    }
+    
+    h3 {
+        font-size: 1.125rem;
+    }
+}
+
+/* ==========================================
+   ANIMAÇÕES RESPEITANDO PREFERÊNCIAS
+   ========================================== */
+
+/* Respeita preferência de movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .loading-spinner,
+    .btn[data-loading="true"]::after,
+    .form-loading::after {
+        animation: none !important;
+    }
+}
+
+/* ==========================================
+   MELHORIAS DE FEEDBACK VISUAL
+   ========================================== */
+
+/* Efeito ripple para botões */
+.btn,
+.btn-auth,
+.campaign-button,
+.participate-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before,
+.btn-auth::before,
+.campaign-button::before,
+.participate-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+    pointer-events: none;
+}
+
+.btn:active::before,
+.btn-auth:active::before,
+.campaign-button:active::before,
+.participate-button:active::before {
+    width: 200px;
+    height: 200px;
+}
+
+/* Estados hover melhorados */
+.campaign-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.impact-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* ==========================================
+   MELHORIAS DE FORMULÁRIOS
+   ========================================== */
+
+/* Correções específicas para página de login */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.auth-container {
+    max-width: 450px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+.auth-card {
+    width: 100%;
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #f1f5f9;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+}
+
+.tab-link {
+    flex: 1;
+    padding: 1rem;
+    background: #f8fafc;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #64748b;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-link.active {
+    background: white;
+    color: #e60000;
+    border-bottom-color: #e60000;
+}
+
+.tab-link:hover {
+    background: #f1f5f9;
+    color: #e60000;
+}
+
+.auth-form {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+/* Labels mais acessíveis */
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #2d3748;
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #e60000;
+    box-shadow: 0 0 0 3px rgba(230, 0, 0, 0.1);
+    outline: none;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.forgot-password {
+    color: #e60000;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.btn-auth {
+    width: 100%;
+    padding: 1rem;
+    background: #e60000;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.btn-auth:hover {
+    background: #cc0000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(230, 0, 0, 0.3);
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.auth-links a {
+    color: #e60000;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+/* Hints mais visíveis */
+.form-hint {
+    font-size: 0.875rem;
+    color: #4a5568;
+    margin-top: 0.25rem;
+    line-height: 1.4;
+}
+
+/* Mensagens de erro melhoradas */
+.field-error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: slideIn 0.3s ease;
+}
+
+.field-error::before {
+    content: "⚠️";
+    font-size: 1rem;
+}
+
+/* Mensagens de sucesso */
+.field-success {
+    color: #28a745;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: slideIn 0.3s ease;
+}
+
+.field-success::before {
+    content: "✅";
+    font-size: 1rem;
+}
+
+/* ==========================================
+   MELHORIAS DOS CARDS DE CAMPANHAS
+   ========================================== */
+
+.campaigns-section {
+    margin: 2rem 0;
+}
+
+.campaigns-section h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: #2d3748;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.campaigns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.campaign-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.campaign-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #e60000, #ff4444);
+}
+
+.campaign-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.campaign-status {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.campaign-status.urgent {
+    background: linear-gradient(135deg, #ff4757, #ff3838) !important;
+    color: white !important;
+    animation: pulse 2s infinite;
+    border: 2px solid #ff4757 !important;
+}
+
+.campaign-status.active {
+    background: linear-gradient(135deg, #2ed573, #1dd1a1) !important;
+    color: white !important;
+    border: 2px solid #2ed573 !important;
+}
+
+.campaign-status.planning {
+    background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+    color: white !important;
+    border: 2px solid #3b82f6 !important;
+}
+
+.campaign-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.campaign-info {
+    margin-bottom: 1.5rem;
+}
+
+.campaign-info p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: #4a5568;
+    font-size: 0.9rem;
+}
+
+.campaign-info i {
+    width: 16px;
+    color: #e60000;
+}
+
+.progress-container {
+    margin-bottom: 1.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, #e60000, #ff4444);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+.progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.participate-button,
+.campaign-button {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: linear-gradient(135deg, #e60000, #cc0000);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.participate-button:hover,
+.campaign-button:hover {
+    background: linear-gradient(135deg, #cc0000, #b30000);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(230, 0, 0, 0.3);
+    color: white;
+    text-decoration: none;
+}
+
+/* Animações */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* ==========================================
+   MELHORIAS DE NAVEGAÇÃO
+   ========================================== */
+
+/* Indicador de página atual */
+.main-nav a.active {
+    background-color: #e60000;
+    color: white;
+    transform: none;
+}
+
+.main-nav a.active:hover {
+    background-color: #cc0000;
+}
+
+/* Tooltips melhorados */
+.main-nav a[title] {
+    position: relative;
+}
+
+.main-nav a[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2d3748;
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+
+.main-nav a[title]:hover::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-bottom-color: #2d3748;
+    z-index: 1001;
+}
+
+/* ==========================================
+   UTILITÁRIOS DE ACESSIBILIDADE
+   ========================================== */
+
+/* Classe para ocultar elementos visualmente mas manter para screen readers */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Classe para mostrar apenas para screen readers */
+.sr-only-focusable:focus {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    padding: inherit !important;
+    margin: inherit !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+}
+
+/* ==========================================
+   ANIMAÇÕES AUXILIARES
+   ========================================== */
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================================
+   MODO ESCURO (PREPARAÇÃO FUTURA)
+   ========================================== */
+
+@media (prefers-color-scheme: dark) {
+    /* Breadcrumb removido */
+    
+    .form-hint {
+        color: #a0aec0;
+    }
+}
+
+/* ==========================================
+   IMPRESSÃO
+   ========================================== */
+
+@media print {
+    .skip-link,
+    .btn,
+    .btn-auth,
+    .campaign-button,
+    .participate-button {
+        display: none !important;
+    }
+    
+    .campaign-card,
+    .impact-card {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+}

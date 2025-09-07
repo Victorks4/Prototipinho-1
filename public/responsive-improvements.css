@@ -1,0 +1,544 @@
+/**
+ * Melhorias de Responsividade - HemoByte
+ * Corrige problemas de responsividade no admin panel e filtros
+ */
+
+/* ==========================================
+   ADMIN PANEL RESPONSIVO
+   ========================================== */
+
+@media (max-width: 1024px) {
+    .admin-panel {
+        flex-direction: column;
+    }
+    
+    .admin-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        order: 2;
+    }
+    
+    .admin-main {
+        margin-left: 0;
+        padding: 1rem;
+        order: 1;
+    }
+    
+    .admin-header {
+        padding: 1rem;
+    }
+    
+    .admin-header h1 {
+        font-size: 1.25rem;
+    }
+    
+    .admin-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+    
+    .admin-nav-item {
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+        padding: 0.75rem 0.5rem;
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 280px;
+        height: 100vh;
+        transition: left 0.3s ease;
+        z-index: 1001;
+    }
+    
+    .admin-sidebar.mobile-open {
+        left: 0;
+    }
+    
+    .admin-main {
+        margin-left: 0;
+        padding: 0.5rem;
+    }
+    
+    /* Botão de menu mobile */
+    .mobile-menu-toggle {
+        display: block !important;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1002;
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    .mobile-menu-toggle:hover {
+        background: #cc0000;
+    }
+    
+    /* Overlay para fechar menu */
+    .mobile-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 1000;
+    }
+    
+    .mobile-overlay.active {
+        display: block;
+    }
+    
+    /* Cards do dashboard */
+    .dashboard-cards {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+    
+    .dashboard-card {
+        padding: 1rem;
+    }
+    
+    .dashboard-card h3 {
+        font-size: 1rem;
+    }
+    
+    .dashboard-card .stat-number {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-main {
+        padding: 0.25rem;
+    }
+    
+    .admin-section {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .admin-section h2 {
+        font-size: 1.25rem;
+    }
+    
+    /* Tabelas responsivas */
+    .admin-table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .admin-table {
+        min-width: 600px;
+    }
+    
+    .admin-table th,
+    .admin-table td {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    /* Formulários */
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px; /* Evita zoom no iOS */
+    }
+    
+    /* Botões */
+    .btn {
+        padding: 0.75rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .btn-group .btn {
+        width: 100%;
+    }
+}
+
+/* ==========================================
+   FILTROS RESPONSIVOS
+   ========================================== */
+
+@media (max-width: 1024px) {
+    .filters-container {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+    
+    .filter-select {
+        flex: 1;
+        min-width: 150px;
+    }
+    
+    .search-container {
+        flex: 1 1 100%;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-section {
+        padding: 1rem;
+    }
+    
+    .filters-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .filter-select {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 16px; /* Evita zoom no iOS */
+    }
+    
+    .search-container {
+        margin-bottom: 0;
+    }
+    
+    .search-input {
+        padding: 0.75rem;
+        font-size: 16px; /* Evita zoom no iOS */
+    }
+    
+    .search-button {
+        padding: 0.75rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-section {
+        padding: 0.5rem;
+    }
+    
+    .search-container {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .search-input {
+        border-radius: 8px;
+    }
+    
+    .search-button {
+        border-radius: 8px;
+        width: 100%;
+    }
+    
+    .filters-container {
+        gap: 0.75rem;
+    }
+}
+
+/* ==========================================
+   CAMPANHAS GRID RESPONSIVO
+   ========================================== */
+
+@media (max-width: 1024px) {
+    .campaigns-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .campaigns-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .campaign-card {
+        padding: 1rem;
+    }
+    
+    .campaign-card h3 {
+        font-size: 1.125rem;
+    }
+    
+    .campaign-info p {
+        font-size: 0.875rem;
+    }
+    
+    .participate-button,
+    .campaign-button {
+        padding: 0.75rem;
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .campaigns-section {
+        padding: 1rem 0.5rem;
+    }
+    
+    .campaigns-section h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    
+    .campaign-card {
+        padding: 0.75rem;
+    }
+    
+    .campaign-status {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .progress-container {
+        margin: 0.75rem 0;
+    }
+    
+    .progress-text {
+        font-size: 0.75rem;
+    }
+}
+
+/* ==========================================
+   MODAIS RESPONSIVOS
+   ========================================== */
+
+@media (max-width: 768px) {
+    .modal {
+        padding: 1rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        max-width: none;
+        margin: 2rem auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .modal-header {
+        padding: 1rem;
+    }
+    
+    .modal-header h3 {
+        font-size: 1.125rem;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
+    
+    .modal-footer {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .modal-footer .btn {
+        width: 100%;
+    }
+}
+
+/* ==========================================
+   NOTIFICAÇÕES RESPONSIVAS
+   ========================================== */
+
+@media (max-width: 768px) {
+    #notification-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .notification {
+        margin-bottom: 0.5rem;
+    }
+    
+    .notification-content {
+        padding: 0.75rem;
+    }
+    
+    .notification-title {
+        font-size: 0.875rem;
+    }
+    
+    .notification-message {
+        font-size: 0.8rem;
+    }
+}
+
+/* ==========================================
+   STATS BANNER RESPONSIVO
+   ========================================== */
+
+@media (max-width: 768px) {
+    .stats-banner {
+        padding: 2rem 1rem;
+    }
+    
+    .stats-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .stat-item {
+        flex: none;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .stat-label {
+        font-size: 0.875rem;
+    }
+    
+    .banner-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+    
+    .cta-button {
+        width: 100%;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-banner {
+        padding: 1.5rem 0.5rem;
+    }
+    
+    .stat-number {
+        font-size: 1.75rem;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+    }
+}
+
+/* ==========================================
+   UTILITÁRIOS RESPONSIVOS
+   ========================================== */
+
+/* Esconder elementos em mobile */
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+/* Mostrar apenas em mobile */
+.show-mobile {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .show-mobile {
+        display: block !important;
+    }
+    
+    .show-mobile.inline {
+        display: inline !important;
+    }
+    
+    .show-mobile.flex {
+        display: flex !important;
+    }
+}
+
+/* Touch targets mínimos */
+@media (max-width: 768px) {
+    button,
+    .btn,
+    a.btn,
+    input[type="submit"],
+    input[type="button"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .nav-link,
+    .admin-nav-item {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Melhorar legibilidade em telas pequenas */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.125rem; }
+    h4 { font-size: 1rem; }
+    
+    p, li {
+        font-size: 0.875rem;
+    }
+}
+
+/* ==========================================
+   ANIMAÇÕES RESPONSIVAS
+   ========================================== */
+
+/* Reduzir animações em dispositivos com pouca bateria */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Otimizar performance em mobile */
+@media (max-width: 768px) {
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .campaign-card,
+    .dashboard-card,
+    .btn {
+        transform: translateZ(0); /* Força aceleração por hardware */
+    }
+}

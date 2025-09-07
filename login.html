@@ -7,7 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles13.css" />
+    <link rel="stylesheet" href="styles-fixed.css" />
+    <link rel="stylesheet" href="public/hemobyte-styles.css" />
+    <link rel="stylesheet" href="public/ux-fixes.css" />
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -16,46 +18,68 @@
     />
 </head>
 <body>
-    <header class="top-header">
+    <!-- Skip link para acessibilidade -->
+    <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+    
+    <header class="top-header" role="banner">
         <div class="logo-container">
-            <a href="index.html" class="logo-link">
-                <i class="fas fa-tint"></i>
+            <a href="index.html" class="logo-link" aria-label="HemoByte - Voltar ao início">
+                <i class="fas fa-tint" aria-hidden="true"></i>
                 <span class="logo-text">HemoByte</span>
             </a>
         </div>
 
-        <nav class="main-nav">
+        <nav class="main-nav" role="navigation" aria-label="Navegação principal">
             <ul>
-                <li><a href="index.html" title="Início"><i class="fas fa-home"></i></a></li>
-                <li><a href="campanhas-ativas.html" title="Campanhas"><i class="fas fa-map-marker-alt"></i></a></li>
-                <li><a href="criar-campanha.html" title="Criar Campanha"><i class="fas fa-plus-circle"></i></a></li>
-                <li><a href="sobre.html" title="Sobre"><i class="fas fa-info-circle"></i></a></li>
+                <li><a href="index.html" title="Início">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                    <span class="sr-only">Início</span>
+                </a></li>
+                <li><a href="campanhas-ativas.html" title="Campanhas">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    <span class="sr-only">Campanhas</span>
+                </a></li>
+                <li><a href="criar-campanha.html" title="Criar Campanha">
+                    <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                    <span class="sr-only">Criar Campanha</span>
+                </a></li>
+                <li><a href="sobre.html" title="Sobre">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    <span class="sr-only">Sobre</span>
+                </a></li>
+                <li><a href="login.html" class="active" title="Login" aria-current="page">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <span class="sr-only">Login</span>
+                </a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="login-page">
+    <main id="main-content" class="login-page" role="main">
+        
         <div class="auth-container">
             <div class="auth-card">
-                <div class="auth-tabs">
-                    <button class="tab-link active" data-tab="login">
-                        <i class="fas fa-sign-in-alt"></i> Login
+                <div class="auth-tabs" role="tablist" aria-label="Opções de autenticação">
+                    <button class="tab-link active" data-tab="login" role="tab" aria-selected="true" aria-controls="login-form" id="login-tab">
+                        <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login
                     </button>
-                    <button class="tab-link" data-tab="cadastro">
-                        <i class="fas fa-user-plus"></i> Cadastrar
+                    <button class="tab-link" data-tab="cadastro" role="tab" aria-selected="false" aria-controls="cadastro-form" id="cadastro-tab">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i> Cadastrar
                     </button>
                 </div>
 
                 <!-- Formulário de Login -->
-                <form id="login-form" class="auth-form active">
+                <form id="login-form" class="auth-form active" role="tabpanel" aria-labelledby="login-tab" data-loading="false" data-validation="login" data-validation-endpoint="validation-server.php?type=login">
                     <div class="form-group">
-                        <label for="login-email"><i class="fas fa-envelope"></i> Email</label>
-                        <input id="login-email" name="email" type="email" placeholder="Digite seu email" required />
+                        <label for="login-email"><i class="fas fa-envelope" aria-hidden="true"></i> Email</label>
+                        <input id="login-email" name="email" type="email" placeholder="Digite seu email" required aria-describedby="email-help" autocomplete="email" />
+                        <div id="email-help" class="form-hint">Usado para login e recuperação de senha</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="login-senha"><i class="fas fa-lock"></i> Senha</label>
-                        <input id="login-senha" name="senha" type="password" placeholder="Digite sua senha" required />
+                        <label for="login-senha"><i class="fas fa-lock" aria-hidden="true"></i> Senha</label>
+                        <input id="login-senha" name="senha" type="password" placeholder="Digite sua senha" required aria-describedby="senha-help" autocomplete="current-password" />
+                        <div id="senha-help" class="form-hint">Mínimo 8 caracteres</div>
                     </div>
 
                     <div class="form-options">
@@ -66,13 +90,19 @@
                         <a href="#" class="forgot-password">Esqueceu a senha?</a>
                     </div>
 
-                    <button type="submit" class="btn-auth">
-                        <i class="fas fa-sign-in-alt"></i> Entrar
+                    <button type="submit" class="btn-auth" data-loading="false" aria-describedby="login-submit-desc">
+                        <span class="btn-text">
+                            <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Entrar
+                        </span>
+                        <span class="btn-loading" style="display: none;">
+                            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Entrando...
+                        </span>
                     </button>
+                    <div id="login-submit-desc" class="sr-only">Clique para fazer login no sistema</div>
                 </form>
 
                 <!-- Formulário de Cadastro -->
-                <form id="cadastro-form" class="auth-form">
+                <form id="cadastro-form" class="auth-form" data-validation="cadastro" data-validation-endpoint="validation-server.php?type=cadastro">
                     <div class="form-group">
                         <label for="cadastro-nome"><i class="fas fa-user"></i> Nome Completo</label>
                         <input id="cadastro-nome" name="nome" type="text" placeholder="Digite seu nome completo" required />
@@ -140,9 +170,15 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- ✅ SCRIPTS OTIMIZADOS - Apenas necessários para login.html -->
+    <!-- Sistema de tratamento de erros -->
+    <script src="public/error-handler.js"></script>
+    
+    <script src="public/ux-accessibility.js"></script>
     <script src="public/login.js"></script>
-    <script src="login-integration.js"></script>
+    
+    <!-- Sistema de Validação Dupla -->
+    <script src="public/validation-system.js"></script>
     <script>
         // Alternar entre abas Login e Cadastro
         const tabLinks = document.querySelectorAll(".tab-link");

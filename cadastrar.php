@@ -1,7 +1,16 @@
 <?php
+/**
+ * Sistema de Cadastro - HemoByte
+ * Melhorias de segurança implementadas
+ */
+
 session_start();
 
+// Configurações de segurança
 header('Content-Type: application/json');
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: DENY');
+header('X-XSS-Protection: 1; mode=block');
 
 // Configurações do banco
 $host = 'localhost';
@@ -26,10 +35,35 @@ try {
     exit;
 }
 
+// Função para sanitizar dados de entrada
+function sanitizeInput($data) {
+    return htmlspecialchars(strip_tags(trim($data)), ENT_QUOTES, 'UTF-8');
+}
+
+// Função para validar força da senha
+function validatePasswordStrength($password) {
+    $checks = [
+        'length' => strlen($password) >= 6,
+        'hasLower' => preg_match('/[a-z]/', $password),
+        'hasUpper' => preg_match('/[A-Z]/', $password),
+        'hasNumber' => preg_match('/\d/', $password)
+    ];
+    
+    $score = array_sum($checks);
+    return ['score' => $score, 'checks' => $checks, 'isStrong' => $score >= 3];
+}
+
+// Verifica se é uma requisição POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['error' => 'Método não permitido']);
+    exit;
+}
+
 // Recebe e valida dados do formulário
-$nome = trim($_POST['nome'] ?? '');
+$nome = sanitizeInput($_POST['nome'] ?? '');
 $email = filter_var(trim($_POST['email'] ?? ''), FILTER_VALIDATE_EMAIL);
-$telefone = trim($_POST['telefone'] ?? '');
+$telefone = sanitizeInput($_POST['telefone'] ?? '');
 $senha = $_POST['senha'] ?? '';
 $confirmar_senha = $_POST['confirmar_senha'] ?? '';
 

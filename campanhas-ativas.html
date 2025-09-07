@@ -8,28 +8,49 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles-fixed.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles-fixed.css">
+  <link rel="stylesheet" href="public/hemobyte-styles.css">
+  <link rel="stylesheet" href="public/ux-fixes.css">
+  <link rel="stylesheet" href="public/responsive-improvements.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Skip link para acessibilidade -->
+    <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+    
     <!-- isso aqui é o cabeçalho fixo do site com logo e menu de navegação -->
-    <header class="top-header">
+    <header class="top-header" role="banner">
         <div class="logo-container">
             <a href="index.html" class="logo-link">
                 <i class="fas fa-tint"></i>
                 <span class="logo-text">HemoByte</span>
             </a>
         </div>
-        <nav class="main-nav">
+        <nav class="main-nav" role="navigation" aria-label="Navegação principal">
             <ul>
-                <li><a href="index.html" title="Início"><i class="fas fa-home"></i></a></li>
-                <li><a href="campanhas-ativas.html" class="active" title="Campanhas"><i class="fas fa-map-marker-alt"></i></a></li>
-                <li><a href="criar-campanha.html" title="Criar Campanha"><i class="fas fa-plus-circle"></i></a></li>
-                <li><a href="sobre.html" title="Sobre"><i class="fas fa-info-circle"></i></a></li>
-                <li id="nav-login"><a href="login.html" title="Login"><i class="fas fa-user"></i></a></li>
+                <li><a href="index.html" title="Início">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                    <span class="sr-only">Início</span>
+                </a></li>
+                <li><a href="campanhas-ativas.html" class="active" title="Campanhas" aria-current="page">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    <span class="sr-only">Campanhas</span>
+                </a></li>
+                <li><a href="criar-campanha.html" title="Criar Campanha">
+                    <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                    <span class="sr-only">Criar Campanha</span>
+                </a></li>
+                <li><a href="sobre.html" title="Sobre">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    <span class="sr-only">Sobre</span>
+                </a></li>
+                <li id="nav-login"><a href="login.html" title="Login">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <span class="sr-only">Login</span>
+                </a></li>
                 <li id="nav-profile" style="display: none;">
                     <a href="public/perfil.html" title="Perfil" class="profile-link">
-                        <i class="fas fa-user-circle"></i>
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
                         <span class="user-name">Carregando...</span>
                     </a>
                 </li>
@@ -38,7 +59,8 @@
     </header>
 
     <!-- isso aqui é o conteúdo principal da página -->
-    <main class="campanhas-page">
+    <main id="main-content" class="campanhas-page" role="main">
+        
         <h1>Campanhas Ativas em Feira de Santana</h1>
         <p class="subtitle">Encontre e participe de campanhas de doação próximas a você</p>
 
@@ -105,6 +127,7 @@
                         <div class="progress-bar">
                             <div class="progress" style="width: 40%"></div>
                         </div>
+                        <span class="progress-text">20/50 doadores</span>
                     </div>
                     <a href="login.html" class="participate-button">Participar</a>
                 </div>
@@ -122,6 +145,7 @@
                         <div class="progress-bar">
                             <div class="progress" style="width: 30%"></div>
                         </div>
+                        <span class="progress-text">9/30 doadores</span>
                     </div>
                     <a href="login.html" class="participate-button">Participar</a>
                 </div>
@@ -138,13 +162,14 @@
                     <div class="campaign-info">
                         <p><i class="fas fa-map-marker-alt"></i> Tomba, Feira de Santana</p>
                         <p><i class="fas fa-calendar"></i> 20 de Maio, 2024</p>
-                        <p><i class="fas fa-clock"></i> 09:00 - 16:00</p>
+                        <p><i class="fas fa-clock"></i> 08:00 - 17:00</p>
                         <p><i class="fas fa-tint"></i> Tipo Sanguíneo: B+</p>
                     </div>
                     <div class="progress-container">
                         <div class="progress-bar">
                             <div class="progress" style="width: 60%"></div>
                         </div>
+                        <span class="progress-text">18/30 doadores</span>
                     </div>
                     <a href="login.html" class="participate-button">Participar</a>
                 </div>
@@ -162,6 +187,7 @@
                         <div class="progress-bar">
                             <div class="progress" style="width: 45%"></div>
                         </div>
+                        <span class="progress-text">18/40 doadores</span>
                     </div>
                     <a href="login.html" class="participate-button">Participar</a>
                 </div>
@@ -179,6 +205,7 @@
                         <div class="progress-bar">
                             <div class="progress" style="width: 20%"></div>
                         </div>
+                        <span class="progress-text">6/30 doadores</span>
                     </div>
                     <a href="login.html" class="participate-button">Participar</a>
                 </div>
@@ -240,6 +267,28 @@
             </nav>
         </div>
     </footer>
+    <!-- ✅ SCRIPTS OTIMIZADOS - Apenas necessários para campanhas-ativas.html -->
+    <!-- Store centralizado (deve carregar primeiro) -->
+    <script src="public/hemobyte-store.js"></script>
+    
+    <!-- Sistema de tratamento de erros -->
+    <script src="public/error-handler.js"></script>
+    
+    <script src="public/hemobyte-app.js"></script>
+    
+    <!-- Melhorias de Acessibilidade -->
+    <script src="public/ux-accessibility.js"></script>
+    
+    <!-- Sistema de Sincronização Admin -->
+    <script src="public/admin-sync.js"></script>
+    
+    <!-- Sistema de filtros para campanhas -->
     <script src="public/filtro.js"></script>
+    
+    <!-- Melhorias Mobile -->
+    <script src="public/mobile-enhancements.js"></script>
+    
+    <!-- Sistema de Validação Dupla -->
+    <script src="public/validation-system.js"></script>
 </body>
 </html> 

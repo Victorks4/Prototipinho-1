@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Administrativo - HemoByte</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles-fixed.css">
+    <link rel="stylesheet" href="public/ux-fixes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .admin-login-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .admin-login-container {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .admin-logo {
+            font-size: 3rem;
+            color: #e60000;
+            margin-bottom: 1rem;
+        }
+
+        .admin-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-subtitle {
+            color: #64748b;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .admin-form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .admin-form-group label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+        }
+
+        .admin-form-group input:focus {
+            border-color: #e60000;
+            box-shadow: 0 0 0 3px rgba(230, 0, 0, 0.1);
+            outline: none;
+            background: white;
+        }
+
+        .admin-login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #e60000, #cc0000);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .admin-login-btn:hover {
+            background: linear-gradient(135deg, #cc0000, #b30000);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(230, 0, 0, 0.3);
+        }
+
+        .admin-login-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .admin-error {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .admin-security-note {
+            background: #f0f9ff;
+            color: #0369a1;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            border-left: 4px solid #0ea5e9;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 480px) {
+            .admin-login-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip link para acessibilidade -->
+    <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+
+    <main id="main-content" class="admin-login-page" role="main">
+        <div class="admin-login-container">
+            <div class="admin-logo">
+                <i class="fas fa-shield-alt" aria-hidden="true"></i>
+            </div>
+            
+            <h1 class="admin-title">Painel Administrativo</h1>
+            <p class="admin-subtitle">Acesso restrito para administradores</p>
+
+            <div id="admin-error" class="admin-error" role="alert">
+                <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                <span id="error-message">Credenciais inválidas</span>
+            </div>
+
+            <form id="admin-login-form" novalidate>
+                <div class="admin-form-group">
+                    <label for="admin-username">
+                        <i class="fas fa-user" aria-hidden="true"></i> Usuário
+                    </label>
+                    <input 
+                        type="text" 
+                        id="admin-username" 
+                        name="username" 
+                        required 
+                        autocomplete="username"
+                        aria-describedby="username-help"
+                    >
+                    <div id="username-help" class="sr-only">Digite seu nome de usuário administrativo</div>
+                </div>
+
+                <div class="admin-form-group">
+                    <label for="admin-password">
+                        <i class="fas fa-lock" aria-hidden="true"></i> Senha
+                    </label>
+                    <input 
+                        type="password" 
+                        id="admin-password" 
+                        name="password" 
+                        required 
+                        autocomplete="current-password"
+                        aria-describedby="password-help"
+                    >
+                    <div id="password-help" class="sr-only">Digite sua senha administrativa</div>
+                </div>
+
+                <button type="submit" class="admin-login-btn" id="login-btn">
+                    <span class="loading-spinner"></span>
+                    <span class="btn-text">
+                        <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Acessar Painel
+                    </span>
+                </button>
+            </form>
+
+            <div class="admin-security-note">
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
+                <strong>Área Segura:</strong> Este painel é protegido e monitora todas as tentativas de acesso.
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="public/ux-accessibility.js"></script>
+    <script>
+        class AdminAuth {
+            constructor() {
+                this.form = document.getElementById('admin-login-form');
+                this.errorDiv = document.getElementById('admin-error');
+                this.loginBtn = document.getElementById('login-btn');
+                this.spinner = document.querySelector('.loading-spinner');
+                this.btnText = document.querySelector('.btn-text');
+                
+                this.init();
+            }
+
+            init() {
+                this.form.addEventListener('submit', (e) => this.handleLogin(e));
+                
+                // Verifica se já está logado
+                if (this.isAdminLoggedIn()) {
+                    window.location.href = 'admin-panel.html';
+                }
+
+                // Limpa erro ao digitar
+                document.getElementById('admin-username').addEventListener('input', () => this.hideError());
+                document.getElementById('admin-password').addEventListener('input', () => this.hideError());
+            }
+
+            async handleLogin(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('admin-username').value.trim();
+                const password = document.getElementById('admin-password').value;
+
+                if (!username || !password) {
+                    this.showError('Por favor, preencha todos os campos');
+                    return;
+                }
+
+                this.setLoading(true);
+
+                // Simula verificação no servidor
+                setTimeout(() => {
+                    if (username === 'adm' && password === '8080') {
+                        // Login bem-sucedido
+                        const adminSession = {
+                            username: 'adm',
+                            loginTime: new Date().toISOString(),
+                            sessionId: this.generateSessionId(),
+                            permissions: ['manage_campaigns', 'manage_images', 'site_control']
+                        };
+                        
+                        localStorage.setItem('adminSession', JSON.stringify(adminSession));
+                        
+                        // Notifica sucesso
+                        this.showSuccess('Login realizado com sucesso!');
+                        
+                        // Redireciona após 1 segundo
+                        setTimeout(() => {
+                            window.location.href = 'admin-panel.html';
+                        }, 1000);
+                    } else {
+                        // Login falhou
+                        this.showError('Usuário ou senha incorretos');
+                        this.setLoading(false);
+                        
+                        // Log da tentativa de acesso
+                        this.logFailedAttempt(username);
+                    }
+                }, 1500); // Simula delay de rede
+            }
+
+            setLoading(loading) {
+                if (loading) {
+                    this.loginBtn.disabled = true;
+                    this.spinner.style.display = 'inline-block';
+                    this.btnText.style.opacity = '0.7';
+                } else {
+                    this.loginBtn.disabled = false;
+                    this.spinner.style.display = 'none';
+                    this.btnText.style.opacity = '1';
+                }
+            }
+
+            showError(message) {
+                document.getElementById('error-message').textContent = message;
+                this.errorDiv.style.display = 'block';
+                this.errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+
+            hideError() {
+                this.errorDiv.style.display = 'none';
+            }
+
+            showSuccess(message) {
+                this.errorDiv.style.background = '#d1fae5';
+                this.errorDiv.style.color = '#065f46';
+                document.getElementById('error-message').textContent = message;
+                this.errorDiv.style.display = 'block';
+            }
+
+            generateSessionId() {
+                return 'admin_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+            }
+
+            isAdminLoggedIn() {
+                const session = localStorage.getItem('adminSession');
+                if (!session) return false;
+
+                try {
+                    const adminSession = JSON.parse(session);
+                    const loginTime = new Date(adminSession.loginTime);
+                    const now = new Date();
+                    const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
+
+                    // Sessão expira em 8 horas
+                    return hoursDiff < 8;
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            logFailedAttempt(username) {
+                const attempts = JSON.parse(localStorage.getItem('adminFailedAttempts') || '[]');
+                attempts.push({
+                    username: username,
+                    timestamp: new Date().toISOString(),
+                    ip: 'localhost' // Em produção, seria capturado do servidor
+                });
+                
+                // Mantém apenas os últimos 50 registros
+                if (attempts.length > 50) {
+                    attempts.splice(0, attempts.length - 50);
+                }
+                
+                localStorage.setItem('adminFailedAttempts', JSON.stringify(attempts));
+            }
+        }
+
+        // Inicializa quando DOM carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            new AdminAuth();
+        });
+    </script>
+</body>
+</html>
