@@ -192,19 +192,35 @@ class HemoByteSystem {
             const userData = localStorage.getItem('usuario');
             const sessionData = localStorage.getItem('session_data');
             
-            if (userData && sessionData) {
+            if (userData) {
                 const user = JSON.parse(userData);
+                
+                // Sempre sincronizar currentUser com localStorage
+                this.currentUser = user;
+                
+                if (sessionData) {
                 const session = JSON.parse(sessionData);
                 
                 // Verifica se a sessão não expirou
                 if (session.expires > Date.now()) {
-                    this.currentUser = user;
                     this.updateNavigationForLoggedUser(user);
                     console.log('✅ Sessão restaurada para:', user.nome);
                 } else {
-                    console.log('⏰ Sessão expirada, limpando dados');
-                    this.clearSession();
+                        // Sessão expirada, mas manter usuário logado
+                        this.createSession(user);
+                        this.updateNavigationForLoggedUser(user);
+                        console.log('🔄 Sessão renovada para:', user.nome);
+                    }
+                } else {
+                    // Tem dados do usuário mas não sessão - criar nova sessão
+                    this.createSession(user);
+                    this.updateNavigationForLoggedUser(user);
+                    console.log('✅ Nova sessão criada para:', user.nome);
                 }
+            } else {
+                // Não há dados de usuário
+                this.currentUser = null;
+                this.updateNavigationForLoggedOut();
             }
         } catch (error) {
             console.error('❌ Erro ao verificar sessão:', error);
@@ -1115,13 +1131,21 @@ class HemoByteSystem {
     async initializeCreateCampaignPage() {
         console.log('➕ Inicializando página de criar campanha...');
         
-        // Verifica se usuário está logado
-        if (!this.currentUser) {
+        // Verifica se usuário está logado (usando localStorage diretamente)
+        const usuario = JSON.parse(localStorage.getItem('usuario') || 'null');
+        
+        if (!usuario && !this.currentUser) {
             this.showNotification('Faça login para criar campanhas', 'warning');
             setTimeout(() => {
                 window.location.href = 'login.html';
             }, 2000);
             return;
+        }
+        
+        // Se encontrou usuário no localStorage mas não em currentUser, sincronizar
+        if (usuario && !this.currentUser) {
+            this.currentUser = usuario;
+            console.log('✅ Usuário sincronizado do localStorage:', usuario.nome);
         }
         
         // Melhora formulário existente

@@ -30,7 +30,8 @@ try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
     http_response_code(500);
-    echo json_encode(['error' => 'Erro ao conectar ao banco de dados']);
+    echo json_encode(['error' => 'Erro ao conectar ao banco de dados: ' . $e->getMessage()]);
+    error_log("Erro de conexão DB: " . $e->getMessage());
     exit;
 }
 

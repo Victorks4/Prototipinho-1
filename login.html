@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="styles-fixed.css" />
     <link rel="stylesheet" href="public/hemobyte-styles.css" />
     <link rel="stylesheet" href="public/ux-fixes.css" />
+    <link rel="stylesheet" href="header-fix.css" />
+    <link rel="stylesheet" href="login-background.css" />
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -158,7 +160,7 @@
 
     <footer class="footer">
         <div class="footer-content">
-            <a href="hemobyteee.html" class="footer-logo">
+            <a href="index.html" class="footer-logo">
                 <i class="fas fa-tint"></i>
                 <span>HemoByte</span>
             </a>
@@ -170,15 +172,9 @@
         </div>
     </footer>
 
-    <!-- ✅ SCRIPTS OTIMIZADOS - Apenas necessários para login.html -->
-    <!-- Sistema de tratamento de erros -->
-    <script src="public/error-handler.js"></script>
-    
-    <script src="public/ux-accessibility.js"></script>
-    <script src="public/login.js"></script>
-    
-    <!-- Sistema de Validação Dupla -->
-    <script src="public/validation-system.js"></script>
+    <!-- ✅ SISTEMA LIMPO DE LOGIN -->
+    <script src="public/auth-system.js"></script>
+    <script src="public/login-system.js"></script>
     <script>
         // Alternar entre abas Login e Cadastro
         const tabLinks = document.querySelectorAll(".tab-link");

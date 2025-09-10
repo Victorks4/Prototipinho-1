@@ -1,16 +1,10 @@
--- ==========================================
--- BANCO DE DADOS ADMINISTRATIVO - HEMOBYTE
--- ==========================================
 
--- Criar banco se não existir
 CREATE DATABASE IF NOT EXISTS hemobyte CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE hemobyte;
 
--- ==========================================
--- TABELA DE CAMPANHAS (ATUALIZADA)
--- ==========================================
 
--- Atualizar tabela de campanhas existente
+
+
 ALTER TABLE campanhas 
 ADD COLUMN IF NOT EXISTS status ENUM('pendente', 'aprovada', 'rejeitada') DEFAULT 'pendente',
 ADD COLUMN IF NOT EXISTS approved_at DATETIME NULL,
@@ -22,9 +16,7 @@ ADD COLUMN IF NOT EXISTS doadores_atuais INT DEFAULT 0,
 ADD COLUMN IF NOT EXISTS descricao TEXT NULL,
 ADD COLUMN IF NOT EXISTS imagem_url VARCHAR(255) NULL;
 
--- ==========================================
--- TABELA DE LOGS ADMINISTRATIVOS
--- ==========================================
+
 
 CREATE TABLE IF NOT EXISTS admin_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -40,9 +32,7 @@ CREATE TABLE IF NOT EXISTS admin_logs (
     INDEX idx_admin_user (admin_user)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ==========================================
--- TABELA DE CONFIGURAÇÕES DO SITE
--- ==========================================
+
 
 CREATE TABLE IF NOT EXISTS site_settings (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -56,9 +46,7 @@ CREATE TABLE IF NOT EXISTS site_settings (
     INDEX idx_setting_key (setting_key)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ==========================================
--- TABELA DE IMAGENS
--- ==========================================
+
 
 CREATE TABLE IF NOT EXISTS admin_images (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -79,9 +67,7 @@ CREATE TABLE IF NOT EXISTS admin_images (
     INDEX idx_uploaded_at (uploaded_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ==========================================
--- TABELA DE SESSÕES ADMINISTRATIVAS
--- ==========================================
+
 
 CREATE TABLE IF NOT EXISTS admin_sessions (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -100,9 +86,7 @@ CREATE TABLE IF NOT EXISTS admin_sessions (
     INDEX idx_is_active (is_active)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ==========================================
--- TABELA DE BACKUP E AUDITORIA
--- ==========================================
+
 
 CREATE TABLE IF NOT EXISTS admin_backups (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -120,9 +104,7 @@ CREATE TABLE IF NOT EXISTS admin_backups (
     INDEX idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ==========================================
--- INSERIR CONFIGURAÇÕES PADRÃO
--- ==========================================
+
 
 INSERT INTO site_settings (setting_key, setting_value, setting_type, description) VALUES
 ('site_title', 'HemoByte - Doação de Sangue', 'string', 'Título principal do site'),
@@ -141,9 +123,7 @@ ON DUPLICATE KEY UPDATE
 setting_value = VALUES(setting_value),
 updated_at = CURRENT_TIMESTAMP;
 
--- ==========================================
--- INSERIR DADOS DE EXEMPLO PARA CAMPANHAS
--- ==========================================
+
 
 INSERT INTO campanhas (titulo, local, data_campanha, horario, tipo_sanguineo, status, meta_doadores, doadores_atuais, descricao) VALUES
 ('Campanha de Doação - Feira VI', 'Feira VI, Feira de Santana', '2024-05-15', '08:00 - 17:00', 'A+', 'pendente', 50, 30, 'Campanha urgente para atender demanda do Hospital Geral'),
@@ -154,19 +134,14 @@ ON DUPLICATE KEY UPDATE
 titulo = VALUES(titulo),
 status = VALUES(status);
 
--- ==========================================
--- INSERIR LOG INICIAL
--- ==========================================
 
 INSERT INTO admin_logs (action, details, admin_user, ip_address) VALUES
 ('SYSTEM_SETUP', 'Database tables created and initial data inserted', 'system', '127.0.0.1'),
 ('ADMIN_CREATED', 'Administrative user created with username: adm', 'system', '127.0.0.1');
 
--- ==========================================
--- CRIAR VIEWS PARA RELATÓRIOS
--- ==========================================
 
--- View para estatísticas gerais
+
+
 CREATE OR REPLACE VIEW admin_stats AS
 SELECT 
     (SELECT COUNT(*) FROM campanhas WHERE status = 'aprovada') as campanhas_aprovadas,
@@ -193,12 +168,9 @@ SELECT
 FROM campanhas c;
 
 -- ==========================================
--- TRIGGERS PARA AUDITORIA
--- ==========================================
 
 DELIMITER //
 
--- Trigger para log de alterações em campanhas
 CREATE TRIGGER IF NOT EXISTS campanhas_audit_update
 AFTER UPDATE ON campanhas
 FOR EACH ROW
@@ -214,7 +186,7 @@ BEGIN
     END IF;
 END//
 
--- Trigger para log de novos usuários
+
 CREATE TRIGGER IF NOT EXISTS usuarios_audit_insert
 AFTER INSERT ON usuarios
 FOR EACH ROW
@@ -230,14 +202,11 @@ END//
 
 DELIMITER ;
 
--- ==========================================
--- PROCEDIMENTOS ARMAZENADOS
--- ==========================================
+
 
 DELIMITER //
 
--- Procedimento para limpeza de logs antigos
-CREATE PROCEDURE IF NOT EXISTS CleanOldLogs(IN days_to_keep INT)
+-- Procedimento para limpeza de logs antigosCREATE PROCEDURE IF NOT EXISTS CleanOldLogs(IN days_to_keep INT)
 BEGIN
     DELETE FROM admin_logs 
     WHERE timestamp < DATE_SUB(NOW(), INTERVAL days_to_keep DAY);
@@ -246,7 +215,7 @@ BEGIN
     VALUES ('LOG_CLEANUP', CONCAT('Removed logs older than ', days_to_keep, ' days'), 'system');
 END//
 
--- Procedimento para backup automático
+
 CREATE PROCEDURE IF NOT EXISTS CreateBackupRecord(
     IN backup_name VARCHAR(255),
     IN backup_type VARCHAR(50),
@@ -261,7 +230,7 @@ BEGIN
     VALUES ('BACKUP_CREATED', CONCAT('Backup created: ', backup_name), 'system');
 END//
 
--- Procedimento para estatísticas do dashboard
+
 CREATE PROCEDURE IF NOT EXISTS GetDashboardStats()
 BEGIN
     SELECT * FROM admin_stats;
@@ -283,21 +252,10 @@ END//
 
 DELIMITER ;
 
--- ==========================================
--- ÍNDICES ADICIONAIS PARA PERFORMANCE
--- ==========================================
-
--- Índices para melhor performance em consultas administrativas
 CREATE INDEX IF NOT EXISTS idx_campanhas_status_data ON campanhas(status, data_campanha);
 CREATE INDEX IF NOT EXISTS idx_usuarios_status_created ON usuarios(status, created_at);
 CREATE INDEX IF NOT EXISTS idx_logs_action_timestamp ON admin_logs(action, timestamp);
 
--- ==========================================
--- COMENTÁRIOS FINAIS
--- ==========================================
 
--- Este script cria toda a estrutura necessária para o painel administrativo
--- Inclui tabelas, views, triggers, procedimentos e dados iniciais
--- Para executar: mysql -u root -p < admin-database.sql
 
 SELECT 'Database setup completed successfully!' as status;

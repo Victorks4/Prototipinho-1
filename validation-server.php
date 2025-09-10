@@ -1,8 +1,5 @@
 <?php
-/**
- * Sistema de Validação Server-Side - HemoByte
- * Validação robusta no servidor para complementar validação client-side
- */
+
 
 class ValidationServer {
     private $rules = [];

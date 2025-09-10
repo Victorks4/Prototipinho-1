@@ -53,6 +53,12 @@
                         <span class="user-name">Carregando...</span>
                     </a>
                 </li>
+                <li id="nav-logout" style="display: none;">
+                    <a href="#" title="Sair" class="logout-link" id="btn-sair">
+                        <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                        <span class="sr-only">Sair</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -294,14 +300,9 @@
         </div>
     </footer>
 
-    <!-- Sistema JavaScript Aprimorado -->
-    <script src="public/hemobyte-app.js"></script>
-    
-    <!-- Sistema de Sincronização Admin -->
-    <script src="public/admin-sync.js"></script>
-    
-    <!-- Sistema de Acessibilidade -->
-    <script src="public/ux-accessibility.js"></script>
+    <!-- ✅ SISTEMA LIMPO PARA PÁGINAS PROTEGIDAS -->
+    <script src="public/auth-system.js"></script>
+    <script src="public/page-protection.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
