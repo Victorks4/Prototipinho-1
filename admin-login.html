@@ -4,50 +4,142 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Administrativo - HemoByte</title>
+    
+    <!-- Modern Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#dc2626',
+                        secondary: '#64748b',
+                        accent: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Original stylesheets -->
     <link rel="stylesheet" href="styles-fixed.css">
     <link rel="stylesheet" href="public/ux-fixes.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Modern CSS Variables */
+        :root {
+            --primary-color: #dc2626;
+            --primary-light: #fef2f2;
+            --primary-dark: #991b1b;
+            --secondary-color: #64748b;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
         .admin-login-page {
             min-height: 100vh;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #764ba2 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-login-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: float 20s ease-in-out infinite;
         }
 
         .admin-login-container {
-            background: white;
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
             padding: 3rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
+            box-shadow: var(--card-shadow);
+            max-width: 450px;
             width: 100%;
             text-align: center;
-            border: 1px solid #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .admin-login-container:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
         }
 
         .admin-logo {
-            font-size: 3rem;
-            color: #e60000;
-            margin-bottom: 1rem;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
+            animation: pulse 2s infinite;
         }
 
         .admin-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2d3748;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark-bg);
             margin-bottom: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .admin-subtitle {
-            color: #64748b;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
+            color: var(--secondary-color);
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+            font-weight: 500;
         }
 
         .admin-form-group {
@@ -58,72 +150,130 @@
         .admin-form-group label {
             display: block;
             font-weight: 600;
-            color: #374151;
-            margin-bottom: 0.5rem;
+            color: var(--dark-bg);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .admin-form-group .input-wrapper {
+            position: relative;
+        }
+
+        .admin-form-group .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary-color);
+            transition: var(--transition);
+            z-index: 2;
         }
 
         .admin-form-group input {
             width: 100%;
-            padding: 1rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
             font-size: 1rem;
-            transition: all 0.3s ease;
-            background: #f9fafb;
+            transition: var(--transition);
+            background: rgba(248, 250, 252, 0.8);
+            backdrop-filter: blur(10px);
         }
 
         .admin-form-group input:focus {
-            border-color: #e60000;
-            box-shadow: 0 0 0 3px rgba(230, 0, 0, 0.1);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
             outline: none;
             background: white;
+            transform: scale(1.02);
+        }
+
+        .admin-form-group input:focus + .input-icon {
+            color: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
         }
 
         .admin-login-btn {
             width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, #e60000, #cc0000);
+            padding: 1.25rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 1rem;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
+        }
+
+        .admin-login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .admin-login-btn:hover::before {
+            left: 100%;
         }
 
         .admin-login-btn:hover {
-            background: linear-gradient(135deg, #cc0000, #b30000);
+            background: linear-gradient(135deg, var(--primary-dark), #7f1d1d);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(230, 0, 0, 0.3);
+            box-shadow: 0 12px 35px rgba(220, 38, 38, 0.4);
+        }
+
+        .admin-login-btn:active {
+            transform: translateY(0);
         }
 
         .admin-login-btn:disabled {
-            background: #9ca3af;
+            background: linear-gradient(135deg, #9ca3af, #6b7280);
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
 
-        .admin-error {
-            background: #fee2e2;
-            color: #dc2626;
-            padding: 0.75rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
+        .admin-error,
+        .admin-success {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
             display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .admin-error {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: var(--primary-dark);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .admin-success {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: #065f46;
+            border-left: 4px solid var(--success-color);
         }
 
         .admin-security-note {
-            background: #f0f9ff;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
             color: #0369a1;
-            padding: 1rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            margin-top: 1rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
             border-left: 4px solid #0ea5e9;
+            text-align: left;
         }
 
         .loading-spinner {
@@ -137,93 +287,212 @@
             margin-right: 0.5rem;
         }
 
+        /* Animations */
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
         @media (max-width: 480px) {
             .admin-login-container {
                 padding: 2rem;
                 margin: 1rem;
+                border-radius: 16px;
             }
+            
+            .admin-title {
+                font-size: 1.75rem;
+            }
+            
+            .admin-logo {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Enhanced focus states for accessibility */
+        .admin-form-group input:focus-visible {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        .admin-login-btn:focus-visible {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
         }
     </style>
 </head>
 <body>
     <!-- Skip link para acessibilidade -->
-    <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+    <a href="#main-content" class="visually-hidden-focusable">Pular para conteúdo principal</a>
 
-    <main id="main-content" class="admin-login-page" role="main">
-        <div class="admin-login-container">
-            <div class="admin-logo">
+    <main id="main-content" class="admin-login-page" role="main" data-aos="fade-in">
+        <div class="admin-login-container animate__animated animate__fadeInUp" data-aos="zoom-in" data-aos-delay="200">
+            <!-- Enhanced Logo -->
+            <div class="admin-logo" data-aos="zoom-in" data-aos-delay="400">
                 <i class="fas fa-shield-alt" aria-hidden="true"></i>
             </div>
             
-            <h1 class="admin-title">Painel Administrativo</h1>
-            <p class="admin-subtitle">Acesso restrito para administradores</p>
+            <!-- Enhanced Title -->
+            <h1 class="admin-title" data-aos="fade-up" data-aos-delay="600">Painel Administrativo</h1>
+            <p class="admin-subtitle" data-aos="fade-up" data-aos-delay="700">Acesso restrito para administradores</p>
 
+            <!-- Enhanced Alert System -->
             <div id="admin-error" class="admin-error" role="alert">
-                <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
-                <span id="error-message">Credenciais inválidas</span>
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-exclamation-triangle me-2" aria-hidden="true"></i>
+                    <span id="error-message">Credenciais inválidas</span>
+                </div>
             </div>
 
-            <form id="admin-login-form" novalidate>
+            <div id="admin-success" class="admin-success" role="alert">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-check-circle me-2" aria-hidden="true"></i>
+                    <span id="success-message">Login realizado com sucesso!</span>
+                </div>
+            </div>
+
+            <!-- Enhanced Form -->
+            <form id="admin-login-form" novalidate data-aos="fade-up" data-aos-delay="800">
                 <div class="admin-form-group">
-                    <label for="admin-username">
-                        <i class="fas fa-user" aria-hidden="true"></i> Usuário
+                    <label for="admin-username" class="form-label">
+                        <i class="fas fa-user me-2" aria-hidden="true"></i>Usuário
                     </label>
-                    <input 
-                        type="text" 
-                        id="admin-username" 
-                        name="username" 
-                        required 
-                        autocomplete="username"
-                        aria-describedby="username-help"
-                    >
-                    <div id="username-help" class="sr-only">Digite seu nome de usuário administrativo</div>
+                    <div class="input-wrapper position-relative">
+                        <input 
+                            type="text" 
+                            id="admin-username" 
+                            name="username" 
+                            class="form-control" 
+                            required 
+                            autocomplete="username"
+                            aria-describedby="username-help"
+                            placeholder="Digite seu usuário"
+                        >
+                        <i class="fas fa-user input-icon" aria-hidden="true"></i>
+                    </div>
+                    <div id="username-help" class="visually-hidden">Digite seu nome de usuário administrativo</div>
                 </div>
 
                 <div class="admin-form-group">
-                    <label for="admin-password">
-                        <i class="fas fa-lock" aria-hidden="true"></i> Senha
+                    <label for="admin-password" class="form-label">
+                        <i class="fas fa-lock me-2" aria-hidden="true"></i>Senha
                     </label>
-                    <input 
-                        type="password" 
-                        id="admin-password" 
-                        name="password" 
-                        required 
-                        autocomplete="current-password"
-                        aria-describedby="password-help"
-                    >
-                    <div id="password-help" class="sr-only">Digite sua senha administrativa</div>
+                    <div class="input-wrapper position-relative">
+                        <input 
+                            type="password" 
+                            id="admin-password" 
+                            name="password" 
+                            class="form-control" 
+                            required 
+                            autocomplete="current-password"
+                            aria-describedby="password-help"
+                            placeholder="Digite sua senha"
+                        >
+                        <i class="fas fa-lock input-icon" aria-hidden="true"></i>
+                        <button type="button" class="btn btn-link position-absolute end-0 top-50 translate-middle-y me-3" 
+                                id="toggle-password" tabindex="-1">
+                            <i class="fas fa-eye text-muted" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div id="password-help" class="visually-hidden">Digite sua senha administrativa</div>
                 </div>
 
-                <button type="submit" class="admin-login-btn" id="login-btn">
+                <button type="submit" class="admin-login-btn btn btn-primary btn-lg" id="login-btn">
                     <span class="loading-spinner"></span>
-                    <span class="btn-text">
-                        <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Acessar Painel
+                    <span class="btn-text d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sign-in-alt me-2" aria-hidden="true"></i>Acessar Painel
                     </span>
                 </button>
             </form>
 
-            <div class="admin-security-note">
-                <i class="fas fa-info-circle" aria-hidden="true"></i>
-                <strong>Área Segura:</strong> Este painel é protegido e monitora todas as tentativas de acesso.
+            <!-- Enhanced Security Note -->
+            <div class="admin-security-note" data-aos="fade-up" data-aos-delay="1000">
+                <div class="d-flex align-items-start">
+                    <i class="fas fa-info-circle me-3 mt-1" aria-hidden="true"></i>
+                    <div>
+                        <strong>Área Segura:</strong> Este painel é protegido e monitora todas as tentativas de acesso.
+                        <div class="mt-2 small text-muted">
+                            <i class="fas fa-clock me-1"></i>Sessão expira em 8 horas de inatividade
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Security Features -->
+            <div class="row g-2 mt-3" data-aos="fade-up" data-aos-delay="1200">
+                <div class="col-6">
+                    <div class="d-flex align-items-center justify-content-center p-2 bg-light rounded">
+                        <i class="fas fa-shield-check text-success me-2"></i>
+                        <small class="text-muted">SSL Seguro</small>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex align-items-center justify-content-center p-2 bg-light rounded">
+                        <i class="fas fa-fingerprint text-primary me-2"></i>
+                        <small class="text-muted">2FA Ready</small>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- Scripts -->
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Original Scripts -->
     <script src="public/ux-accessibility.js"></script>
+    
     <script>
+        // Initialize AOS animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
         class AdminAuth {
             constructor() {
                 this.form = document.getElementById('admin-login-form');
                 this.errorDiv = document.getElementById('admin-error');
+                this.successDiv = document.getElementById('admin-success');
                 this.loginBtn = document.getElementById('login-btn');
                 this.spinner = document.querySelector('.loading-spinner');
                 this.btnText = document.querySelector('.btn-text');
+                this.togglePassword = document.getElementById('toggle-password');
+                this.passwordInput = document.getElementById('admin-password');
                 
                 this.init();
             }
@@ -231,14 +500,61 @@
             init() {
                 this.form.addEventListener('submit', (e) => this.handleLogin(e));
                 
+                // Password toggle functionality
+                if (this.togglePassword) {
+                    this.togglePassword.addEventListener('click', () => this.togglePasswordVisibility());
+                }
+                
                 // Verifica se já está logado
                 if (this.isAdminLoggedIn()) {
                     window.location.href = 'admin-panel.html';
                 }
 
                 // Limpa erro ao digitar
-                document.getElementById('admin-username').addEventListener('input', () => this.hideError());
-                document.getElementById('admin-password').addEventListener('input', () => this.hideError());
+                document.getElementById('admin-username').addEventListener('input', () => this.hideAlerts());
+                document.getElementById('admin-password').addEventListener('input', () => this.hideAlerts());
+
+                // Enhanced input animations
+                this.setupInputAnimations();
+
+                // Initialize Bootstrap tooltips
+                this.initializeTooltips();
+            }
+
+            setupInputAnimations() {
+                const inputs = document.querySelectorAll('.admin-form-group input');
+                inputs.forEach(input => {
+                    input.addEventListener('focus', function() {
+                        this.closest('.admin-form-group').classList.add('focused');
+                    });
+                    
+                    input.addEventListener('blur', function() {
+                        if (!this.value) {
+                            this.closest('.admin-form-group').classList.remove('focused');
+                        }
+                    });
+                });
+            }
+
+            initializeTooltips() {
+                // Initialize any tooltips if needed
+                const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                const tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl);
+                });
+            }
+
+            togglePasswordVisibility() {
+                const icon = this.togglePassword.querySelector('i');
+                if (this.passwordInput.type === 'password') {
+                    this.passwordInput.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    this.passwordInput.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
             }
 
             async handleLogin(e) {
@@ -249,6 +565,7 @@
 
                 if (!username || !password) {
                     this.showError('Por favor, preencha todos os campos');
+                    this.shakeForm();
                     return;
                 }
 
@@ -270,14 +587,18 @@
                         // Notifica sucesso
                         this.showSuccess('Login realizado com sucesso!');
                         
-                        // Redireciona após 1 segundo
+                        // Animação de sucesso
+                        this.successAnimation();
+                        
+                        // Redireciona após 2 segundos
                         setTimeout(() => {
                             window.location.href = 'admin-panel.html';
-                        }, 1000);
+                        }, 2000);
                     } else {
                         // Login falhou
                         this.showError('Usuário ou senha incorretos');
                         this.setLoading(false);
+                        this.shakeForm();
                         
                         // Log da tentativa de acesso
                         this.logFailedAttempt(username);
@@ -285,33 +606,66 @@
                 }, 1500); // Simula delay de rede
             }
 
+            shakeForm() {
+                const container = document.querySelector('.admin-login-container');
+                container.classList.add('animate__animated', 'animate__shakeX');
+                setTimeout(() => {
+                    container.classList.remove('animate__animated', 'animate__shakeX');
+                }, 1000);
+            }
+
+            successAnimation() {
+                const container = document.querySelector('.admin-login-container');
+                container.classList.add('animate__animated', 'animate__bounceIn');
+                
+                // Add success glow effect
+                container.style.boxShadow = '0 0 50px rgba(16, 185, 129, 0.5)';
+                setTimeout(() => {
+                    container.style.boxShadow = '';
+                }, 2000);
+            }
+
             setLoading(loading) {
                 if (loading) {
                     this.loginBtn.disabled = true;
                     this.spinner.style.display = 'inline-block';
-                    this.btnText.style.opacity = '0.7';
+                    this.btnText.innerHTML = '<i class="fas fa-sync fa-spin me-2"></i>Verificando...';
+                    this.loginBtn.classList.add('loading');
                 } else {
                     this.loginBtn.disabled = false;
                     this.spinner.style.display = 'none';
-                    this.btnText.style.opacity = '1';
+                    this.btnText.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i>Acessar Painel';
+                    this.loginBtn.classList.remove('loading');
                 }
             }
 
             showError(message) {
                 document.getElementById('error-message').textContent = message;
                 this.errorDiv.style.display = 'block';
+                this.successDiv.style.display = 'none';
+                this.errorDiv.classList.add('animate__animated', 'animate__fadeInDown');
+                
+                setTimeout(() => {
+                    this.errorDiv.classList.remove('animate__animated', 'animate__fadeInDown');
+                }, 600);
+                
                 this.errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
 
-            hideError() {
+            showSuccess(message) {
+                document.getElementById('success-message').textContent = message;
+                this.successDiv.style.display = 'block';
                 this.errorDiv.style.display = 'none';
+                this.successDiv.classList.add('animate__animated', 'animate__fadeInDown');
+                
+                setTimeout(() => {
+                    this.successDiv.classList.remove('animate__animated', 'animate__fadeInDown');
+                }, 600);
             }
 
-            showSuccess(message) {
-                this.errorDiv.style.background = '#d1fae5';
-                this.errorDiv.style.color = '#065f46';
-                document.getElementById('error-message').textContent = message;
-                this.errorDiv.style.display = 'block';
+            hideAlerts() {
+                this.errorDiv.style.display = 'none';
+                this.successDiv.style.display = 'none';
             }
 
             generateSessionId() {
@@ -355,7 +709,30 @@
         // Inicializa quando DOM carregar
         document.addEventListener('DOMContentLoaded', () => {
             new AdminAuth();
+            
+            // Add some interactive particles effect (optional)
+            createParticles();
         });
+
+        // Optional particle effect for background
+        function createParticles() {
+            const container = document.querySelector('.admin-login-page');
+            for (let i = 0; i < 5; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 4px;
+                    height: 4px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    animation: float ${8 + Math.random() * 4}s ease-in-out infinite;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation-delay: ${Math.random() * 2}s;
+                `;
+                container.appendChild(particle);
+            }
+        }
     </script>
 </body>
 </html>

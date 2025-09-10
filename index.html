@@ -5,265 +5,624 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HemoByte - Campanhas de Doação de Sangue em Feira de Santana</title>
+  
+  <!-- Preconnect para melhor performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'blood-red': '#dc2626',
+            'blood-dark': '#b91c1c',
+            'blood-light': '#f87171',
+            'hemobyte-blue': '#1e40af',
+            'hemobyte-light': '#60a5fa'
+          },
+          fontFamily: {
+            'poppins': ['Poppins', 'sans-serif'],
+            'inter': ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts - Enhanced -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  
+  <!-- AOS - Animate On Scroll -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <!-- Original Styles (preserved) -->
   <link rel="stylesheet" href="styles-fixed.css">
   <link rel="stylesheet" href="public/hemobyte-styles.css">
   <link rel="stylesheet" href="public/ux-fixes.css">
   <link rel="stylesheet" href="public/responsive-improvements.css">
   <link rel="stylesheet" href="header-fix.css">
+  
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Modern Enhancements -->
+  <style>
+    :root {
+      --blood-red: #dc2626;
+      --blood-dark: #b91c1c;
+      --blood-light: #f87171;
+      --hemobyte-blue: #1e40af;
+      --hemobyte-light: #60a5fa;
+    }
+
+    body {
+      font-family: 'Inter', 'Poppins', sans-serif;
+    }
+
+    /* Enhanced transitions for existing elements */
+    .stat-item, .impact-card, .cta-button, .feature-item {
+      transition: all 0.3s ease;
+    }
+
+    .stat-item:hover, .impact-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Enhanced typography */
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+    }
+
+    .stat-number, .impact-number {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+    }
+
+    /* Subtle animations for icons */
+    .logo-link i {
+      animation: pulse 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
+    /* Enhanced hover effects */
+    .main-nav a:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Improved spacing with Bootstrap utilities */
+    .modern-spacing {
+      padding: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .modern-spacing {
+        padding: 2.5rem;
+      }
+    }
+
+    /* Enhanced alert styling */
+    .emergency-alert {
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(239, 68, 68, 0.2);
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
 <body>
   <!-- Skip link para acessibilidade -->
-  <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+  <a href="#main-content" class="skip-link visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 z-3">Pular para conteúdo principal</a>
   
   <!-- isso aqui é o cabeçalho fixo do site com logo e menu de navegação -->
-  <header class="top-header" role="banner">
-    <div class="logo-container">
-      <a href="index.html" class="logo-link">
-        <i class="fas fa-tint"></i>
-        <span class="logo-text">HemoByte</span>
-      </a>
+  <header class="top-header navbar navbar-expand-lg" role="banner" data-aos="fade-down">
+    <div class="container-fluid px-3 px-lg-5">
+      <div class="logo-container">
+        <a href="index.html" class="logo-link navbar-brand d-flex align-items-center text-decoration-none">
+          <i class="fas fa-tint text-danger me-2"></i>
+          <span class="logo-text fw-bold">HemoByte</span>
+        </a>
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <nav class="main-nav d-none d-lg-flex" role="navigation" aria-label="Navegação principal">
+        <ul class="navbar-nav d-flex flex-row gap-3">
+          <li class="nav-item">
+            <a href="index.html" class="active nav-link d-flex flex-column align-items-center text-decoration-none p-2 rounded" title="Início" aria-current="page" data-bs-toggle="tooltip" data-bs-placement="bottom">
+              <i class="fas fa-home" aria-hidden="true"></i>
+              <span class="sr-only">Início</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="campanhas-ativas.html" class="nav-link d-flex flex-column align-items-center text-decoration-none p-2 rounded" title="Campanhas" data-bs-toggle="tooltip" data-bs-placement="bottom">
+              <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+              <span class="sr-only">Campanhas</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="criar-campanha.html" class="nav-link d-flex flex-column align-items-center text-decoration-none p-2 rounded" title="Criar Campanha" data-bs-toggle="tooltip" data-bs-placement="bottom">
+              <i class="fas fa-plus-circle" aria-hidden="true"></i>
+              <span class="sr-only">Criar Campanha</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="sobre.html" class="nav-link d-flex flex-column align-items-center text-decoration-none p-2 rounded" title="Sobre" data-bs-toggle="tooltip" data-bs-placement="bottom">
+              <i class="fas fa-info-circle" aria-hidden="true"></i>
+              <span class="sr-only">Sobre</span>
+            </a>
+          </li>
+          <li class="nav-item" id="nav-login">
+            <a href="login.html" class="nav-link d-flex flex-column align-items-center text-decoration-none p-2 rounded" title="Login" data-bs-toggle="tooltip" data-bs-placement="bottom">
+              <i class="fas fa-user" aria-hidden="true"></i>
+              <span class="sr-only">Login</span>
+            </a>
+          </li>
+          <li class="nav-item" id="nav-profile" style="display: none;">
+            <a href="public/perfil.html" title="Perfil" class="profile-link nav-link d-flex flex-column align-items-center text-decoration-none p-2 rounded" data-bs-toggle="tooltip" data-bs-placement="bottom">
+              <i class="fas fa-user-circle" aria-hidden="true"></i>
+              <span class="user-name small">Carregando...</span>
+            </a>
+          </li>
+          <li class="nav-item" id="nav-logout" style="display: none;">
+            <a href="#" title="Sair" class="logout-link nav-link d-flex flex-column align-items-center text-decoration-none p-2 rounded" id="btn-sair" data-bs-toggle="tooltip" data-bs-placement="bottom">
+              <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+              <span class="sr-only">Sair</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <!-- Mobile menu button -->
+      <button class="navbar-toggler d-lg-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <!-- Mobile navigation -->
+      <div class="collapse navbar-collapse d-lg-none" id="mobileNav">
+        <ul class="navbar-nav ms-auto pt-3 pb-2">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link active" aria-current="page">
+              <i class="fas fa-home me-2"></i>Início
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="campanhas-ativas.html" class="nav-link">
+              <i class="fas fa-map-marker-alt me-2"></i>Campanhas
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="criar-campanha.html" class="nav-link">
+              <i class="fas fa-plus-circle me-2"></i>Criar Campanha
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="sobre.html" class="nav-link">
+              <i class="fas fa-info-circle me-2"></i>Sobre
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="login.html" class="nav-link">
+              <i class="fas fa-user me-2"></i>Login
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <nav class="main-nav" role="navigation" aria-label="Navegação principal">
-      <ul>
-        <li><a href="index.html" class="active" title="Início" aria-current="page">
-          <i class="fas fa-home" aria-hidden="true"></i>
-          <span class="sr-only">Início</span>
-        </a></li>
-        <li><a href="campanhas-ativas.html" title="Campanhas">
-          <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-          <span class="sr-only">Campanhas</span>
-        </a></li>
-        <li><a href="criar-campanha.html" title="Criar Campanha">
-          <i class="fas fa-plus-circle" aria-hidden="true"></i>
-          <span class="sr-only">Criar Campanha</span>
-        </a></li>
-        <li><a href="sobre.html" title="Sobre">
-          <i class="fas fa-info-circle" aria-hidden="true"></i>
-          <span class="sr-only">Sobre</span>
-        </a></li>
-        <li id="nav-login"><a href="login.html" title="Login">
-          <i class="fas fa-user" aria-hidden="true"></i>
-          <span class="sr-only">Login</span>
-        </a></li>
-                <li id="nav-profile" style="display: none;">
-                  <a href="public/perfil.html" title="Perfil" class="profile-link">
-                    <i class="fas fa-user-circle" aria-hidden="true"></i>
-                    <span class="user-name">Carregando...</span>
-                  </a>
-                </li>
-                <li id="nav-logout" style="display: none;">
-                  <a href="#" title="Sair" class="logout-link" id="btn-sair">
-                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
-                    <span class="sr-only">Sair</span>
-                  </a>
-                </li>
-      </ul>
-    </nav>
   </header>
 
   <!-- Conteúdo principal -->
   <main id="main-content" role="main">
     <!-- Stats Banner -->
-    <section class="stats-banner" aria-labelledby="stats-title">
-      <h2 id="stats-title" class="sr-only">Estatísticas do HemoByte</h2>
-      <div class="stats-container">
-        <div class="stat-item">
-          <div class="stat-number" aria-label="Mil e quinhentas doações">1.500+</div>
-          <div class="stat-label">DOAÇÕES</div>
+    <section class="stats-banner" aria-labelledby="stats-title" data-aos="fade-up">
+      <h2 id="stats-title" class="sr-only visually-hidden">Estatísticas do HemoByte</h2>
+      <div class="stats-container d-flex flex-wrap justify-content-center align-items-center gap-4 p-4">
+        <div class="stat-item text-center p-3 rounded shadow-sm" data-aos="zoom-in" data-aos-delay="100">
+          <div class="stat-number fw-bold display-6" aria-label="Mil e quinhentas doações">1.500+</div>
+          <div class="stat-label text-uppercase small fw-medium">DOAÇÕES</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number" aria-label="Doze campanhas">12</div>
-          <div class="stat-label">CAMPANHAS</div>
+        <div class="stat-item text-center p-3 rounded shadow-sm" data-aos="zoom-in" data-aos-delay="200">
+          <div class="stat-number fw-bold display-6" aria-label="Doze campanhas">12</div>
+          <div class="stat-label text-uppercase small fw-medium">CAMPANHAS</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number" aria-label="Seis mil vidas impactadas">6.000+</div>
-          <div class="stat-label">VIDAS IMPACTADAS</div>
+        <div class="stat-item text-center p-3 rounded shadow-sm" data-aos="zoom-in" data-aos-delay="300">
+          <div class="stat-number fw-bold display-6" aria-label="Seis mil vidas impactadas">6.000+</div>
+          <div class="stat-label text-uppercase small fw-medium">VIDAS IMPACTADAS</div>
+        </div>
+        <div class="stat-item text-center p-3 rounded shadow-sm" data-aos="zoom-in" data-aos-delay="400">
+          <div class="stat-number fw-bold display-6" aria-label="Quinze hospitais">15</div>
+          <div class="stat-label text-uppercase small fw-medium">HOSPITAIS</div>
         </div>
       
-        <div class="banner-buttons">
-          <a href="criar-campanha.html" class="cta-button primary" aria-describedby="create-campaign-desc">
-            Criar Campanha
+        <div class="banner-buttons d-flex flex-wrap justify-content-center gap-3 w-100 mt-4" data-aos="fade-up" data-aos-delay="500">
+          <a href="criar-campanha.html" class="cta-button primary btn btn-lg px-4 py-2 rounded-pill fw-semibold text-decoration-none" aria-describedby="create-campaign-desc">
+            <i class="fas fa-plus-circle me-2"></i>Criar Campanha
           </a>
-          <div id="create-campaign-desc" class="sr-only">Organize uma nova campanha de doação de sangue</div>
+          <div id="create-campaign-desc" class="sr-only visually-hidden">Organize uma nova campanha de doação de sangue</div>
           
-          <a href="campanhas-ativas.html" class="cta-button secondary" aria-describedby="view-campaigns-desc">
-            Ver Campanhas
+          <a href="campanhas-ativas.html" class="cta-button secondary btn btn-lg px-4 py-2 rounded-pill fw-semibold text-decoration-none" aria-describedby="view-campaigns-desc">
+            <i class="fas fa-eye me-2"></i>Ver Campanhas
           </a>
-          <div id="view-campaigns-desc" class="sr-only">Veja todas as campanhas ativas na sua região</div>
+          <div id="view-campaigns-desc" class="sr-only visually-hidden">Veja todas as campanhas ativas na sua região</div>
         </div>
       </div>
     </section>
 
   <!-- isso aqui é o banner principal da página -->
-  <section class="hero-banner">
+  <section class="hero-banner" data-aos="fade-in">
   </section>
 
     <!-- isso aqui é a seção de estatísticas de impacto -->
-    <section class="impact-section" aria-labelledby="impact-title">
+    <section class="impact-section py-5" aria-labelledby="impact-title">
       <!-- Emergency Alert -->
-      <section class="emergency-alert" role="alert" aria-labelledby="emergency-title">
-        <i class="fas fa-exclamation-circle alert-icon" aria-hidden="true"></i>
-        <div class="alert-text">
-          <h3 id="emergency-title">Urgente: Precisamos de doadores tipo O-</h3>
-        </div>
-        <a href="campanhas-ativas.html" class="alert-button" aria-describedby="emergency-desc">
-          Quero Ajudar
-        </a>
-        <div id="emergency-desc" class="sr-only">Clique para ver campanhas urgentes de doação tipo O-</div>
-      </section>
+      <div class="container mb-4">
+        <section class="emergency-alert alert alert-danger d-flex align-items-center p-3 border-0" role="alert" aria-labelledby="emergency-title" data-aos="shake">
+          <i class="fas fa-exclamation-circle alert-icon me-3 fs-4" aria-hidden="true"></i>
+          <div class="alert-text flex-grow-1">
+            <h3 id="emergency-title" class="h5 mb-1 fw-bold">Urgente: Precisamos de doadores tipo O-</h3>
+            <p class="mb-0 small text-muted">Estoque crítico - Sua doação pode salvar vidas!</p>
+          </div>
+          <a href="campanhas-ativas.html" class="alert-button btn btn-danger ms-3" aria-describedby="emergency-desc">
+            <i class="fas fa-heart me-1"></i>Quero Ajudar
+          </a>
+          <div id="emergency-desc" class="sr-only visually-hidden">Clique para ver campanhas urgentes de doação tipo O-</div>
+        </section>
+      </div>
 
-      <h2 id="impact-title" class="section-title">Nosso Impacto em Feira de Santana</h2>
-      
-      <div class="impact-grid" role="group" aria-labelledby="impact-title">
-        <div class="impact-card">
-          <div class="impact-icon" aria-hidden="true">
-            <i class="fas fa-tint"></i>
-          </div>
-          <h3>Doações Realizadas</h3>
-          <div class="impact-number" aria-label="Mil e quinhentas doações">1.500+</div>
-          <p>este mês</p>
+      <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+          <h2 id="impact-title" class="section-title display-5 fw-bold mb-3">Nosso Impacto em Feira de Santana</h2>
+          <p class="lead text-muted">Transformando vidas através da solidariedade</p>
         </div>
         
-        <div class="impact-card">
-          <div class="impact-icon" aria-hidden="true">
-            <i class="fas fa-users"></i>
+        <div class="impact-grid row g-4" role="group" aria-labelledby="impact-title">
+          <div class="col-md-6 col-lg-3">
+            <div class="impact-card h-100 p-4 text-center bg-white rounded shadow-sm border-0" data-aos="flip-left" data-aos-delay="100">
+              <div class="impact-icon mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle" style="width: 80px; height: 80px;" aria-hidden="true">
+                <i class="fas fa-tint fs-2 text-white"></i>
+              </div>
+              <h3 class="h5 fw-bold">Doações Realizadas</h3>
+              <div class="impact-number display-4 fw-bold text-primary" aria-label="Mil e quinhentas doações">1.500+</div>
+              <p class="text-muted mb-0">este mês</p>
+            </div>
           </div>
-          <h3>Campanhas Ativas</h3>
-          <div class="impact-number" aria-label="Doze campanhas">12</div>
-          <p>em diferentes bairros</p>
-        </div>
-        
-        <div class="impact-card">
-          <div class="impact-icon" aria-hidden="true">
-            <i class="fas fa-heart"></i>
+          
+          <div class="col-md-6 col-lg-3">
+            <div class="impact-card h-100 p-4 text-center bg-white rounded shadow-sm border-0" data-aos="flip-left" data-aos-delay="200">
+              <div class="impact-icon mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle" style="width: 80px; height: 80px;" aria-hidden="true">
+                <i class="fas fa-users fs-2 text-white"></i>
+              </div>
+              <h3 class="h5 fw-bold">Campanhas Ativas</h3>
+              <div class="impact-number display-4 fw-bold text-primary" aria-label="Doze campanhas">12</div>
+              <p class="text-muted mb-0">em diferentes bairros</p>
+            </div>
           </div>
-          <h3>Vidas Impactadas</h3>
-          <div class="impact-number" aria-label="Seis mil vidas">6.000+</div>
-          <p>em 2024</p>
-        </div>
-        
-        <div class="impact-card">
-          <div class="impact-icon" aria-hidden="true">
-            <i class="fas fa-hospital"></i>
+          
+          <div class="col-md-6 col-lg-3">
+            <div class="impact-card h-100 p-4 text-center bg-white rounded shadow-sm border-0" data-aos="flip-left" data-aos-delay="300">
+              <div class="impact-icon mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle" style="width: 80px; height: 80px;" aria-hidden="true">
+                <i class="fas fa-heart fs-2 text-white"></i>
+              </div>
+              <h3 class="h5 fw-bold">Vidas Impactadas</h3>
+              <div class="impact-number display-4 fw-bold text-primary" aria-label="Seis mil vidas">6.000+</div>
+              <p class="text-muted mb-0">em 2024</p>
+            </div>
           </div>
-          <h3>Hospitais Atendidos</h3>
-          <div class="impact-number" aria-label="Quinze hospitais">15</div>
-          <p>na região</p>
+          
+          <div class="col-md-6 col-lg-3">
+            <div class="impact-card h-100 p-4 text-center bg-white rounded shadow-sm border-0" data-aos="flip-left" data-aos-delay="400">
+              <div class="impact-icon mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle" style="width: 80px; height: 80px;" aria-hidden="true">
+                <i class="fas fa-hospital fs-2 text-white"></i>
+              </div>
+              <h3 class="h5 fw-bold">Hospitais Atendidos</h3>
+              <div class="impact-number display-4 fw-bold text-primary" aria-label="Quinze hospitais">15</div>
+              <p class="text-muted mb-0">na região</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- isso aqui é a seção de campanhas em destaque -->
-    <section class="campaigns-section" aria-labelledby="campaigns-title">
-      <div class="section-header">
-        <h2 id="campaigns-title">Campanhas em Destaque</h2>
-        <a href="campanhas-ativas.html" class="view-all" aria-describedby="view-all-desc">Ver Todas</a>
-        <div id="view-all-desc" class="sr-only">Ver todas as campanhas disponíveis</div>
-      </div>
-      
-      <div class="campaigns-container" role="group" aria-labelledby="campaigns-title">
-        <!-- Campanhas carregadas dinamicamente do painel admin -->
-        <!-- LÓGICA CORRIGIDA: Mostra as 2 primeiras campanhas da página "Campanhas Ativas" -->
-        <div style="text-align: center; padding: 2rem; color: #6b7280;">
-          <p><i class="fas fa-sync fa-spin"></i> Carregando campanhas em destaque...</p>
+    <section class="campaigns-section py-5 bg-light" aria-labelledby="campaigns-title">
+      <div class="container">
+        <div class="section-header d-flex justify-content-between align-items-center mb-5" data-aos="fade-up">
+          <div>
+            <h2 id="campaigns-title" class="display-6 fw-bold mb-2">Campanhas em Destaque</h2>
+            <p class="text-muted mb-0">Encontre oportunidades para fazer a diferença</p>
+          </div>
+          <a href="campanhas-ativas.html" class="view-all btn btn-outline-primary" aria-describedby="view-all-desc">
+            <i class="fas fa-arrow-right me-2"></i>Ver Todas
+          </a>
+          <div id="view-all-desc" class="sr-only visually-hidden">Ver todas as campanhas disponíveis</div>
+        </div>
+        
+        <div class="campaigns-container" role="group" aria-labelledby="campaigns-title">
+          <!-- Campanhas carregadas dinamicamente do painel admin -->
+          <!-- LÓGICA CORRIGIDA: Mostra as 2 primeiras campanhas da página "Campanhas Ativas" -->
+          <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+              <div class="text-center p-5 bg-white rounded shadow-sm" data-aos="pulse">
+                <div class="spinner-border text-danger mb-3" role="status">
+                  <span class="visually-hidden">Carregando...</span>
+                </div>
+                <p class="text-muted mb-0">
+                  <i class="fas fa-sync fa-spin me-2"></i>Carregando campanhas em destaque...
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- isso aqui é a seção de histórias de sucesso -->
-    <section class="success-stories">
-    </section>
-
-  <!-- isso aqui é a seção de promoção do aplicativo -->
-  <section class="app-promo">
-    <div class="app-content">
-      <h2>App HemoByte</h2>
-      <p>Transforme vidas com apenas alguns toques</p>
-      
-      <div class="app-features">
-        <div class="feature-item">
-          <div class="feature-icon">
-            <i class="fas fa-bell"></i>
-          </div>
-          <div class="feature-text">
-            <h4>Notificações</h4>
-            <p>Alertas de campanhas próximas</p>
-          </div>
+    <section class="success-stories py-5" data-aos="fade-up">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="display-6 fw-bold mb-3">Histórias que Inspiram</h2>
+          <p class="lead text-muted">Vidas transformadas pela doação de sangue</p>
         </div>
         
-        <div class="feature-item">
-          <div class="feature-icon">
-            <i class="fas fa-map-marked-alt"></i>
+        <div class="row g-4">
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body p-4 text-center">
+                <div class="mb-3">
+                  <i class="fas fa-quote-left text-danger fs-2"></i>
+                </div>
+                <p class="card-text">"Graças ao HemoByte, consegui encontrar doadores rapidamente quando minha filha precisou. Serei eternamente grata!"</p>
+                <div class="mt-3">
+                  <h6 class="card-title fw-bold mb-0">Maria Silva</h6>
+                  <small class="text-muted">Mãe beneficiada</small>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="feature-text">
-            <h4>Localização</h4>
-            <p>Encontre pontos de doação</p>
+          
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body p-4 text-center">
+                <div class="mb-3">
+                  <i class="fas fa-quote-left text-danger fs-2"></i>
+                </div>
+                <p class="card-text">"Doar sangue nunca foi tão fácil. O aplicativo me conectou com campanhas próximas de casa!"</p>
+                <div class="mt-3">
+                  <h6 class="card-title fw-bold mb-0">João Santos</h6>
+                  <small class="text-muted">Doador regular</small>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        
-        <div class="feature-item">
-          <div class="feature-icon">
-            <i class="fas fa-calendar-check"></i>
-          </div>
-          <div class="feature-text">
-            <h4>Agendamento</h4>
-            <p>Marque sua doação facilmente</p>
+          
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body p-4 text-center">
+                <div class="mb-3">
+                  <i class="fas fa-quote-left text-danger fs-2"></i>
+                </div>
+                <p class="card-text">"Como organizadora, o HemoByte revolucionou nossas campanhas. Muito mais eficiente!"</p>
+                <div class="mt-3">
+                  <h6 class="card-title fw-bold mb-0">Ana Costa</h6>
+                  <small class="text-muted">Coordenadora hospitalar</small>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      
-      <!-- App Download Buttons -->
-      <div class="app-buttons-container">
-        <a href="#" class="app-button google-play">
-          <i class="fab fa-google-play"></i>
-          <div class="button-text">
-            <span>BAIXE NO</span>
-            <strong>Google Play</strong>
+    </section>
+
+  <!-- isso aqui é a seção de promoção do aplicativo -->
+  <section class="app-promo py-5 text-white" data-aos="fade-up">
+    <div class="container">
+      <div class="app-content row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h2 class="display-5 fw-bold mb-3">App HemoByte</h2>
+          <p class="lead mb-4">Transforme vidas com apenas alguns toques</p>
+          
+          <div class="app-features row g-3">
+            <div class="col-md-4">
+              <div class="feature-item text-center p-3 rounded" data-aos="zoom-in" data-aos-delay="100">
+                <div class="feature-icon mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle" style="width: 60px; height: 60px;">
+                  <i class="fas fa-bell fs-4"></i>
+                </div>
+                <div class="feature-text">
+                  <h4 class="h6 fw-bold mb-2">Notificações</h4>
+                  <p class="small mb-0">Alertas de campanhas próximas</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="feature-item text-center p-3 rounded" data-aos="zoom-in" data-aos-delay="200">
+                <div class="feature-icon mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle" style="width: 60px; height: 60px;">
+                  <i class="fas fa-map-marked-alt fs-4"></i>
+                </div>
+                <div class="feature-text">
+                  <h4 class="h6 fw-bold mb-2">Localização</h4>
+                  <p class="small mb-0">Encontre pontos de doação</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="feature-item text-center p-3 rounded" data-aos="zoom-in" data-aos-delay="300">
+                <div class="feature-icon mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle" style="width: 60px; height: 60px;">
+                  <i class="fas fa-calendar-check fs-4"></i>
+                </div>
+                <div class="feature-text">
+                  <h4 class="h6 fw-bold mb-2">Agendamento</h4>
+                  <p class="small mb-0">Marque sua doação facilmente</p>
+                </div>
+              </div>
+            </div>
           </div>
-        </a>
-        <a href="#" class="app-button app-store">
-          <i class="fab fa-apple"></i>
-          <div class="button-text">
-            <span>DISPONÍVEL NA</span>
-            <strong>App Store</strong>
+        </div>
+        
+        <div class="col-lg-6">
+          <!-- App Download Buttons -->
+          <div class="app-buttons-container text-center" data-aos="fade-left" data-aos-delay="400">
+            <div class="row g-3 justify-content-center">
+              <div class="col-auto">
+                <a href="#" class="app-button google-play d-flex align-items-center p-3 rounded text-decoration-none text-white">
+                  <i class="fab fa-google-play fs-3 me-3"></i>
+                  <div class="button-text text-start">
+                    <span class="small">BAIXE NO</span>
+                    <strong class="d-block">Google Play</strong>
+                  </div>
+                </a>
+              </div>
+              <div class="col-auto">
+                <a href="#" class="app-button app-store d-flex align-items-center p-3 rounded text-decoration-none text-white">
+                  <i class="fab fa-apple fs-3 me-3"></i>
+                  <div class="button-text text-start">
+                    <span class="small">DISPONÍVEL NA</span>
+                    <strong class="d-block">App Store</strong>
+                  </div>
+                </a>
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <div class="row g-2 justify-content-center text-center">
+                <div class="col-auto">
+                  <small class="text-white-50">
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    4.8 (2.5k avaliações)
+                  </small>
+                </div>
+              </div>
+            </div>
           </div>
-        </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- isso aqui é o rodapé da página com links e contatos -->
   </main>
 
   <!-- isso aqui é o rodapé do site -->
-  <footer class="footer" role="contentinfo">
-    <div class="footer-content">
-      <a href="index.html" class="footer-logo" aria-label="HemoByte - Voltar ao início">
-        <i class="fas fa-tint" aria-hidden="true"></i>
-        <span>HemoByte</span>
-      </a>
-      <nav class="footer-links" role="navigation" aria-label="Links do rodapé">
-        <a href="campanhas-ativas.html">Campanhas</a>
-        <a href="sobre.html">Sobre</a>
-        <a href="https://wa.me/75981829675" aria-label="Falar conosco pelo WhatsApp" target="_blank" rel="noopener">
-          <i class="fab fa-whatsapp" aria-hidden="true"></i>
-          <span class="sr-only">WhatsApp</span>
-        </a>
-        <a href="admin-login.html" style="color: #666; font-size: 0.8rem;" aria-label="Acesso administrativo">
-          <i class="fas fa-shield-alt" aria-hidden="true"></i>
-          <span class="sr-only">Admin</span>
-        </a>
-      </nav>
+  <footer class="footer py-4" role="contentinfo">
+    <div class="container">
+      <div class="footer-content row align-items-center">
+        <div class="col-md-6 mb-3 mb-md-0">
+          <a href="index.html" class="footer-logo d-flex align-items-center text-decoration-none" aria-label="HemoByte - Voltar ao início">
+            <i class="fas fa-tint text-danger me-2 fs-4" aria-hidden="true"></i>
+            <span class="fw-bold fs-4">HemoByte</span>
+          </a>
+          <p class="text-muted mb-0 mt-2 small">Conectando vidas através da tecnologia</p>
+        </div>
+        
+        <div class="col-md-6">
+          <nav class="footer-links text-md-end" role="navigation" aria-label="Links do rodapé">
+            <div class="d-flex flex-wrap justify-content-md-end gap-3">
+              <a href="campanhas-ativas.html" class="text-decoration-none">
+                <i class="fas fa-map-marker-alt me-1"></i>Campanhas
+              </a>
+              <a href="sobre.html" class="text-decoration-none">
+                <i class="fas fa-info-circle me-1"></i>Sobre
+              </a>
+              <a href="https://wa.me/75981829675" class="text-decoration-none" aria-label="Falar conosco pelo WhatsApp" target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp me-1"></i>
+                <span class="sr-only visually-hidden">WhatsApp</span>
+              </a>
+              <a href="admin-login.html" class="text-muted small text-decoration-none" aria-label="Acesso administrativo">
+                <i class="fas fa-shield-alt me-1" aria-hidden="true"></i>
+                <span class="sr-only visually-hidden">Admin</span>
+              </a>
+            </div>
+          </nav>
+        </div>
+      </div>
+      
+      <hr class="my-3">
+      
+      <div class="row">
+        <div class="col-12 text-center">
+          <small class="text-muted">
+            © 2024 HemoByte. Todos os direitos reservados. 
+            <span class="mx-2">|</span>
+            Feira de Santana - BA
+          </small>
+        </div>
+      </div>
     </div>
   </footer>
 
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- AOS Animation Library -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
   <!-- ✅ SISTEMA LIMPO E OTIMIZADO -->
   <script src="public/auth-system.js"></script>
   <script src="public/page-protection.js"></script>
+  
+  <script>
+    // Initialize AOS animations
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
+    });
+
+    // Initialize Bootstrap tooltips
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    const tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    // Enhanced scroll behavior
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add subtle parallax effect to hero banner
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const hero = document.querySelector('.hero-banner');
+      if (hero) {
+        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+      }
+    });
+  </script>
   
 </body>
 </html>
