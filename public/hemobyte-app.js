@@ -1113,6 +1113,133 @@ class HemoByteSystem {
         
         // Configura smooth scroll
         this.setupSmoothScroll();
+        
+        // Carrega campanhas em destaque
+        this.loadFeaturedCampaigns();
+    }
+
+    /**
+     * Carrega campanhas em destaque na página inicial
+     */
+    loadFeaturedCampaigns() {
+        console.log('🌟 Carregando campanhas em destaque...');
+        
+        const container = document.querySelector('.campaigns-container .row');
+        if (!container) {
+            console.log('❌ Container de campanhas não encontrado');
+            return;
+        }
+
+        // Dados simulados de campanhas em destaque
+        const featuredCampaigns = [
+            {
+                id: 1,
+                title: "Campanha Urgente - Hospital Geral",
+                location: "Centro, Feira de Santana",
+                date: "12 de Setembro, 2025",
+                time: "08:00 - 17:00",
+                bloodType: "O-",
+                progress: 75,
+                current: 45,
+                target: 60,
+                status: "urgent",
+                description: "Campanha emergencial para atender pacientes em estado crítico."
+            },
+            {
+                id: 2,
+                title: "Doe Vida - UEFS",
+                location: "UEFS, Feira de Santana",
+                date: "15 de Setembro, 2025",
+                time: "09:00 - 16:00",
+                bloodType: "A+",
+                progress: 40,
+                current: 24,
+                target: 60,
+                status: "active",
+                description: "Campanha universitária para conscientização e doação."
+            }
+        ];
+
+        // Remove loading e adiciona campanhas
+        container.innerHTML = '';
+        
+        featuredCampaigns.forEach((campaign, index) => {
+            const campaignCard = this.createCampaignCard(campaign, index);
+            container.appendChild(campaignCard);
+        });
+
+        console.log('✅ Campanhas em destaque carregadas com sucesso');
+    }
+
+    /**
+     * Cria um card de campanha
+     */
+    createCampaignCard(campaign, index) {
+        const col = document.createElement('div');
+        col.className = 'col-lg-6 mb-4';
+        col.setAttribute('data-aos', 'fade-up');
+        col.setAttribute('data-aos-delay', (index * 100).toString());
+
+        const statusClass = campaign.status === 'urgent' ? 'bg-danger' : 'bg-success';
+        const statusText = campaign.status === 'urgent' ? 'Urgente' : 'Ativa';
+        const statusIcon = campaign.status === 'urgent' ? 'fas fa-exclamation-triangle' : 'fas fa-check-circle';
+
+        col.innerHTML = `
+            <div class="card border-0 shadow-sm h-100 campaign-card">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge ${statusClass} text-white px-3 py-2">
+                            <i class="${statusIcon} me-1"></i>${statusText}
+                        </span>
+                    </div>
+                    
+                    <h5 class="card-title fw-bold mb-3">${campaign.title}</h5>
+                    
+                    <div class="campaign-details mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-map-marker-alt text-danger me-2"></i>
+                            <span class="text-muted">${campaign.location}</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-calendar text-danger me-2"></i>
+                            <span class="text-muted">${campaign.date}</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-clock text-danger me-2"></i>
+                            <span class="text-muted">${campaign.time}</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-tint text-danger me-2"></i>
+                            <span class="text-muted">Tipo Sanguíneo: <strong>${campaign.bloodType}</strong></span>
+                        </div>
+                    </div>
+                    
+                    <div class="progress mb-3" style="height: 8px;">
+                        <div class="progress-bar bg-danger" role="progressbar" 
+                             style="width: ${campaign.progress}%" 
+                             aria-valuenow="${campaign.progress}" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted small">${campaign.current}/${campaign.target} doadores</span>
+                        <span class="text-danger fw-bold">${campaign.progress}%</span>
+                    </div>
+                    
+                    <p class="text-muted small mb-4">${campaign.description}</p>
+                    
+                    <div class="d-grid">
+                        <a href="login.html" class="btn btn-danger btn-lg">
+                            <i class="fas fa-heart me-2"></i>Participar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        return col;
     }
 
     /**
