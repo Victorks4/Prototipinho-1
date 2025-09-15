@@ -8,116 +8,61 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Original Styles -->
-    <link rel="stylesheet" href="styles-fixed.css">
-    <link rel="stylesheet" href="public/hemobyte-styles.css">
-    <link rel="stylesheet" href="public/ux-fixes.css">
-    <link rel="stylesheet" href="public/responsive-improvements.css">
-    <link rel="stylesheet" href="header-fix.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles-fixed.css">
+  <link rel="stylesheet" href="public/hemobyte-styles.css">
+  <link rel="stylesheet" href="public/ux-fixes.css">
+  <link rel="stylesheet" href="public/responsive-improvements.css">
+  <link rel="stylesheet" href="header-fix.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Skip link para acessibilidade -->
-    <a href="#main-content" class="skip-link visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 z-3">Pular para conteúdo principal</a>
+    <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
     
     <!-- isso aqui é o cabeçalho fixo do site com logo e menu de navegação -->
-    <header class="top-header navbar navbar-expand-lg" role="banner" data-aos="fade-down">
-        <div class="container-fluid px-3 px-lg-5">
-            <div class="logo-container">
-                <a href="index.html" class="logo-link navbar-brand d-flex align-items-center text-decoration-none">
-                    <i class="fas fa-tint text-danger me-2"></i>
-                    <span class="logo-text fw-bold">HemoByte</span>
-                </a>
-            </div>
-            
-            <!-- Desktop Navigation -->
-            <nav class="main-nav d-none d-lg-flex" role="navigation" aria-label="Navegação principal">
-                <ul class="navbar-nav d-flex flex-row gap-3">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link d-flex flex-column align-items-center text-decoration-none p-2 rounded" title="Início" data-bs-toggle="tooltip" data-bs-placement="bottom">
-                            <i class="fas fa-home" aria-hidden="true"></i>
-                            <span class="sr-only">Início</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="campanhas-ativas.html" class="active nav-link d-flex flex-column align-items-center text-decoration-none p-2 rounded" title="Campanhas" aria-current="page" data-bs-toggle="tooltip" data-bs-placement="bottom">
-                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                            <span class="sr-only">Campanhas</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="criar-campanha.html" class="nav-link d-flex flex-column align-items-center text-decoration-none p-2 rounded" title="Criar Campanha" data-bs-toggle="tooltip" data-bs-placement="bottom">
-                            <i class="fas fa-plus-circle" aria-hidden="true"></i>
-                            <span class="sr-only">Criar Campanha</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="sobre.html" class="nav-link d-flex flex-column align-items-center text-decoration-none p-2 rounded" title="Sobre" data-bs-toggle="tooltip" data-bs-placement="bottom">
-                            <i class="fas fa-info-circle" aria-hidden="true"></i>
-                            <span class="sr-only">Sobre</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" id="nav-login">
-                        <a href="login.html" class="nav-link d-flex flex-column align-items-center text-decoration-none p-2 rounded" title="Login" data-bs-toggle="tooltip" data-bs-placement="bottom">
-                            <i class="fas fa-user" aria-hidden="true"></i>
-                            <span class="sr-only">Login</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" id="nav-profile" style="display: none;">
-                        <a href="public/perfil.html" title="Perfil" class="profile-link nav-link d-flex flex-column align-items-center text-decoration-none p-2 rounded" data-bs-toggle="tooltip" data-bs-placement="bottom">
-                            <i class="fas fa-user-circle" aria-hidden="true"></i>
-                            <span class="user-name sr-only">Carregando...</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" id="nav-logout" style="display: none;">
-                        <a href="#" title="Sair" class="logout-link nav-link d-flex flex-column align-items-center text-decoration-none p-2 rounded" id="btn-sair" data-bs-toggle="tooltip" data-bs-placement="bottom">
-                            <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
-                            <span class="sr-only">Sair</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            
-            <!-- Mobile menu toggle -->
-            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <!-- Mobile navigation -->
-            <div class="collapse navbar-collapse d-lg-none" id="mobileNav">
-                <ul class="navbar-nav ms-auto pt-3 pb-2">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">
-                            <i class="fas fa-home me-2"></i>Início
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="campanhas-ativas.html" class="nav-link active" aria-current="page">
-                            <i class="fas fa-map-marker-alt me-2"></i>Campanhas
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="criar-campanha.html" class="nav-link">
-                            <i class="fas fa-plus-circle me-2"></i>Criar Campanha
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="sobre.html" class="nav-link">
-                            <i class="fas fa-info-circle me-2"></i>Sobre
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="login.html" class="nav-link">
-                            <i class="fas fa-user me-2"></i>Login
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    <header class="top-header" role="banner">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <i class="fas fa-tint"></i>
+                <span class="logo-text">HemoByte</span>
+            </a>
         </div>
+        <nav class="main-nav" role="navigation" aria-label="Navegação principal">
+            <ul>
+                <li><a href="index.html" title="Início">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                    <span class="sr-only">Início</span>
+                </a></li>
+                <li><a href="campanhas-ativas.html" class="active" title="Campanhas" aria-current="page">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    <span class="sr-only">Campanhas</span>
+                </a></li>
+                <li><a href="criar-campanha.html" title="Criar Campanha">
+                    <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                    <span class="sr-only">Criar Campanha</span>
+                </a></li>
+                <li><a href="sobre.html" title="Sobre">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    <span class="sr-only">Sobre</span>
+                </a></li>
+                <li id="nav-login"><a href="login.html" title="Login">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <span class="sr-only">Login</span>
+                </a></li>
+                <li id="nav-profile" style="display: none;">
+                    <a href="public/perfil.html" title="Perfil" class="profile-link">
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
+                        <span class="user-name">Carregando...</span>
+                    </a>
+                </li>
+                <li id="nav-logout" style="display: none;">
+                    <a href="#" title="Sair" class="logout-link" id="btn-sair">
+                        <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                        <span class="sr-only">Sair</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </header>
 
     <!-- isso aqui é o conteúdo principal da página -->
@@ -330,8 +275,6 @@
         </div>
     </footer>
     <!-- ✅ SCRIPTS OTIMIZADOS - Apenas necessários para campanhas-ativas.html -->
-    <!-- Bootstrap 5 JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- ✅ SISTEMA LIMPO -->
     <script src="public/auth-system.js"></script>
 </body>
