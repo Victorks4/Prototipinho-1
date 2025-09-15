@@ -4,766 +4,199 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Login - HemoByte</title>
-    
-    <!-- Preconnect para melhor performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'blood-red': '#dc2626',
-              'blood-dark': '#b91c1c',
-              'blood-light': '#f87171',
-              'hemobyte-blue': '#1e40af',
-              'hemobyte-light': '#60a5fa'
-            },
-            fontFamily: {
-              'poppins': ['Poppins', 'sans-serif'],
-              'inter': ['Inter', 'sans-serif']
-            }
-          }
-        }
-      }
-    </script>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    
-    <!-- AOS - Animate On Scroll -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <!-- Original Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles-fixed.css" />
     <link rel="stylesheet" href="public/hemobyte-styles.css" />
     <link rel="stylesheet" href="public/ux-fixes.css" />
     <link rel="stylesheet" href="header-fix.css" />
     <link rel="stylesheet" href="login-background.css" />
-    
-    <style>
-      :root {
-        --blood-red: #dc2626;
-        --blood-dark: #b91c1c;
-        --blood-light: #f87171;
-        --hemobyte-blue: #1e40af;
-        --hemobyte-light: #60a5fa;
-        --glass-bg: rgba(255, 255, 255, 0.1);
-        --glass-border: rgba(255, 255, 255, 0.2);
-        --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-      }
-
-      body {
-        font-family: 'Inter', 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-        min-height: 100vh;
-        overflow-x: hidden;
-      }
-
-      .login-page {
-        background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(30, 64, 175, 0.1) 100%),
-                    radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
-                    radial-gradient(circle at 70% 80%, rgba(239, 68, 68, 0.3) 0%, transparent 50%);
-        min-height: 100vh;
-        position: relative;
-      }
-
-      .login-page::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="2" fill="%23ffffff" fill-opacity="0.1"/><circle cx="80" cy="40" r="1" fill="%23ffffff" fill-opacity="0.1"/><circle cx="40" cy="80" r="1.5" fill="%23ffffff" fill-opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-        opacity: 0.3;
-        pointer-events: none;
-      }
-
-      /* Glass Morphism Auth Container */
-      .auth-container {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 24px;
-        padding: 2.5rem;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-        position: relative;
-        overflow: hidden;
-        max-width: 450px;
-        width: 100%;
-      }
-
-      .auth-container::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
-      }
-
-      /* Enhanced Tab System */
-      .auth-tabs {
-        display: flex;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 0.5rem;
-        margin-bottom: 2rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .tab-link {
-        flex: 1;
-        background: transparent;
-        border: none;
-        color: rgba(255, 255, 255, 0.7);
-        padding: 0.75rem 1rem;
-        border-radius: 12px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-      }
-
-      .tab-link.active {
-        background: linear-gradient(135deg, var(--blood-red), var(--blood-dark));
-        color: white;
-        box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
-        transform: translateY(-1px);
-      }
-
-      .tab-link:hover:not(.active) {
-        background: rgba(255, 255, 255, 0.1);
-        color: white;
-      }
-
-      /* Enhanced Form Styling */
-      .auth-form {
-        display: none;
-      }
-
-      .auth-form.active {
-        display: block;
-        animation: fadeInUp 0.5s ease-out;
-      }
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .form-group {
-        margin-bottom: 1.5rem;
-        position: relative;
-      }
-
-      .form-group label {
-        display: block;
-        color: white;
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-        font-size: 0.9rem;
-      }
-
-      .form-group input {
-        width: 100%;
-        padding: 0.875rem 1rem;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 12px;
-        color: white;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
-      }
-
-      .form-group input:focus {
-        outline: none;
-        border-color: var(--blood-red);
-        box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-        background: rgba(255, 255, 255, 0.15);
-        transform: translateY(-1px);
-      }
-
-      .form-group input::placeholder {
-        color: rgba(255, 255, 255, 0.5);
-      }
-
-      .form-hint {
-        font-size: 0.8rem;
-        color: rgba(255, 255, 255, 0.6);
-        margin-top: 0.25rem;
-      }
-
-      /* Form Options */
-      .form-options {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 1.5rem 0;
-        font-size: 0.9rem;
-      }
-
-      .remember-me {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: rgba(255, 255, 255, 0.8);
-        cursor: pointer;
-      }
-
-      .remember-me input[type="checkbox"] {
-        width: auto;
-        margin: 0;
-      }
-
-      .forgot-password {
-        color: var(--blood-light);
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
-
-      .forgot-password:hover {
-        color: var(--blood-red);
-      }
-
-      /* Enhanced Buttons */
-      .btn-auth {
-        width: 100%;
-        padding: 0.875rem 1.5rem;
-        background: linear-gradient(135deg, var(--blood-red), var(--blood-dark));
-        color: white;
-        border: none;
-        border-radius: 12px;
-        font-weight: 600;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
-      }
-
-      .btn-auth:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 35px rgba(220, 38, 38, 0.4);
-      }
-
-      .btn-auth:active {
-        transform: translateY(0);
-      }
-
-      .btn-auth[data-loading="true"] {
-        pointer-events: none;
-        opacity: 0.8;
-      }
-
-      /* Auth Links */
-      .auth-links {
-        text-align: center;
-        margin-top: 2rem;
-        padding-top: 2rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .auth-links p {
-        color: rgba(255, 255, 255, 0.7);
-        margin: 0;
-      }
-
-      .auth-links a {
-        color: var(--blood-light);
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.3s ease;
-      }
-
-      .auth-links a:hover {
-        color: var(--blood-red);
-      }
-
-      /* Password Toggle */
-      .password-toggle {
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        background: none;
-        border: none;
-        color: rgba(255, 255, 255, 0.6);
-        cursor: pointer;
-        transition: color 0.3s ease;
-      }
-
-      .password-toggle:hover {
-        color: white;
-      }
-
-      /* Loading Animation */
-      .btn-loading {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-      }
-
-      /* Enhanced Header for login page */
-      .top-header {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      /* Floating particles animation */
-      @keyframes float {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        33% { transform: translateY(-20px) rotate(120deg); }
-        66% { transform: translateY(-10px) rotate(240deg); }
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .auth-container {
-          margin: 1rem;
-          padding: 2rem;
-        }
-        
-        .tab-link {
-          font-size: 0.9rem;
-          padding: 0.625rem 0.75rem;
-        }
-      }
-    </style>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
 </head>
 <body>
     <!-- Skip link para acessibilidade -->
-    <a href="#main-content" class="skip-link visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 z-3">
-        Pular para conteúdo principal
-    </a>
+    <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
     
-    <!-- Header moderno -->
-    <header class="top-header navbar navbar-expand-lg navbar-dark fixed-top" role="banner" data-aos="fade-down">
-        <div class="container-fluid px-3 px-lg-5">
-            <div class="logo-container">
-                <a href="index.html" class="logo-link navbar-brand d-flex align-items-center text-decoration-none" aria-label="HemoByte - Voltar ao início">
-                    <i class="fas fa-tint text-danger me-2 fs-3 animate__animated animate__pulse animate__infinite" aria-hidden="true"></i>
-                    <span class="logo-text fw-bold fs-4 text-white">HemoByte</span>
-                </a>
-            </div>
-
-            <nav class="main-nav d-none d-lg-flex" role="navigation" aria-label="Navegação principal">
-                <ul class="navbar-nav d-flex flex-row gap-3">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link position-relative" title="Início" data-bs-toggle="tooltip" data-bs-placement="bottom">
-                            <i class="fas fa-home" aria-hidden="true"></i>
-                            <span class="sr-only">Início</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="campanhas-ativas.html" class="nav-link position-relative" title="Campanhas" data-bs-toggle="tooltip" data-bs-placement="bottom">
-                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                            <span class="sr-only">Campanhas</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="criar-campanha.html" class="nav-link position-relative" title="Criar Campanha" data-bs-toggle="tooltip" data-bs-placement="bottom">
-                            <i class="fas fa-plus-circle" aria-hidden="true"></i>
-                            <span class="sr-only">Criar Campanha</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="sobre.html" class="nav-link position-relative" title="Sobre" data-bs-toggle="tooltip" data-bs-placement="bottom">
-                            <i class="fas fa-info-circle" aria-hidden="true"></i>
-                            <span class="sr-only">Sobre</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="login.html" class="nav-link active position-relative" title="Login" aria-current="page" data-bs-toggle="tooltip" data-bs-placement="bottom">
-                            <i class="fas fa-user" aria-hidden="true"></i>
-                            <span class="sr-only">Login</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            
-            <!-- Mobile menu button -->
-            <button class="navbar-toggler d-lg-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <!-- Mobile navigation -->
-            <div class="collapse navbar-collapse d-lg-none" id="mobileNav">
-                <ul class="navbar-nav ms-auto pt-3 pb-2">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">
-                            <i class="fas fa-home me-2"></i>Início
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="campanhas-ativas.html" class="nav-link">
-                            <i class="fas fa-map-marker-alt me-2"></i>Campanhas
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="criar-campanha.html" class="nav-link">
-                            <i class="fas fa-plus-circle me-2"></i>Criar Campanha
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="sobre.html" class="nav-link">
-                            <i class="fas fa-info-circle me-2"></i>Sobre
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="login.html" class="nav-link active" aria-current="page">
-                            <i class="fas fa-user me-2"></i>Login
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    <header class="top-header" role="banner">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link" aria-label="HemoByte - Voltar ao início">
+                <i class="fas fa-tint" aria-hidden="true"></i>
+                <span class="logo-text">HemoByte</span>
+            </a>
         </div>
+
+        <nav class="main-nav" role="navigation" aria-label="Navegação principal">
+            <ul>
+                <li><a href="index.html" title="Início">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                    <span class="sr-only">Início</span>
+                </a></li>
+                <li><a href="campanhas-ativas.html" title="Campanhas">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    <span class="sr-only">Campanhas</span>
+                </a></li>
+                <li><a href="criar-campanha.html" title="Criar Campanha">
+                    <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                    <span class="sr-only">Criar Campanha</span>
+                </a></li>
+                <li><a href="sobre.html" title="Sobre">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    <span class="sr-only">Sobre</span>
+                </a></li>
+                <li><a href="login.html" class="active" title="Login" aria-current="page">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <span class="sr-only">Login</span>
+                </a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Main content -->
-    <main id="main-content" class="login-page d-flex align-items-center justify-content-center pt-5" role="main">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-5">
-                    <div class="auth-container" data-aos="zoom-in" data-aos-delay="300">
-                        
-                        <!-- Welcome Header -->
-                        <div class="text-center mb-4" data-aos="fade-up" data-aos-delay="400">
-                            <div class="mb-3">
-                                <i class="fas fa-tint text-danger fs-1 animate__animated animate__pulse animate__infinite"></i>
-                            </div>
-                            <h1 class="h3 fw-bold text-white mb-2">Bem-vindo ao HemoByte</h1>
-                            <p class="text-white-50 mb-0">Conectando vidas através da doação</p>
-                        </div>
-
-                        <!-- Auth Tabs -->
-                        <div class="auth-tabs" role="tablist" aria-label="Opções de autenticação" data-aos="fade-up" data-aos-delay="500">
-                            <button class="tab-link active" data-tab="login" role="tab" aria-selected="true" aria-controls="login-form" id="login-tab">
-                                <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login
-                            </button>
-                            <button class="tab-link" data-tab="cadastro" role="tab" aria-selected="false" aria-controls="cadastro-form" id="cadastro-tab">
-                                <i class="fas fa-user-plus" aria-hidden="true"></i> Cadastrar
-                            </button>
-                        </div>
-
-                        <!-- Alert Container -->
-                        <div id="auth-alert" class="alert alert-dismissible fade" style="display: none;" role="alert">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-exclamation-circle me-2"></i>
-                                <span id="auth-alert-message"></span>
-                            </div>
-                            <button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.style.display='none'"></button>
-                        </div>
-                        <!-- Formulário de Login -->
-                        <form id="login-form" class="auth-form active" role="tabpanel" aria-labelledby="login-tab" data-loading="false" data-validation="login" data-validation-endpoint="validation-server.php?type=login" data-aos="fade-up" data-aos-delay="600">
-                            <div class="form-group">
-                                <label for="login-email" class="form-label">
-                                    <i class="fas fa-envelope me-2" aria-hidden="true"></i>Email
-                                </label>
-                                <input 
-                                    id="login-email" 
-                                    name="email" 
-                                    type="email" 
-                                    class="form-control" 
-                                    placeholder="Digite seu email" 
-                                    required 
-                                    aria-describedby="email-help" 
-                                    autocomplete="email"
-                                />
-                                <div id="email-help" class="form-hint">
-                                    <i class="fas fa-info-circle me-1"></i>
-                                    Usado para login e recuperação de senha
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="login-senha" class="form-label">
-                                    <i class="fas fa-lock me-2" aria-hidden="true"></i>Senha
-                                </label>
-                                <div class="position-relative">
-                                    <input 
-                                        id="login-senha" 
-                                        name="senha" 
-                                        type="password" 
-                                        class="form-control" 
-                                        placeholder="Digite sua senha" 
-                                        required 
-                                        aria-describedby="senha-help" 
-                                        autocomplete="current-password"
-                                    />
-                                    <button type="button" class="password-toggle" onclick="togglePassword('login-senha', this)">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                                <div id="senha-help" class="form-hint">
-                                    <i class="fas fa-shield-alt me-1"></i>
-                                    Mínimo 8 caracteres
-                                </div>
-                            </div>
-
-                            <div class="form-options">
-                                <label class="remember-me">
-                                    <input type="checkbox" name="lembrar" class="form-check-input me-2" />
-                                    <span>Lembrar-me</span>
-                                </label>
-                                <a href="#" class="forgot-password">
-                                    <i class="fas fa-key me-1"></i>
-                                    Esqueceu a senha?
-                                </a>
-                            </div>
-
-                            <button type="submit" class="btn-auth" data-loading="false" aria-describedby="login-submit-desc">
-                                <span class="btn-text">
-                                    <i class="fas fa-sign-in-alt me-2" aria-hidden="true"></i>Entrar
-                                </span>
-                                <span class="btn-loading" style="display: none;">
-                                    <i class="fas fa-spinner fa-spin me-2" aria-hidden="true"></i>Entrando...
-                                </span>
-                            </button>
-                            <div id="login-submit-desc" class="visually-hidden">Clique para fazer login no sistema</div>
-                        </form>
-
-                        <!-- Formulário de Cadastro -->
-                        <form id="cadastro-form" class="auth-form" data-validation="cadastro" data-validation-endpoint="validation-server.php?type=cadastro" data-aos="fade-up" data-aos-delay="600">
-                            <div class="form-group">
-                                <label for="cadastro-nome" class="form-label">
-                                    <i class="fas fa-user me-2"></i>Nome Completo
-                                </label>
-                                <input 
-                                    id="cadastro-nome" 
-                                    name="nome" 
-                                    type="text" 
-                                    class="form-control" 
-                                    placeholder="Digite seu nome completo" 
-                                    required 
-                                    autocomplete="name"
-                                />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="cadastro-email" class="form-label">
-                                    <i class="fas fa-envelope me-2"></i>Email
-                                </label>
-                                <input 
-                                    id="cadastro-email" 
-                                    name="email" 
-                                    type="email" 
-                                    class="form-control" 
-                                    placeholder="Digite seu email" 
-                                    required 
-                                    autocomplete="email"
-                                />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="cadastro-telefone" class="form-label">
-                                    <i class="fas fa-phone me-2"></i>Telefone
-                                </label>
-                                <input
-                                    id="cadastro-telefone"
-                                    name="telefone"
-                                    type="tel"
-                                    class="form-control"
-                                    placeholder="(00) 00000-0000"
-                                    required
-                                    maxlength="15"
-                                    autocomplete="tel"
-                                />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="cadastro-senha" class="form-label">
-                                    <i class="fas fa-lock me-2"></i>Senha
-                                </label>
-                                <div class="position-relative">
-                                    <input 
-                                        id="cadastro-senha" 
-                                        name="senha" 
-                                        type="password" 
-                                        class="form-control" 
-                                        placeholder="Digite sua senha" 
-                                        required 
-                                        autocomplete="new-password"
-                                    />
-                                    <button type="button" class="password-toggle" onclick="togglePassword('cadastro-senha', this)">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                                <div class="form-hint">
-                                    <i class="fas fa-info-circle me-1"></i>
-                                    Deve conter ao menos 8 caracteres, uma letra maiúscula e um número
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="cadastro-confirmar-senha" class="form-label">
-                                    <i class="fas fa-lock me-2"></i>Confirmar Senha
-                                </label>
-                                <div class="position-relative">
-                                    <input
-                                        id="cadastro-confirmar-senha"
-                                        name="confirmar_senha"
-                                        type="password"
-                                        class="form-control"
-                                        placeholder="Confirme sua senha"
-                                        required
-                                        autocomplete="new-password"
-                                    />
-                                    <button type="button" class="password-toggle" onclick="togglePassword('cadastro-confirmar-senha', this)">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="termos" required>
-                                    <label class="form-check-label text-white-50 small" for="termos">
-                                        Aceito os <a href="#" class="text-danger">termos de uso</a> e 
-                                        <a href="#" class="text-danger">política de privacidade</a>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="btn-auth">
-                                <i class="fas fa-user-plus me-2"></i>Cadastrar
-                            </button>
-                        </form>
-
-                        <!-- Auth Links -->
-                        <div class="auth-links" data-aos="fade-up" data-aos-delay="700">
-                            <p>
-                                <i class="fas fa-question-circle me-2"></i>
-                                Precisa de ajuda? 
-                                <a href="https://wa.me/75981829675" target="_blank" rel="noopener" class="text-decoration-none">
-                                    <i class="fab fa-whatsapp me-1"></i>Fale Conosco
-                                </a>
-                            </p>
-                        </div>
-                    </div>
+    <main id="main-content" class="login-page" role="main">
+        
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-tabs" role="tablist" aria-label="Opções de autenticação">
+                    <button class="tab-link active" data-tab="login" role="tab" aria-selected="true" aria-controls="login-form" id="login-tab">
+                        <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login
+                    </button>
+                    <button class="tab-link" data-tab="cadastro" role="tab" aria-selected="false" aria-controls="cadastro-form" id="cadastro-tab">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i> Cadastrar
+                    </button>
                 </div>
+
+                <!-- Formulário de Login -->
+                <form id="login-form" class="auth-form active" role="tabpanel" aria-labelledby="login-tab" data-loading="false" data-validation="login" data-validation-endpoint="validation-server.php?type=login">
+                    <div class="form-group">
+                        <label for="login-email"><i class="fas fa-envelope" aria-hidden="true"></i> Email</label>
+                        <input id="login-email" name="email" type="email" placeholder="Digite seu email" required aria-describedby="email-help" autocomplete="email" />
+                        <div id="email-help" class="form-hint">Usado para login e recuperação de senha</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-senha"><i class="fas fa-lock" aria-hidden="true"></i> Senha</label>
+                        <input id="login-senha" name="senha" type="password" placeholder="Digite sua senha" required aria-describedby="senha-help" autocomplete="current-password" />
+                        <div id="senha-help" class="form-hint">Mínimo 8 caracteres</div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" name="lembrar" />
+                            <span>Lembrar-me</span>
+                        </label>
+                        <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                    </div>
+
+                    <button type="submit" class="btn-auth" data-loading="false" aria-describedby="login-submit-desc">
+                        <span class="btn-text">
+                            <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Entrar
+                        </span>
+                        <span class="btn-loading" style="display: none;">
+                            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Entrando...
+                        </span>
+                    </button>
+                    <div id="login-submit-desc" class="sr-only">Clique para fazer login no sistema</div>
+                </form>
+
+                <!-- Formulário de Cadastro -->
+                <form id="cadastro-form" class="auth-form" data-validation="cadastro" data-validation-endpoint="validation-server.php?type=cadastro">
+                    <div class="form-group">
+                        <label for="cadastro-nome"><i class="fas fa-user"></i> Nome Completo</label>
+                        <input id="cadastro-nome" name="nome" type="text" placeholder="Digite seu nome completo" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cadastro-email"><i class="fas fa-envelope"></i> Email</label>
+                        <input id="cadastro-email" name="email" type="email" placeholder="Digite seu email" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cadastro-telefone"><i class="fas fa-phone"></i> Telefone</label>
+                        <input
+                            id="cadastro-telefone"
+                            name="telefone"
+                            type="tel"
+                            placeholder="(00) 00000-0000"
+                            required
+                            maxlength="15"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cadastro-senha"><i class="fas fa-lock"></i> Senha</label>
+                        <input id="cadastro-senha" name="senha" type="password" placeholder="Digite sua senha" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cadastro-confirmar-senha"><i class="fas fa-lock"></i> Confirmar Senha</label>
+                        <input
+                            id="cadastro-confirmar-senha"
+                            name="confirmar_senha"
+                            type="password"
+                            placeholder="Confirme sua senha"
+                            required
+                        />
+                    </div>
+
+                    <button type="submit" class="btn-auth">
+                        <i class="fas fa-user-plus"></i> Cadastrar
+                    </button>
+                </form>
+            </div>
+
+            <div class="auth-links">
+                <p>
+                    Precisa de ajuda? <a href="https://wa.me/75981829675" target="_blank"><i class="fab fa-whatsapp"></i> Fale
+                        Conosco</a>
+                </p>
             </div>
         </div>
     </main>
 
-    <!-- Footer modernizado -->
-    <footer class="footer py-3" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); border-top: 1px solid rgba(255, 255, 255, 0.1);">
-        <div class="container">
-            <div class="footer-content row align-items-center">
-                <div class="col-md-6">
-                    <a href="index.html" class="footer-logo d-flex align-items-center text-decoration-none text-white">
-                        <i class="fas fa-tint text-danger me-2"></i>
-                        <span class="fw-bold">HemoByte</span>
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <nav class="footer-links text-md-end">
-                        <div class="d-flex flex-wrap justify-content-md-end gap-3">
-                            <a href="campanhas-ativas.html" class="text-white-50 text-decoration-none small">
-                                <i class="fas fa-map-marker-alt me-1"></i>Campanhas
-                            </a>
-                            <a href="sobre.html" class="text-white-50 text-decoration-none small">
-                                <i class="fas fa-info-circle me-1"></i>Sobre
-                            </a>
-                            <a href="https://wa.me/75981829675" class="text-white-50 text-decoration-none small" target="_blank" rel="noopener">
-                                <i class="fab fa-whatsapp me-1"></i>WhatsApp
-                            </a>
-                        </div>
-                    </nav>
-                </div>
-            </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="index.html" class="footer-logo">
+                <i class="fas fa-tint"></i>
+                <span>HemoByte</span>
+            </a>
+            <nav class="footer-links">
+                <a href="campanhas-ativas.html">Campanhas</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="https://wa.me/75981829675"><i class="fab fa-whatsapp"></i></a>
+            </nav>
         </div>
     </footer>
 
-    <!-- Bootstrap 5 JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- AOS Animation Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <!-- Scripts originais -->
+    <!-- ✅ SISTEMA LIMPO DE LOGIN -->
     <script src="public/auth-system.js"></script>
     <script src="public/login-system.js"></script>
-    
     <script>
-        // Initialize AOS animations
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true,
-            mirror: false
-        });
-
-        // Initialize Bootstrap tooltips
-        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        const tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl);
-        });
-
-        // Enhanced tab functionality
+        // Alternar entre abas Login e Cadastro
         const tabLinks = document.querySelectorAll(".tab-link");
         const forms = document.querySelectorAll(".auth-form");
 
         tabLinks.forEach((link) => {
             link.addEventListener("click", () => {
-                // Remove active states
-                tabLinks.forEach((l) => {
-                    l.classList.remove("active");
-                    l.setAttribute("aria-selected", "false");
-                });
+                tabLinks.forEach((l) => l.classList.remove("active"));
                 forms.forEach((f) => f.classList.remove("active"));
 
-                // Add active state to clicked tab
                 link.classList.add("active");
-                link.setAttribute("aria-selected", "true");
 
-                // Show corresponding form
                 const tab = link.getAttribute("data-tab");
-                const targetForm = document.getElementById(`${tab}-form`);
-                if (targetForm) {
-                    targetForm.classList.add("active");
-                    
-                    // Focus first input in the form
-                    const firstInput = targetForm.querySelector('input[type="text"], input[type="email"]');
-                    if (firstInput) {
-                        setTimeout(() => firstInput.focus(), 300);
-                    }
+                if (tab === "login") {
+                    document.getElementById("login-form").classList.add("active");
+                } else if (tab === "cadastro") {
+                    document.getElementById("cadastro-form").classList.add("active");
                 }
-
-                // Clear any alerts
-                hideAlert();
             });
         });
 
-        // Enhanced phone mask for Brazilian numbers
+        // Máscara simples para telefone brasileiro
         const telefoneInput = document.getElementById("cadastro-telefone");
         if (telefoneInput) {
             telefoneInput.addEventListener("input", (e) => {
@@ -784,109 +217,7 @@
             });
         }
 
-        // Password toggle functionality
-        function togglePassword(inputId, button) {
-            const input = document.getElementById(inputId);
-            const icon = button.querySelector('i');
-            
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                input.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-
-        // Alert system
-        function showAlert(message, type = 'danger') {
-            const alert = document.getElementById('auth-alert');
-            const messageEl = document.getElementById('auth-alert-message');
-            
-            messageEl.textContent = message;
-            alert.className = `alert alert-${type} alert-dismissible fade show`;
-            alert.style.display = 'block';
-            
-            // Auto hide after 5 seconds
-            setTimeout(() => {
-                hideAlert();
-            }, 5000);
-        }
-
-        function hideAlert() {
-            const alert = document.getElementById('auth-alert');
-            if (alert) {
-                alert.classList.remove('show');
-                setTimeout(() => {
-                    alert.style.display = 'none';
-                }, 300);
-            }
-        }
-
-        // Enhanced form validation
-        function validateForm(form) {
-            const inputs = form.querySelectorAll('input[required]');
-            let isValid = true;
-
-            inputs.forEach(input => {
-                if (!input.value.trim()) {
-                    input.classList.add('is-invalid');
-                    isValid = false;
-                } else {
-                    input.classList.remove('is-invalid');
-                }
-            });
-
-            // Email validation
-            const emailInputs = form.querySelectorAll('input[type="email"]');
-            emailInputs.forEach(input => {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (input.value && !emailRegex.test(input.value)) {
-                    input.classList.add('is-invalid');
-                    isValid = false;
-                }
-            });
-
-            // Password confirmation validation (for registration)
-            if (form.id === 'cadastro-form') {
-                const senha = form.querySelector('#cadastro-senha').value;
-                const confirmarSenha = form.querySelector('#cadastro-confirmar-senha').value;
-                
-                if (senha !== confirmarSenha) {
-                    form.querySelector('#cadastro-confirmar-senha').classList.add('is-invalid');
-                    showAlert('As senhas não coincidem');
-                    isValid = false;
-                }
-            }
-
-            return isValid;
-        }
-
-        // Add form validation to forms
-        forms.forEach(form => {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                if (validateForm(form)) {
-                    // If validation passes, you can submit the form
-                    // For now, just show a success message
-                    showAlert('Formulário validado com sucesso!', 'success');
-                } else {
-                    showAlert('Por favor, corrija os erros no formulário');
-                }
-            });
-        });
-
-        // Clear validation on input
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('input', () => {
-                input.classList.remove('is-invalid');
-            });
-        });
-
-        // Handle URL hash for direct tab access
+        // Se quiser já abrir direto no cadastro pela URL (#cadastro)
         if (window.location.hash === "#cadastro") {
             tabLinks.forEach((l) => l.classList.remove("active"));
             forms.forEach((f) => f.classList.remove("active"));
@@ -894,33 +225,6 @@
             document.querySelector('[data-tab="cadastro"]').classList.add("active");
             document.getElementById("cadastro-form").classList.add("active");
         }
-
-        // Add floating particles effect
-        function createParticles() {
-            const body = document.body;
-            for (let i = 0; i < 6; i++) {
-                const particle = document.createElement('div');
-                particle.style.cssText = `
-                    position: fixed;
-                    width: 4px;
-                    height: 4px;
-                    background: linear-gradient(45deg, rgba(220, 38, 38, 0.3), rgba(30, 64, 175, 0.3));
-                    border-radius: 50%;
-                    animation: float ${12 + Math.random() * 4}s ease-in-out infinite;
-                    left: ${Math.random() * 100}%;
-                    top: ${Math.random() * 100}%;
-                    animation-delay: ${Math.random() * 3}s;
-                    pointer-events: none;
-                    z-index: -1;
-                `;
-                body.appendChild(particle);
-            }
-        }
-
-        // Initialize particles when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-        });
     </script>
 </body>
 </html>

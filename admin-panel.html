@@ -4,103 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Administrativo - HemoByte</title>
-    
-    <!-- Modern Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#dc2626',
-                        secondary: '#64748b',
-                        accent: '#3b82f6'
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Animate.css for smooth animations -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    
-    <!-- AOS (Animate On Scroll) -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Original stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles-fixed.css">
     <link rel="stylesheet" href="public/ux-fixes.css">
     <link rel="stylesheet" href="public/responsive-improvements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Modern CSS Variables for Theming */
-        :root {
-            --primary-color: #dc2626;
-            --primary-light: #fef2f2;
-            --primary-dark: #991b1b;
-            --secondary-color: #64748b;
-            --accent-color: #3b82f6;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --dark-bg: #0f172a;
-            --dark-secondary: #1e293b;
-            --light-bg: #f8fafc;
-            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --border-radius: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            min-height: 100vh;
-        }
-
         .admin-panel {
             display: flex;
             min-height: 100vh;
-            background: var(--light-bg);
+            background: #f8fafc;
         }
 
-        /* Enhanced Sidebar with Glassmorphism */
         .admin-sidebar {
             width: 280px;
-            background: linear-gradient(180deg, var(--dark-bg) 0%, var(--dark-secondary) 100%);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(180deg, #1e293b 0%, #334155 100%);
             color: white;
             padding: 0;
-            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
             position: fixed;
             height: 100vh;
             overflow-y: auto;
             z-index: 1000;
-            transition: var(--transition);
         }
 
-        /* Animated Header */
         .admin-header {
             padding: 2rem 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid #475569;
             text-align: center;
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(220, 38, 38, 0.2));
         }
 
         .admin-header h1 {
@@ -108,103 +41,60 @@
             font-weight: 700;
             margin: 0.5rem 0 0 0;
             color: white;
-            font-family: 'Poppins', sans-serif;
-            animation: fadeInUp 0.8s ease-out;
         }
 
         .admin-header .logo {
-            font-size: 2.5rem;
-            color: var(--primary-color);
+            font-size: 2rem;
+            color: #e60000;
             margin-bottom: 0.5rem;
-            animation: pulse 2s infinite;
-            filter: drop-shadow(0 4px 8px rgba(220, 38, 38, 0.3));
         }
 
-        /* Enhanced Navigation */
         .admin-nav {
             padding: 1rem 0;
         }
 
         .admin-nav-item {
-            display: flex;
-            align-items: center;
+            display: block;
             padding: 1rem 1.5rem;
             color: #cbd5e1;
             text-decoration: none;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             border: none;
             background: none;
             width: 100%;
             text-align: left;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .admin-nav-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .admin-nav-item:hover::before {
-            left: 100%;
         }
 
         .admin-nav-item:hover,
         .admin-nav-item.active {
-            background: linear-gradient(90deg, rgba(220, 38, 38, 0.2), rgba(220, 38, 38, 0.1));
+            background: rgba(230, 0, 0, 0.1);
             color: white;
-            border-right: 4px solid var(--primary-color);
-            transform: translateX(5px);
-            box-shadow: inset 0 0 20px rgba(220, 38, 38, 0.1);
+            border-right: 3px solid #e60000;
         }
 
         .admin-nav-item i {
             width: 20px;
             margin-right: 0.75rem;
-            transition: var(--transition);
         }
 
-        .admin-nav-item:hover i {
-            transform: scale(1.1);
-            color: var(--primary-color);
-        }
-
-        /* Enhanced Main Content */
         .admin-main {
             flex: 1;
             margin-left: 280px;
             padding: 2rem;
-            transition: var(--transition);
         }
 
-        /* Modern Top Bar */
         .admin-top-bar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--card-shadow);
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: var(--transition);
         }
 
-        .admin-top-bar:hover {
-            box-shadow: var(--card-shadow-hover);
-            transform: translateY(-2px);
-        }
-
-        /* Enhanced User Info */
         .admin-user-info {
             display: flex;
             align-items: center;
@@ -212,63 +102,41 @@
         }
 
         .admin-user-avatar {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #e60000, #cc0000);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 600;
-            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
-            transition: var(--transition);
         }
 
-        .admin-user-avatar:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.4);
-        }
-
-        /* Enhanced Logout Button */
         .admin-logout-btn {
-            background: linear-gradient(135deg, var(--danger-color), #dc2626);
+            background: #ef4444;
             color: white;
             border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            transition: var(--transition);
-            font-weight: 500;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+            transition: all 0.3s ease;
         }
 
         .admin-logout-btn:hover {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+            background: #dc2626;
         }
 
-        /* Enhanced Content Container */
         .admin-content {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: var(--border-radius);
-            padding: 2.5rem;
-            box-shadow: var(--card-shadow);
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             min-height: 600px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: var(--transition);
         }
 
-        .admin-content:hover {
-            box-shadow: var(--card-shadow-hover);
-        }
-
-        /* Section Management */
         .admin-section {
             display: none;
-            animation: fadeInUp 0.5s ease-out;
         }
 
         .admin-section.active {
@@ -276,303 +144,168 @@
         }
 
         .admin-section h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--dark-bg);
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 3px solid var(--primary-color);
-            position: relative;
-            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
         }
 
-        .admin-section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--success-color));
-            border-radius: 2px;
-        }
-
-        /* Enhanced Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        /* Modern Stat Cards */
         .stat-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border-radius: 12px;
             text-align: center;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: var(--card-shadow);
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .stat-card:hover::before {
-            opacity: 1;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: var(--card-shadow-hover);
         }
 
         .stat-card.red {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, #e60000 0%, #cc0000 100%);
         }
 
         .stat-card.green {
-            background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
         }
 
         .stat-card.blue {
-            background: linear-gradient(135deg, var(--accent-color) 0%, #2563eb 100%);
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
         }
 
         .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
+            font-size: 2rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            font-family: 'Inter', sans-serif;
         }
 
         .stat-label {
-            font-size: 1rem;
-            opacity: 0.95;
-            font-weight: 500;
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
 
-        /* Enhanced Tables */
         .campaigns-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1.5rem;
-            background: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
+            margin-top: 1rem;
         }
 
         .campaigns-table th,
         .campaigns-table td {
-            padding: 1.25rem;
+            padding: 1rem;
             text-align: left;
-            border-bottom: 1px solid #f1f5f9;
-            transition: var(--transition);
+            border-bottom: 1px solid #e5e7eb;
         }
 
         .campaigns-table th {
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            background: #f9fafb;
             font-weight: 600;
-            color: var(--dark-bg);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: #374151;
         }
 
-        .campaigns-table tbody tr {
-            transition: var(--transition);
-        }
-
-        .campaigns-table tbody tr:hover {
-            background: linear-gradient(135deg, #fef2f2, #fee2e2);
-            transform: scale(1.01);
-        }
-
-        /* Enhanced Status Badges */
         .status-badge {
-            padding: 0.5rem 1rem;
+            padding: 0.25rem 0.75rem;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: var(--transition);
-        }
-
-        .status-badge:hover {
-            transform: scale(1.05);
         }
 
         .status-pending {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            background: #fef3c7;
             color: #92400e;
         }
 
         .status-approved {
-            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            background: #d1fae5;
             color: #065f46;
         }
 
         .status-rejected {
-            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            background: #fee2e2;
             color: #991b1b;
         }
 
-        /* Enhanced Action Buttons */
         .action-btn {
-            padding: 0.75rem 1.5rem;
+            padding: 0.5rem 1rem;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 0.8rem;
             margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .action-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255,255,255,0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .action-btn:active::before {
-            width: 300px;
-            height: 300px;
+            transition: all 0.3s ease;
         }
 
         .btn-approve {
-            background: linear-gradient(135deg, var(--success-color), #059669);
+            background: #10b981;
             color: white;
         }
 
         .btn-approve:hover {
-            background: linear-gradient(135deg, #059669, #047857);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+            background: #059669;
         }
 
         .btn-reject {
-            background: linear-gradient(135deg, var(--danger-color), #dc2626);
+            background: #ef4444;
             color: white;
         }
 
         .btn-reject:hover {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(239, 68, 68, 0.3);
+            background: #dc2626;
         }
 
         .btn-edit {
-            background: linear-gradient(135deg, var(--accent-color), #2563eb);
+            background: #3b82f6;
             color: white;
         }
 
         .btn-edit:hover {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+            background: #2563eb;
         }
 
-        /* Enhanced Image Upload Area */
         .image-upload-area {
-            border: 3px dashed #d1d5db;
-            border-radius: var(--border-radius);
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
             padding: 3rem;
             text-align: center;
-            margin: 1.5rem 0;
-            transition: var(--transition);
+            margin: 1rem 0;
+            transition: all 0.3s ease;
             cursor: pointer;
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .image-upload-area::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.1), transparent);
-            transition: left 0.6s;
-        }
-
-        .image-upload-area:hover::before {
-            left: 100%;
         }
 
         .image-upload-area:hover {
-            border-color: var(--primary-color);
-            background: linear-gradient(135deg, var(--primary-light), #fee2e2);
-            transform: scale(1.02);
+            border-color: #e60000;
+            background: #fef2f2;
         }
 
         .image-upload-area.dragover {
-            border-color: var(--primary-color);
-            background: linear-gradient(135deg, var(--primary-light), #fee2e2);
-            transform: scale(1.05);
+            border-color: #e60000;
+            background: #fef2f2;
         }
 
-        /* Enhanced Image Gallery */
         .image-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
             margin-top: 2rem;
         }
 
         .image-item {
             position: relative;
-            border-radius: var(--border-radius);
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: var(--card-shadow);
-            transition: var(--transition);
-            background: white;
-        }
-
-        .image-item:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: var(--card-shadow-hover);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .image-item img {
             width: 100%;
-            height: 180px;
+            height: 150px;
             object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .image-item:hover img {
-            transform: scale(1.1);
         }
 
         .image-overlay {
@@ -581,13 +314,12 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+            background: rgba(0, 0, 0, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
-            transition: var(--transition);
-            backdrop-filter: blur(2px);
+            transition: opacity 0.3s ease;
         }
 
         .image-item:hover .image-overlay {
@@ -596,78 +328,62 @@
 
         .image-actions {
             display: flex;
-            gap: 0.75rem;
+            gap: 0.5rem;
         }
 
-        /* Enhanced Form Controls */
         .site-controls {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
 
         .control-group {
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            border: 1px solid #e2e8f0;
-            transition: var(--transition);
-            box-shadow: var(--card-shadow);
-        }
-
-        .control-group:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--card-shadow-hover);
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
         }
 
         .control-group h3 {
-            margin-bottom: 1.5rem;
-            color: var(--dark-bg);
-            font-weight: 600;
-            font-size: 1.25rem;
-            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1rem;
+            color: #374151;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .form-group label {
             display: block;
             font-weight: 500;
-            margin-bottom: 0.75rem;
-            color: var(--dark-bg);
-            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: #374151;
         }
 
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            background: white;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.9rem;
         }
 
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+            border-color: #e60000;
+            box-shadow: 0 0 0 3px rgba(230, 0, 0, 0.1);
             outline: none;
-            transform: scale(1.02);
         }
 
-        /* Enhanced Toggle Switch */
         .toggle-switch {
             position: relative;
             display: inline-block;
-            width: 70px;
-            height: 40px;
+            width: 60px;
+            height: 34px;
         }
 
         .toggle-switch input {
@@ -683,77 +399,35 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
-            transition: var(--transition);
-            border-radius: 40px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
         }
 
         .slider:before {
             position: absolute;
             content: "";
-            height: 32px;
-            width: 32px;
+            height: 26px;
+            width: 26px;
             left: 4px;
             bottom: 4px;
-            background: white;
-            transition: var(--transition);
+            background-color: white;
+            transition: .4s;
             border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
         input:checked + .slider {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            background-color: #e60000;
         }
 
         input:checked + .slider:before {
-            transform: translateX(30px);
+            transform: translateX(26px);
         }
 
-        /* Enhanced Sync Indicator */
-        .sync-indicator {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1.25rem;
-            background: linear-gradient(135deg, var(--success-color), #059669);
-            color: white;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: var(--transition);
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-        }
-
-        .sync-indicator:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
-        }
-
-        .sync-indicator.syncing {
-            background: linear-gradient(135deg, var(--warning-color), #d97706);
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-        }
-
-        .sync-indicator.error {
-            background: linear-gradient(135deg, var(--danger-color), #dc2626);
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
-        }
-
-        .sync-indicator i {
-            font-size: 1rem;
-        }
-
-        .sync-indicator.syncing i {
-            animation: spin 1s linear infinite;
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
             .admin-sidebar {
                 transform: translateX(-100%);
-                transition: var(--transition);
+                transition: transform 0.3s ease;
             }
 
             .admin-sidebar.open {
@@ -762,32 +436,16 @@
 
             .admin-main {
                 margin-left: 0;
-                padding: 1rem;
             }
 
             .mobile-menu-btn {
                 display: block;
-                background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+                background: #e60000;
                 color: white;
                 border: none;
                 padding: 0.75rem;
-                border-radius: 8px;
+                border-radius: 6px;
                 cursor: pointer;
-                box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
-                transition: var(--transition);
-            }
-
-            .mobile-menu-btn:hover {
-                transform: scale(1.05);
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .admin-content {
-                padding: 1.5rem;
             }
         }
 
@@ -795,128 +453,68 @@
             display: none;
         }
 
-        /* Animation Keyframes */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Tooltips */
-        [data-tooltip] {
-            position: relative;
-        }
-
-        [data-tooltip]:hover::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--dark-bg);
-            color: white;
+        .sync-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             padding: 0.5rem 1rem;
-            border-radius: 6px;
+            background: #10b981;
+            color: white;
+            border-radius: 20px;
             font-size: 0.8rem;
-            white-space: nowrap;
-            z-index: 1000;
-            opacity: 0;
-            animation: fadeInUp 0.3s ease-out forwards;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
-        /* Loading states */
-        .loading {
-            position: relative;
-            overflow: hidden;
+        .sync-indicator.syncing {
+            background: #f59e0b;
         }
 
-        .loading::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: loading 1.5s infinite;
+        .sync-indicator.error {
+            background: #ef4444;
         }
 
-        @keyframes loading {
-            0% { left: -100%; }
-            100% { left: 100%; }
+        .sync-indicator i {
+            font-size: 0.9rem;
+        }
+
+        .sync-indicator.syncing i {
+            animation: spin 1s linear infinite;
         }
     </style>
 </head>
 <body>
     <!-- Skip link para acessibilidade -->
-    <a href="#main-content" class="skip-link visually-hidden-focusable">Pular para conteúdo principal</a>
+    <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
 
-    <div class="admin-panel" data-aos="fade-in">
+    <div class="admin-panel">
         <!-- Sidebar -->
-        <aside class="admin-sidebar" id="admin-sidebar" role="navigation" aria-label="Menu administrativo" data-aos="slide-right">
+        <aside class="admin-sidebar" id="admin-sidebar" role="navigation" aria-label="Menu administrativo">
             <div class="admin-header">
-                <div class="logo" data-aos="zoom-in" data-aos-delay="300">
+                <div class="logo">
                     <i class="fas fa-tint" aria-hidden="true"></i>
                 </div>
-                <h1 data-aos="fade-up" data-aos-delay="500">HemoByte Admin</h1>
-                <div class="text-center mt-2" data-aos="fade-up" data-aos-delay="700">
-                    <small class="text-white-50">Painel de Controle</small>
-                </div>
+                <h1>HemoByte Admin</h1>
             </div>
 
             <nav class="admin-nav">
-                <button class="admin-nav-item active" data-section="dashboard" aria-current="page" 
-                        data-tooltip="Visão geral do sistema" data-aos="fade-right" data-aos-delay="100">
-                    <i class="fas fa-chart-pie" aria-hidden="true"></i> 
-                    <span>Dashboard</span>
+                <button class="admin-nav-item active" data-section="dashboard" aria-current="page">
+                    <i class="fas fa-chart-pie" aria-hidden="true"></i> Dashboard
                 </button>
-                <button class="admin-nav-item" data-section="campaigns" 
-                        data-tooltip="Gerenciar campanhas de doação" data-aos="fade-right" data-aos-delay="200">
-                    <i class="fas fa-clipboard-list" aria-hidden="true"></i> 
-                    <span>Gerenciar Campanhas</span>
+                <button class="admin-nav-item" data-section="campaigns">
+                    <i class="fas fa-clipboard-list" aria-hidden="true"></i> Gerenciar Campanhas
                 </button>
-                <button class="admin-nav-item" data-section="images" 
-                        data-tooltip="Upload e gerenciamento de imagens" data-aos="fade-right" data-aos-delay="300">
-                    <i class="fas fa-images" aria-hidden="true"></i> 
-                    <span>Gerenciar Imagens</span>
+                <button class="admin-nav-item" data-section="images">
+                    <i class="fas fa-images" aria-hidden="true"></i> Gerenciar Imagens
                 </button>
-                <button class="admin-nav-item" data-section="site-control" 
-                        data-tooltip="Configurações gerais do site" data-aos="fade-right" data-aos-delay="400">
-                    <i class="fas fa-cogs" aria-hidden="true"></i> 
-                    <span>Controle do Site</span>
+                <button class="admin-nav-item" data-section="site-control">
+                    <i class="fas fa-cogs" aria-hidden="true"></i> Controle do Site
                 </button>
-                <button class="admin-nav-item" data-section="users" 
-                        data-tooltip="Gerenciar usuários cadastrados" data-aos="fade-right" data-aos-delay="500">
-                    <i class="fas fa-users" aria-hidden="true"></i> 
-                    <span>Usuários</span>
+                <button class="admin-nav-item" data-section="users">
+                    <i class="fas fa-users" aria-hidden="true"></i> Usuários
                 </button>
-                <button class="admin-nav-item" data-section="logs" 
-                        data-tooltip="Visualizar logs do sistema" data-aos="fade-right" data-aos-delay="600">
-                    <i class="fas fa-file-alt" aria-hidden="true"></i> 
-                    <span>Logs do Sistema</span>
+                <button class="admin-nav-item" data-section="logs">
+                    <i class="fas fa-file-alt" aria-hidden="true"></i> Logs do Sistema
                 </button>
             </nav>
         </aside>
@@ -924,561 +522,219 @@
         <!-- Main Content -->
         <main id="main-content" class="admin-main" role="main">
             <!-- Top Bar -->
-            <div class="admin-top-bar" data-aos="fade-down">
-                <div class="d-flex align-items-center">
-                    <button class="mobile-menu-btn me-3" id="mobile-menu-btn" aria-label="Abrir menu" 
-                            data-tooltip="Menu de navegação">
+            <div class="admin-top-bar">
+                <div>
+                    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu">
                         <i class="fas fa-bars" aria-hidden="true"></i>
                     </button>
-                    <h3 class="mb-0 fw-bold text-dark" id="current-section-title">Dashboard</h3>
-                    <span class="badge bg-primary ms-2 animate__animated animate__pulse animate__infinite">Online</span>
+                    <span id="current-section-title">Dashboard</span>
                 </div>
                 
-                <div class="admin-user-info" data-aos="fade-left">
-                    <div id="sync-status" class="sync-indicator" title="Status da sincronização" 
-                         data-bs-toggle="tooltip" data-bs-placement="bottom">
+                <div class="admin-user-info">
+                    <div id="sync-status" class="sync-indicator" title="Status da sincronização">
                         <i class="fas fa-sync-alt" aria-hidden="true"></i>
                         <span>Sincronizado</span>
                     </div>
-                    
-                    <!-- Status Indicators -->
-                    <div class="d-flex gap-2 me-2">
-                        <span class="badge bg-success rounded-pill" data-tooltip="Sistema Online">
-                            <i class="fas fa-circle"></i>
-                        </span>
-                        <span class="badge bg-info rounded-pill" data-tooltip="Última sincronização">
-                            <i class="fas fa-clock"></i> Agora
-                        </span>
-                    </div>
-                    
-                    <div class="admin-user-avatar" aria-label="Avatar do administrador" 
-                         data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
-                        ADM
-                    </div>
-                    
-                    <!-- User Dropdown -->
-                    <div class="dropdown">
-                        <span class="dropdown-toggle fw-semibold text-dark" role="button" 
-                              data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
-                            Administrador
-                        </span>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0">
-                            <li><h6 class="dropdown-header">Conta</h6></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Perfil</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configurações</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-danger" href="#" id="logout-btn">
-                                <i class="fas fa-sign-out-alt me-2"></i>Sair
-                            </a></li>
-                        </ul>
-                    </div>
+                    <div class="admin-user-avatar" aria-label="Avatar do administrador">ADM</div>
+                    <span>Administrador</span>
+                    <button class="admin-logout-btn" id="logout-btn" aria-label="Sair do painel">
+                        <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Sair
+                    </button>
                 </div>
             </div>
 
             <!-- Content Area -->
-            <div class="admin-content" data-aos="fade-up" data-aos-delay="200">
+            <div class="admin-content">
                 <!-- Dashboard Section -->
                 <section id="dashboard" class="admin-section active" aria-labelledby="dashboard-title">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 id="dashboard-title" class="animate__animated animate__fadeInLeft">
-                            <i class="fas fa-chart-pie me-2 text-primary"></i>Dashboard - Visão Geral
-                        </h2>
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-outline-primary btn-sm" data-tooltip="Atualizar dados" 
-                                    onclick="location.reload()">
-                                <i class="fas fa-sync-alt"></i>
-                            </button>
-                            <button class="btn btn-primary btn-sm" data-tooltip="Exportar relatório">
-                                <i class="fas fa-download me-1"></i>Relatório
-                            </button>
-                        </div>
-                    </div>
+                    <h2 id="dashboard-title">Dashboard - Visão Geral</h2>
                     
                     <div class="stats-grid">
-                        <div class="stat-card red" data-aos="zoom-in" data-aos-delay="100">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <i class="fas fa-heartbeat fa-2x opacity-75"></i>
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-outline-light dropdown-toggle border-0" 
-                                            data-bs-toggle="dropdown">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#campaigns">Ver Detalhes</a></li>
-                                        <li><a class="dropdown-item" href="#">Exportar</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="stat-number animate__animated animate__countUp" id="total-campaigns">12</div>
+                        <div class="stat-card red">
+                            <div class="stat-number" id="total-campaigns">12</div>
                             <div class="stat-label">Campanhas Ativas</div>
-                            <div class="mt-2 small opacity-75">
-                                <i class="fas fa-sync me-1"></i> Auto-sincronizado
-                            </div>
-                            <div class="progress mt-2" style="height: 4px;">
-                                <div class="progress-bar bg-white" style="width: 75%"></div>
+                            <div style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.8;">
+                                <i class="fas fa-sync"></i> Auto-sincronizado
                             </div>
                         </div>
-
-                        <div class="stat-card green" data-aos="zoom-in" data-aos-delay="200">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <i class="fas fa-tint fa-2x opacity-75"></i>
-                                <button class="btn btn-sm btn-outline-light border-0" 
-                                        onclick="adminPanel.editStat('donations')" data-tooltip="Editar valor">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </div>
-                            <div class="stat-number animate__animated animate__countUp" id="total-donations">1.547</div>
+                        <div class="stat-card green">
+                            <div class="stat-number" id="total-donations">1.547</div>
                             <div class="stat-label">Doações Realizadas</div>
-                            <div class="mt-2 small">
-                                <span class="badge bg-light text-dark me-1">+15%</span>
-                                <span class="opacity-75">vs. mês anterior</span>
-                            </div>
+                            <button onclick="adminPanel.editStat('donations')" style="margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 4px; cursor: pointer; font-size: 0.7rem;">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
                         </div>
-
-                        <div class="stat-card blue" data-aos="zoom-in" data-aos-delay="300">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <i class="fas fa-users fa-2x opacity-75"></i>
-                                <button class="btn btn-sm btn-outline-light border-0" 
-                                        onclick="adminPanel.editStat('users')" data-tooltip="Editar valor">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </div>
-                            <div class="stat-number animate__animated animate__countUp" id="total-users">2.834</div>
+                        <div class="stat-card blue">
+                            <div class="stat-number" id="total-users">2.834</div>
                             <div class="stat-label">Usuários Cadastrados</div>
-                            <div class="mt-2 small">
-                                <span class="badge bg-light text-dark me-1">+8%</span>
-                                <span class="opacity-75">crescimento mensal</span>
-                            </div>
+                            <button onclick="adminPanel.editStat('users')" style="margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 4px; cursor: pointer; font-size: 0.7rem;">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
                         </div>
-
-                        <div class="stat-card" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);" 
-                             data-aos="zoom-in" data-aos-delay="400">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <i class="fas fa-hospital fa-2x opacity-75"></i>
-                                <button class="btn btn-sm btn-outline-light border-0" 
-                                        onclick="adminPanel.editStat('hospitals')" data-tooltip="Editar valor">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </div>
-                            <div class="stat-number animate__animated animate__countUp" id="total-hospitals">15</div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+                            <div class="stat-number" id="total-hospitals">15</div>
                             <div class="stat-label">Hospitais Atendidos</div>
-                            <div class="mt-2 small">
-                                <span class="badge bg-light text-dark me-1">Ativo</span>
-                                <span class="opacity-75">parceiros</span>
-                            </div>
+                            <button onclick="adminPanel.editStat('hospitals')" style="margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 4px; cursor: pointer; font-size: 0.7rem;">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Quick Actions -->
-                    <div class="row mb-4" data-aos="fade-up" data-aos-delay="500">
-                        <div class="col-12">
-                            <div class="card border-0 shadow-sm">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">
-                                        <i class="fas fa-bolt text-warning me-2"></i>Ações Rápidas
-                                    </h5>
-                                    <div class="row g-2">
-                                        <div class="col-md-3">
-                                            <button class="btn btn-outline-primary w-100" data-section="campaigns">
-                                                <i class="fas fa-plus me-1"></i>Nova Campanha
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <button class="btn btn-outline-success w-100" onclick="adminPanel.loadUsers()">
-                                                <i class="fas fa-user-plus me-1"></i>Novo Usuário
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <button class="btn btn-outline-info w-100" onclick="adminPanel.backupData()">
-                                                <i class="fas fa-download me-1"></i>Backup
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <button class="btn btn-outline-warning w-100" data-section="logs">
-                                                <i class="fas fa-eye me-1"></i>Ver Logs
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Recent Activity -->
-                    <div class="row" data-aos="fade-up" data-aos-delay="600">
-                        <div class="col-md-8">
-                            <div class="card border-0 shadow-sm h-100">
-                                <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center">
-                                    <h5 class="mb-0">
-                                        <i class="fas fa-history text-info me-2"></i>Atividade Recente
-                                    </h5>
-                                    <button class="btn btn-sm btn-outline-secondary" data-tooltip="Atualizar">
-                                        <i class="fas fa-sync-alt"></i>
-                                    </button>
-                                </div>
-                                <div class="card-body">
-                                    <div id="recent-activity">
-                                        <div class="d-flex align-items-center mb-3 p-2 rounded bg-light">
-                                            <div class="me-3">
-                                                <i class="fas fa-plus-circle text-success fa-lg"></i>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <div class="fw-semibold">Nova campanha criada</div>
-                                                <div class="text-muted small">"Doação Emergencial - Centro"</div>
-                                            </div>
-                                            <small class="text-muted">2min</small>
-                                        </div>
-
-                                        <div class="d-flex align-items-center mb-3 p-2 rounded bg-light">
-                                            <div class="me-3">
-                                                <i class="fas fa-user-plus text-primary fa-lg"></i>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <div class="fw-semibold">Novo usuário cadastrado</div>
-                                                <div class="text-muted small">Maria Silva</div>
-                                            </div>
-                                            <small class="text-muted">5min</small>
-                                        </div>
-
-                                        <div class="d-flex align-items-center mb-3 p-2 rounded bg-light">
-                                            <div class="me-3">
-                                                <i class="fas fa-check-circle text-success fa-lg"></i>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <div class="fw-semibold">Campanha aprovada</div>
-                                                <div class="text-muted small">"Feira VI - Solidariedade"</div>
-                                            </div>
-                                            <small class="text-muted">10min</small>
-                                        </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <button class="btn btn-sm btn-outline-primary" data-section="logs">
-                                            Ver Todos os Logs
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="card border-0 shadow-sm h-100">
-                                <div class="card-header bg-transparent border-0">
-                                    <h5 class="mb-0">
-                                        <i class="fas fa-chart-line text-success me-2"></i>Estatísticas Rápidas
-                                    </h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="small">Campanhas Pendentes</span>
-                                            <span class="badge bg-warning" id="pending-campaigns">3</span>
-                                        </div>
-                                        <div class="progress mt-1" style="height: 6px;">
-                                            <div class="progress-bar bg-warning" style="width: 25%"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="small">Taxa de Aprovação</span>
-                                            <span class="text-success fw-bold">87%</span>
-                                        </div>
-                                        <div class="progress mt-1" style="height: 6px;">
-                                            <div class="progress-bar bg-success" style="width: 87%"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <div class="d-flex justify-content-between">
-                                            <span class="small">Uso do Sistema</span>
-                                            <span class="text-info fw-bold">92%</span>
-                                        </div>
-                                        <div class="progress mt-1" style="height: 6px;">
-                                            <div class="progress-bar bg-info" style="width: 92%"></div>
-                                        </div>
-                                    </div>
-
-                                    <hr>
-                                    <div class="text-center">
-                                        <small class="text-muted">Última atualização: agora</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <h3>Atividade Recente</h3>
+                    <div id="recent-activity">
+                        <p><i class="fas fa-plus-circle" style="color: #10b981;"></i> Nova campanha criada: "Doação Emergencial - Centro"</p>
+                        <p><i class="fas fa-user-plus" style="color: #3b82f6;"></i> Novo usuário cadastrado: Maria Silva</p>
+                        <p><i class="fas fa-check-circle" style="color: #10b981;"></i> Campanha aprovada: "Feira VI - Solidariedade"</p>
                     </div>
                 </section>
 
                 <!-- Campaigns Management -->
                 <section id="campaigns" class="admin-section" aria-labelledby="campaigns-title">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 id="campaigns-title" class="animate__animated animate__fadeInLeft">
-                            <i class="fas fa-clipboard-list me-2 text-primary"></i>Gerenciar Campanhas
-                        </h2>
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-outline-primary" data-tooltip="Atualizar lista">
-                                <i class="fas fa-sync-alt"></i>
-                            </button>
-                            <button class="btn btn-success" data-tooltip="Criar nova campanha">
-                                <i class="fas fa-plus me-1"></i>Nova Campanha
-                            </button>
-                        </div>
-                    </div>
+                    <h2 id="campaigns-title">Gerenciar Campanhas</h2>
                     
-                    <!-- Enhanced Filters -->
-                    <div class="card border-0 shadow-sm mb-4" data-aos="fade-up">
-                        <div class="card-body">
-                            <div class="row g-3 align-items-end">
-                                <div class="col-md-3">
-                                    <label class="form-label fw-semibold">Filtrar por Categoria</label>
-                                    <select id="category-filter" class="form-select" onchange="adminPanel.filterCampaigns()">
-                                        <option value="all">🔍 Todas as Categorias</option>
-                                        <option value="urgente">🚨 Urgente</option>
-                                        <option value="ativa">✅ Ativa</option>
-                                        <option value="planejamento">📋 Planejamento</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="col-md-3">
-                                    <label class="form-label fw-semibold">Status</label>
-                                    <select id="status-filter" class="form-select" onchange="adminPanel.filterCampaigns()">
-                                        <option value="all">📊 Todos os Status</option>
-                                        <option value="pending">⏳ Pendentes</option>
-                                        <option value="approved">✅ Aprovadas</option>
-                                        <option value="rejected">❌ Rejeitadas</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="col-md-4">
-                                    <label class="form-label fw-semibold">Buscar</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light border-end-0">
-                                            <i class="fas fa-search text-muted"></i>
-                                        </span>
-                                        <input type="text" class="form-control border-start-0" 
-                                               placeholder="Nome da campanha, organizador..." id="search-input">
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-2">
-                                    <div class="d-flex gap-2">
-                                        <button class="btn btn-outline-secondary" onclick="adminPanel.loadCampaigns()" 
-                                                data-tooltip="Atualizar">
-                                            <i class="fas fa-sync"></i>
-                                        </button>
-                                        <button class="btn btn-primary" onclick="adminPanel.createNewCampaign()" 
-                                                data-tooltip="Nova campanha">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="section-actions" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <label style="font-weight: 600;">Filtrar por Categoria:</label>
+                            <select id="category-filter" onchange="adminPanel.filterCampaigns()" style="
+                                padding: 0.5rem 1rem;
+                                border: 2px solid #e2e8f0;
+                                border-radius: 8px;
+                                background: white;
+                                font-size: 0.9rem;
+                                cursor: pointer;
+                            ">
+                                <option value="all">🔍 Todas as Categorias</option>
+                                <option value="urgente">🚨 Urgente</option>
+                                <option value="ativa">✅ Ativa</option>
+                                <option value="planejamento">📋 Planejamento</option>
+                            </select>
+                            
+                            <select id="status-filter" onchange="adminPanel.filterCampaigns()" style="
+                                padding: 0.5rem 1rem;
+                                border: 2px solid #e2e8f0;
+                                border-radius: 8px;
+                                background: white;
+                                font-size: 0.9rem;
+                                cursor: pointer;
+                            ">
+                                <option value="all">📊 Todos os Status</option>
+                                <option value="pending">⏳ Pendentes</option>
+                                <option value="approved">✅ Aprovadas</option>
+                                <option value="rejected">❌ Rejeitadas</option>
+                            </select>
+                        </div>
+                        
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="action-btn btn-approve" onclick="adminPanel.loadCampaigns()" style="padding: 0.5rem 1rem;">
+                                <i class="fas fa-sync" aria-hidden="true"></i> Atualizar
+                            </button>
+                            <button class="action-btn btn-edit" onclick="adminPanel.createNewCampaign()" style="padding: 0.5rem 1rem; background: #10b981;">
+                                <i class="fas fa-plus" aria-hidden="true"></i> Nova Campanha
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Enhanced Category Stats -->
-                    <div class="row g-3 mb-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="col-md-4">
-                            <div class="card border-0 shadow-sm h-100 border-start border-danger border-4">
-                                <div class="card-body text-center">
-                                    <div class="display-4 mb-2">🚨</div>
-                                    <h5 class="fw-bold text-danger mb-1">URGENTE</h5>
-                                    <h3 class="text-danger mb-0" id="urgente-count">0</h3>
-                                    <div class="progress mt-2" style="height: 4px;">
-                                        <div class="progress-bar bg-danger" style="width: 100%"></div>
-                                    </div>
-                                    <small class="text-muted">Prioridade máxima</small>
-                                </div>
-                            </div>
+                    <!-- Contadores por Categoria -->
+                    <div id="category-stats" style="
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                        gap: 1rem;
+                        margin-bottom: 2rem;
+                        padding: 1rem;
+                        background: #f8f9fa;
+                        border-radius: 12px;
+                    ">
+                        <div class="category-stat urgente" style="
+                            background: linear-gradient(135deg, #fee2e2, #fecaca);
+                            padding: 1rem;
+                            border-radius: 8px;
+                            text-align: center;
+                            border-left: 4px solid #ef4444;
+                        ">
+                            <div style="font-size: 1.5rem;">🚨</div>
+                            <div style="font-weight: 600; color: #991b1b;">URGENTE</div>
+                            <div id="urgente-count" style="font-size: 1.2rem; font-weight: bold; color: #7f1d1d;">0</div>
                         </div>
                         
-                        <div class="col-md-4">
-                            <div class="card border-0 shadow-sm h-100 border-start border-success border-4">
-                                <div class="card-body text-center">
-                                    <div class="display-4 mb-2">✅</div>
-                                    <h5 class="fw-bold text-success mb-1">ATIVA</h5>
-                                    <h3 class="text-success mb-0" id="ativa-count">0</h3>
-                                    <div class="progress mt-2" style="height: 4px;">
-                                        <div class="progress-bar bg-success" style="width: 75%"></div>
-                                    </div>
-                                    <small class="text-muted">Em andamento</small>
-                                </div>
-                            </div>
+                        <div class="category-stat ativa" style="
+                            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+                            padding: 1rem;
+                            border-radius: 8px;
+                            text-align: center;
+                            border-left: 4px solid #10b981;
+                        ">
+                            <div style="font-size: 1.5rem;">✅</div>
+                            <div style="font-weight: 600; color: #065f46;">ATIVA</div>
+                            <div id="ativa-count" style="font-size: 1.2rem; font-weight: bold; color: #064e3b;">0</div>
                         </div>
                         
-                        <div class="col-md-4">
-                            <div class="card border-0 shadow-sm h-100 border-start border-primary border-4">
-                                <div class="card-body text-center">
-                                    <div class="display-4 mb-2">📋</div>
-                                    <h5 class="fw-bold text-primary mb-1">PLANEJAMENTO</h5>
-                                    <h3 class="text-primary mb-0" id="planejamento-count">0</h3>
-                                    <div class="progress mt-2" style="height: 4px;">
-                                        <div class="progress-bar bg-primary" style="width: 50%"></div>
-                                    </div>
-                                    <small class="text-muted">Em preparação</small>
-                                </div>
-                            </div>
+                        <div class="category-stat planejamento" style="
+                            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+                            padding: 1rem;
+                            border-radius: 8px;
+                            text-align: center;
+                            border-left: 4px solid #3b82f6;
+                        ">
+                            <div style="font-size: 1.5rem;">📋</div>
+                            <div style="font-weight: 600; color: #1e40af;">PLANEJAMENTO</div>
+                            <div id="planejamento-count" style="font-size: 1.2rem; font-weight: bold; color: #1e3a8a;">0</div>
                         </div>
                     </div>
 
-                    <!-- Enhanced Table -->
-                    <div class="card border-0 shadow-sm" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card-header bg-transparent border-0 py-3">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0 fw-semibold">Lista de Campanhas</h5>
-                                <div class="d-flex gap-2">
-                                    <button class="btn btn-sm btn-outline-secondary" data-tooltip="Exportar CSV">
-                                        <i class="fas fa-download"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-secondary" data-tooltip="Imprimir">
-                                        <i class="fas fa-print"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="campaigns-table table table-hover" role="table" aria-label="Lista de campanhas">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th class="border-0 fw-semibold">Campanha & Organizador</th>
-                                        <th class="border-0 fw-semibold">Local & Data</th>
-                                        <th class="border-0 fw-semibold">Categoria</th>
-                                        <th class="border-0 fw-semibold">Histórico</th>
-                                        <th class="border-0 fw-semibold">Status</th>
-                                        <th class="border-0 fw-semibold text-center">Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="campaigns-tbody">
-                                    <!-- Campanhas serão carregadas dinamicamente -->
-                                    <tr>
-                                        <td colspan="6" class="text-center py-5">
-                                            <div class="spinner-border text-primary" role="status">
-                                                <span class="visually-hidden">Carregando...</span>
-                                            </div>
-                                            <div class="mt-2 text-muted">Carregando campanhas...</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <table class="campaigns-table" role="table" aria-label="Lista de campanhas">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">Campanha & Organizador</th>
+                                <th style="width: 15%;">Local & Data</th>
+                                <th style="width: 12%;">Categoria</th>
+                                <th style="width: 12%;">Histórico</th>
+                                <th style="width: 12%;">Status</th>
+                                <th style="width: 24%;">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="campaigns-tbody">
+                            <!-- Campanhas serão carregadas dinamicamente -->
+                        </tbody>
+                    </table>
                 </section>
 
                 <!-- Images Management -->
                 <section id="images" class="admin-section" aria-labelledby="images-title">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 id="images-title" class="animate__animated animate__fadeInLeft">
-                            <i class="fas fa-images me-2 text-primary"></i>Gerenciar Imagens
-                        </h2>
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-outline-secondary" data-tooltip="Filtros">
-                                <i class="fas fa-filter"></i>
-                            </button>
-                            <button class="btn btn-primary" data-tooltip="Upload múltiplo">
-                                <i class="fas fa-cloud-upload-alt me-1"></i>Upload
-                            </button>
-                        </div>
-                    </div>
+                    <h2 id="images-title">Gerenciar Imagens</h2>
                     
-                    <!-- Enhanced Upload Area -->
-                    <div class="card border-0 shadow-sm mb-4" data-aos="fade-up">
-                        <div class="card-body">
-                            <div class="image-upload-area" id="image-upload-area" tabindex="0" role="button" 
-                                 aria-label="Área para upload de imagens">
-                                <div class="text-center">
-                                    <i class="fas fa-cloud-upload-alt fa-4x text-muted mb-3 animate__animated animate__bounce animate__infinite"></i>
-                                    <h5 class="fw-semibold text-dark">Arraste imagens ou clique para selecionar</h5>
-                                    <p class="text-muted mb-3">Formatos aceitos: JPG, PNG, GIF (máx. 5MB por arquivo)</p>
-                                    <div class="d-flex justify-content-center gap-2">
-                                        <span class="badge bg-light text-dark">JPG</span>
-                                        <span class="badge bg-light text-dark">PNG</span>
-                                        <span class="badge bg-light text-dark">GIF</span>
-                                    </div>
-                                </div>
-                                <input type="file" id="image-input" multiple accept="image/*" style="display: none;">
-                            </div>
-
-                            <!-- Upload Progress -->
-                            <div id="upload-progress" class="mt-3 d-none">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <small class="fw-semibold">Fazendo upload...</small>
-                                    <small id="upload-percentage">0%</small>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" 
-                                         style="width: 0%"></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="image-upload-area" id="image-upload-area" tabindex="0" role="button" aria-label="Área para upload de imagens">
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: #9ca3af; margin-bottom: 1rem;"></i>
+                        <p>Clique aqui ou arraste imagens para fazer upload</p>
+                        <p style="font-size: 0.9rem; color: #6b7280;">Formatos aceitos: JPG, PNG, GIF (máx. 5MB)</p>
+                        <input type="file" id="image-input" multiple accept="image/*" style="display: none;">
                     </div>
 
-                    <!-- Gallery Header -->
-                    <div class="d-flex justify-content-between align-items-center mb-3" data-aos="fade-up" data-aos-delay="100">
-                        <div>
-                            <h5 class="mb-0 fw-semibold">Galeria de Imagens</h5>
-                            <small class="text-muted">Clique em uma imagem para visualizar</small>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button class="btn btn-sm btn-outline-secondary active" data-view="grid" data-tooltip="Visualização em grade">
-                                <i class="fas fa-th"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-secondary" data-view="list" data-tooltip="Visualização em lista">
-                                <i class="fas fa-list"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Enhanced Image Gallery -->
-                    <div class="image-gallery" id="image-gallery" data-aos="fade-up" data-aos-delay="200">
-                        <!-- Example Images with Enhanced Cards -->
-                        <div class="card border-0 shadow-sm overflow-hidden">
-                            <div class="image-item position-relative">
-                                <img src="https://via.placeholder.com/300x200/dc2626/ffffff?text=Campanha+1" 
-                                     alt="Imagem da campanha 1" class="card-img-top">
-                                <div class="image-overlay">
-                                    <div class="image-actions">
-                                        <button class="btn btn-sm btn-light me-2" onclick="editImage(1)" 
-                                                data-tooltip="Editar imagem">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-light me-2" data-tooltip="Visualizar">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-danger" onclick="deleteImage(1)" 
-                                                data-tooltip="Excluir imagem">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
+                    <div class="image-gallery" id="image-gallery">
+                        <!-- Imagens serão carregadas dinamicamente -->
+                        <div class="image-item">
+                            <img src="https://via.placeholder.com/200x150?text=Campanha+1" alt="Imagem da campanha 1">
+                            <div class="image-overlay">
+                                <div class="image-actions">
+                                    <button class="action-btn btn-edit" onclick="editImage(1)" aria-label="Editar imagem">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn btn-reject" onclick="deleteImage(1)" aria-label="Excluir imagem">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="card-body p-3">
-                                <h6 class="card-title mb-1">Campanha 1</h6>
-                                <small class="text-muted">300x200 • 45KB</small>
-                            </div>
                         </div>
-
-                        <div class="card border-0 shadow-sm overflow-hidden">
-                            <div class="image-item position-relative">
-                                <img src="https://via.placeholder.com/300x200/10b981/ffffff?text=Campanha+2" 
-                                     alt="Imagem da campanha 2" class="card-img-top">
-                                <div class="image-overlay">
-                                    <div class="image-actions">
-                                        <button class="btn btn-sm btn-light me-2" onclick="editImage(2)" 
-                                                data-tooltip="Editar imagem">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-light me-2" data-tooltip="Visualizar">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-danger" onclick="deleteImage(2)" 
-                                                data-tooltip="Excluir imagem">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
+                        <div class="image-item">
+                            <img src="https://via.placeholder.com/200x150?text=Campanha+2" alt="Imagem da campanha 2">
+                            <div class="image-overlay">
+                                <div class="image-actions">
+                                    <button class="action-btn btn-edit" onclick="editImage(2)" aria-label="Editar imagem">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn btn-reject" onclick="deleteImage(2)" aria-label="Excluir imagem">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="card-body p-3">
-                                <h6 class="card-title mb-1">Campanha 2</h6>
-                                <small class="text-muted">300x200 • 52KB</small>
                             </div>
                         </div>
                     </div>
@@ -1486,818 +742,149 @@
 
                 <!-- Site Control -->
                 <section id="site-control" class="admin-section" aria-labelledby="site-control-title">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 id="site-control-title" class="animate__animated animate__fadeInLeft">
-                            <i class="fas fa-cogs me-2 text-primary"></i>Controle do Site
-                        </h2>
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-outline-primary" data-tooltip="Visualizar site">
-                                <i class="fas fa-external-link-alt me-1"></i>Ver Site
-                            </button>
-                            <button class="btn btn-success" onclick="saveSettings()" data-tooltip="Salvar configurações">
-                                <i class="fas fa-save me-1"></i>Salvar Tudo
-                            </button>
-                        </div>
-                    </div>
+                    <h2 id="site-control-title">Controle do Site</h2>
                     
-                    <div class="row g-4" data-aos="fade-up">
-                        <!-- General Settings -->
-                        <div class="col-lg-6">
-                            <div class="card border-0 shadow-sm h-100">
-                                <div class="card-header bg-primary text-white">
-                                    <h5 class="mb-0">
-                                        <i class="fas fa-cog me-2"></i>Configurações Gerais
-                                    </h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <label for="site-title" class="form-label fw-semibold">Título do Site</label>
-                                        <input type="text" class="form-control" id="site-title" 
-                                               value="HemoByte - Doação de Sangue" placeholder="Digite o título do site">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="site-description" class="form-label fw-semibold">Descrição</label>
-                                        <textarea class="form-control" id="site-description" rows="3" 
-                                                  placeholder="Descrição do site">Plataforma para campanhas de doação de sangue em Feira de Santana</textarea>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="maintenance-mode">
-                                        <label class="form-check-label fw-semibold" for="maintenance-mode">
-                                            <i class="fas fa-tools text-warning me-1"></i>Modo Manutenção
-                                        </label>
-                                        <div class="form-text">Desativa temporariamente o site para manutenção</div>
-                                    </div>
-                                </div>
+                    <div class="site-controls">
+                        <div class="control-group">
+                            <h3>Configurações Gerais</h3>
+                            <div class="form-group">
+                                <label for="site-title">Título do Site</label>
+                                <input type="text" id="site-title" value="HemoByte - Doação de Sangue">
+                            </div>
+                            <div class="form-group">
+                                <label for="site-description">Descrição</label>
+                                <textarea id="site-description" rows="3">Plataforma para campanhas de doação de sangue em Feira de Santana</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <span style="margin-right: 1rem;">Modo Manutenção</span>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="maintenance-mode">
+                                        <span class="slider"></span>
+                                    </label>
+                                </label>
                             </div>
                         </div>
 
-                        <!-- Emergency Alerts -->
-                        <div class="col-lg-6">
-                            <div class="card border-0 shadow-sm h-100">
-                                <div class="card-header bg-danger text-white">
-                                    <h5 class="mb-0">
-                                        <i class="fas fa-exclamation-triangle me-2"></i>Alertas de Emergência
-                                    </h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <label for="emergency-message" class="form-label fw-semibold">Mensagem de Emergência</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text bg-danger text-white">
-                                                <i class="fas fa-bullhorn"></i>
-                                            </span>
-                                            <input type="text" class="form-control" id="emergency-message" 
-                                                   value="Urgente: Precisamos de doadores tipo O-" 
-                                                   placeholder="Digite a mensagem de emergência">
-                                        </div>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="emergency-alert" checked>
-                                        <label class="form-check-label fw-semibold" for="emergency-alert">
-                                            <i class="fas fa-broadcast-tower text-danger me-1"></i>Exibir Alerta
-                                        </label>
-                                        <div class="form-text">Mostra o alerta de emergência no topo do site</div>
-                                    </div>
-                                    <div class="mt-3">
-                                        <div class="alert alert-warning d-flex align-items-center">
-                                            <i class="fas fa-info-circle me-2"></i>
-                                            <small>O alerta será exibido em destaque na página inicial</small>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="control-group">
+                            <h3>Alertas de Emergência</h3>
+                            <div class="form-group">
+                                <label for="emergency-message">Mensagem de Emergência</label>
+                                <input type="text" id="emergency-message" value="Urgente: Precisamos de doadores tipo O-">
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <span style="margin-right: 1rem;">Exibir Alerta</span>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="emergency-alert" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </label>
                             </div>
                         </div>
 
-                        <!-- Site Statistics -->
-                        <div class="col-lg-6">
-                            <div class="card border-0 shadow-sm h-100">
-                                <div class="card-header bg-success text-white">
-                                    <h5 class="mb-0">
-                                        <i class="fas fa-chart-bar me-2"></i>Estatísticas do Site
-                                    </h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="total-donations-input" class="form-label fw-semibold">
-                                                <i class="fas fa-tint text-danger me-1"></i>Total de Doações
-                                            </label>
-                                            <input type="number" class="form-control" id="total-donations-input" value="1547">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="active-campaigns-input" class="form-label fw-semibold">
-                                                <i class="fas fa-clipboard-list text-primary me-1"></i>Campanhas Ativas
-                                            </label>
-                                            <input type="number" class="form-control" id="active-campaigns-input" value="12">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="lives-impacted-input" class="form-label fw-semibold">
-                                                <i class="fas fa-heart text-success me-1"></i>Vidas Impactadas
-                                            </label>
-                                            <input type="number" class="form-control" id="lives-impacted-input" value="6000">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label fw-semibold">
-                                                <i class="fas fa-sync text-info me-1"></i>Última Atualização
-                                            </label>
-                                            <input type="text" class="form-control" value="Agora" readonly>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="control-group">
+                            <h3>Estatísticas do Site</h3>
+                            <div class="form-group">
+                                <label for="total-donations-input">Total de Doações</label>
+                                <input type="number" id="total-donations-input" value="1547">
+                            </div>
+                            <div class="form-group">
+                                <label for="active-campaigns-input">Campanhas Ativas</label>
+                                <input type="number" id="active-campaigns-input" value="12">
+                            </div>
+                            <div class="form-group">
+                                <label for="lives-impacted-input">Vidas Impactadas</label>
+                                <input type="number" id="lives-impacted-input" value="6000">
                             </div>
                         </div>
 
-                        <!-- System Actions -->
-                        <div class="col-lg-6">
-                            <div class="card border-0 shadow-sm h-100">
-                                <div class="card-header bg-info text-white">
-                                    <h5 class="mb-0">
-                                        <i class="fas fa-tools me-2"></i>Ações do Sistema
-                                    </h5>
-                                </div>
-                                <div class="card-body d-flex flex-column">
-                                    <div class="d-grid gap-3 flex-grow-1">
-                                        <button class="btn btn-success btn-lg" onclick="saveSettings()">
-                                            <i class="fas fa-save me-2"></i>Salvar Configurações
-                                        </button>
-                                        <button class="btn btn-primary btn-lg" onclick="backupData()">
-                                            <i class="fas fa-download me-2"></i>Backup dos Dados
-                                        </button>
-                                        <button class="btn btn-warning btn-lg" onclick="clearCache()">
-                                            <i class="fas fa-broom me-2"></i>Limpar Cache
-                                        </button>
-                                        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#resetModal">
-                                            <i class="fas fa-redo me-2"></i>Reset Sistema
-                                        </button>
-                                    </div>
-                                    <div class="mt-3">
-                                        <small class="text-muted">
-                                            <i class="fas fa-info-circle me-1"></i>
-                                            Backup automático realizado diariamente às 3:00
-                                        </small>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="control-group">
+                            <h3>Ações do Sistema</h3>
+                            <button class="action-btn btn-approve" onclick="saveSettings()" style="width: 100%; margin-bottom: 0.5rem;">
+                                <i class="fas fa-save"></i> Salvar Configurações
+                            </button>
+                            <button class="action-btn btn-edit" onclick="backupData()" style="width: 100%; margin-bottom: 0.5rem;">
+                                <i class="fas fa-download"></i> Backup dos Dados
+                            </button>
+                            <button class="action-btn btn-reject" onclick="clearCache()" style="width: 100%;">
+                                <i class="fas fa-broom"></i> Limpar Cache
+                            </button>
                         </div>
                     </div>
                 </section>
 
                 <!-- Users Management -->
                 <section id="users" class="admin-section" aria-labelledby="users-title">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 id="users-title" class="animate__animated animate__fadeInLeft">
-                            <i class="fas fa-users me-2 text-primary"></i>Gerenciar Usuários
-                        </h2>
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-outline-primary" data-tooltip="Exportar lista">
-                                <i class="fas fa-download"></i>
-                            </button>
-                            <button class="btn btn-success" data-tooltip="Adicionar usuário">
-                                <i class="fas fa-user-plus me-1"></i>Novo Usuário
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Users Stats -->
-                    <div class="row g-3 mb-4" data-aos="fade-up">
-                        <div class="col-md-3">
-                            <div class="card border-0 shadow-sm text-center">
-                                <div class="card-body">
-                                    <i class="fas fa-users fa-2x text-primary mb-2"></i>
-                                    <h4 class="fw-bold text-primary">2,834</h4>
-                                    <small class="text-muted">Total de Usuários</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card border-0 shadow-sm text-center">
-                                <div class="card-body">
-                                    <i class="fas fa-user-check fa-2x text-success mb-2"></i>
-                                    <h4 class="fw-bold text-success">2,810</h4>
-                                    <small class="text-muted">Ativos</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card border-0 shadow-sm text-center">
-                                <div class="card-body">
-                                    <i class="fas fa-user-clock fa-2x text-warning mb-2"></i>
-                                    <h4 class="fw-bold text-warning">20</h4>
-                                    <small class="text-muted">Pendentes</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card border-0 shadow-sm text-center">
-                                <div class="card-body">
-                                    <i class="fas fa-user-times fa-2x text-danger mb-2"></i>
-                                    <h4 class="fw-bold text-danger">4</h4>
-                                    <small class="text-muted">Bloqueados</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 id="users-title">Gerenciar Usuários</h2>
                     
-                    <div class="card border-0 shadow-sm" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card-header bg-transparent border-0 py-3">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0 fw-semibold">Lista de Usuários</h5>
-                                <div class="input-group" style="width: 300px;">
-                                    <span class="input-group-text bg-light">
-                                        <i class="fas fa-search text-muted"></i>
-                                    </span>
-                                    <input type="text" class="form-control" placeholder="Buscar usuários...">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th class="border-0 fw-semibold">Usuário</th>
-                                        <th class="border-0 fw-semibold">Email</th>
-                                        <th class="border-0 fw-semibold">Cadastro</th>
-                                        <th class="border-0 fw-semibold">Status</th>
-                                        <th class="border-0 fw-semibold text-center">Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" 
-                                                     style="width: 40px; height: 40px;">
-                                                    <span class="text-white fw-bold">JS</span>
-                                                </div>
-                                                <div>
-                                                    <div class="fw-semibold">João Silva</div>
-                                                    <small class="text-muted">ID: #001</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>joao@email.com</td>
-                                        <td>10/05/2024</td>
-                                        <td><span class="badge bg-success">Ativo</span></td>
-                                        <td class="text-center">
-                                            <div class="btn-group" role="group">
-                                                <button class="btn btn-sm btn-outline-primary" onclick="editUser(1)" data-tooltip="Editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-warning" data-tooltip="Suspender">
-                                                    <i class="fas fa-pause"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-danger" onclick="blockUser(1)" data-tooltip="Bloquear">
-                                                    <i class="fas fa-ban"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="bg-success rounded-circle d-flex align-items-center justify-content-center me-3" 
-                                                     style="width: 40px; height: 40px;">
-                                                    <span class="text-white fw-bold">MS</span>
-                                                </div>
-                                                <div>
-                                                    <div class="fw-semibold">Maria Santos</div>
-                                                    <small class="text-muted">ID: #002</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>maria@email.com</td>
-                                        <td>12/05/2024</td>
-                                        <td><span class="badge bg-success">Ativo</span></td>
-                                        <td class="text-center">
-                                            <div class="btn-group" role="group">
-                                                <button class="btn btn-sm btn-outline-primary" onclick="editUser(2)" data-tooltip="Editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-warning" data-tooltip="Suspender">
-                                                    <i class="fas fa-pause"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-danger" onclick="blockUser(2)" data-tooltip="Bloquear">
-                                                    <i class="fas fa-ban"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="card-footer bg-transparent">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">Mostrando 2 de 2.834 usuários</small>
-                                <nav>
-                                    <ul class="pagination pagination-sm mb-0">
-                                        <li class="page-item disabled">
-                                            <span class="page-link">Anterior</span>
-                                        </li>
-                                        <li class="page-item active">
-                                            <span class="page-link">1</span>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">2</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">3</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Próximo</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
+                    <table class="campaigns-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Cadastro</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>João Silva</td>
+                                <td>joao@email.com</td>
+                                <td>10/05/2024</td>
+                                <td><span class="status-badge status-approved">Ativo</span></td>
+                                <td>
+                                    <button class="action-btn btn-edit" onclick="editUser(1)">Editar</button>
+                                    <button class="action-btn btn-reject" onclick="blockUser(1)">Bloquear</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Maria Santos</td>
+                                <td>maria@email.com</td>
+                                <td>12/05/2024</td>
+                                <td><span class="status-badge status-approved">Ativo</span></td>
+                                <td>
+                                    <button class="action-btn btn-edit" onclick="editUser(2)">Editar</button>
+                                    <button class="action-btn btn-reject" onclick="blockUser(2)">Bloquear</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
 
                 <!-- System Logs -->
                 <section id="logs" class="admin-section" aria-labelledby="logs-title">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 id="logs-title" class="animate__animated animate__fadeInLeft">
-                            <i class="fas fa-file-alt me-2 text-primary"></i>Logs do Sistema
-                        </h2>
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-outline-secondary" data-tooltip="Filtrar logs">
-                                <i class="fas fa-filter"></i>
-                            </button>
-                            <button class="btn btn-outline-primary" data-tooltip="Atualizar">
-                                <i class="fas fa-sync-alt"></i>
-                            </button>
-                            <button class="btn btn-primary" data-tooltip="Exportar logs">
-                                <i class="fas fa-download me-1"></i>Exportar
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Log Filters -->
-                    <div class="card border-0 shadow-sm mb-4" data-aos="fade-up">
-                        <div class="card-body">
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                    <label class="form-label fw-semibold">Nível</label>
-                                    <select class="form-select">
-                                        <option value="all">Todos os Níveis</option>
-                                        <option value="info">INFO</option>
-                                        <option value="warning">WARNING</option>
-                                        <option value="error">ERROR</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="form-label fw-semibold">Data Inicial</label>
-                                    <input type="date" class="form-control" value="2024-05-15">
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="form-label fw-semibold">Data Final</label>
-                                    <input type="date" class="form-control" value="2024-05-15">
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="form-label fw-semibold">Buscar</label>
-                                    <input type="text" class="form-control" placeholder="Buscar nos logs...">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 id="logs-title">Logs do Sistema</h2>
                     
-                    <!-- Enhanced Log Display -->
-                    <div class="card border-0 shadow-sm" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card-header bg-dark text-white">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">
-                                    <i class="fas fa-terminal me-2"></i>Console do Sistema
-                                </h5>
-                                <div class="d-flex gap-2">
-                                    <span class="badge bg-success">
-                                        <i class="fas fa-circle me-1"></i>Online
-                                    </span>
-                                    <button class="btn btn-sm btn-outline-light" data-tooltip="Limpar logs">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body p-0">
-                            <div style="background: #1a1a1a; color: #f8f9fa; padding: 1.5rem; font-family: 'Courier New', monospace; 
-                                        font-size: 0.9rem; max-height: 500px; overflow-y: auto;">
-                                
-                                <div class="log-entry mb-2 p-2 rounded" style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981;">
-                                    <div class="d-flex justify-content-between">
-                                        <span>
-                                            <span class="badge bg-success me-2">INFO</span>
-                                            <span class="text-muted">[2024-05-15 14:30:22]</span>
-                                        </span>
-                                        <i class="fas fa-user text-success"></i>
-                                    </div>
-                                    <div class="mt-1">Admin login successful - User: adm</div>
-                                </div>
-
-                                <div class="log-entry mb-2 p-2 rounded" style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981;">
-                                    <div class="d-flex justify-content-between">
-                                        <span>
-                                            <span class="badge bg-success me-2">INFO</span>
-                                            <span class="text-muted">[2024-05-15 14:25:15]</span>
-                                        </span>
-                                        <i class="fas fa-check text-success"></i>
-                                    </div>
-                                    <div class="mt-1">Campaign approved - ID: 12</div>
-                                </div>
-
-                                <div class="log-entry mb-2 p-2 rounded" style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981;">
-                                    <div class="d-flex justify-content-between">
-                                        <span>
-                                            <span class="badge bg-success me-2">INFO</span>
-                                            <span class="text-muted">[2024-05-15 14:20:08]</span>
-                                        </span>
-                                        <i class="fas fa-user-plus text-success"></i>
-                                    </div>
-                                    <div class="mt-1">New user registered - maria@email.com</div>
-                                </div>
-
-                                <div class="log-entry mb-2 p-2 rounded" style="background: rgba(245, 158, 11, 0.1); border-left: 4px solid #f59e0b;">
-                                    <div class="d-flex justify-content-between">
-                                        <span>
-                                            <span class="badge bg-warning me-2">WARNING</span>
-                                            <span class="text-muted">[2024-05-15 14:15:33]</span>
-                                        </span>
-                                        <i class="fas fa-exclamation-triangle text-warning"></i>
-                                    </div>
-                                    <div class="mt-1">Failed login attempt - Username: admin</div>
-                                </div>
-
-                                <div class="log-entry mb-2 p-2 rounded" style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981;">
-                                    <div class="d-flex justify-content-between">
-                                        <span>
-                                            <span class="badge bg-success me-2">INFO</span>
-                                            <span class="text-muted">[2024-05-15 14:10:44]</span>
-                                        </span>
-                                        <i class="fas fa-image text-success"></i>
-                                    </div>
-                                    <div class="mt-1">Image uploaded - campaign_feira_vi.jpg</div>
-                                </div>
-
-                                <div class="log-entry mb-2 p-2 rounded" style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981;">
-                                    <div class="d-flex justify-content-between">
-                                        <span>
-                                            <span class="badge bg-success me-2">INFO</span>
-                                            <span class="text-muted">[2024-05-15 14:05:12]</span>
-                                        </span>
-                                        <i class="fas fa-plus text-success"></i>
-                                    </div>
-                                    <div class="mt-1">Campaign created - Doação Emergencial Centro</div>
-                                </div>
-
-                                <div class="log-entry mb-2 p-2 rounded" style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981;">
-                                    <div class="d-flex justify-content-between">
-                                        <span>
-                                            <span class="badge bg-success me-2">INFO</span>
-                                            <span class="text-muted">[2024-05-15 14:00:01]</span>
-                                        </span>
-                                        <i class="fas fa-download text-success"></i>
-                                    </div>
-                                    <div class="mt-1">System backup completed</div>
-                                </div>
-
-                                <div class="text-center mt-3">
-                                    <div class="spinner-border spinner-border-sm text-primary me-2"></div>
-                                    <span class="text-muted">Monitorando logs em tempo real...</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div style="background: #1f2937; color: #f9fafb; padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.9rem; max-height: 400px; overflow-y: auto;">
+                        <div>[2024-05-15 14:30:22] INFO: Admin login successful - User: adm</div>
+                        <div>[2024-05-15 14:25:15] INFO: Campaign approved - ID: 12</div>
+                        <div>[2024-05-15 14:20:08] INFO: New user registered - maria@email.com</div>
+                        <div>[2024-05-15 14:15:33] WARNING: Failed login attempt - Username: admin</div>
+                        <div>[2024-05-15 14:10:44] INFO: Image uploaded - campaign_feira_vi.jpg</div>
+                        <div>[2024-05-15 14:05:12] INFO: Campaign created - Doação Emergencial Centro</div>
+                        <div>[2024-05-15 14:00:01] INFO: System backup completed</div>
                     </div>
                 </section>
             </div>
         </main>
     </div>
 
-    <!-- ✅ MODERN SCRIPTS SECTION -->
-    
-    <!-- Bootstrap 5 JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- AOS Animation Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <!-- Original Scripts -->
+    <!-- ✅ SCRIPTS OTIMIZADOS - Apenas necessários para admin-panel.html -->
+    <!-- Store centralizado (deve carregar primeiro) -->
     <script src="public/hemobyte-store.js"></script>
+    
+    <!-- Sistema de tratamento de erros -->
     <script src="public/error-handler.js"></script>
+    
     <script src="public/ux-accessibility.js"></script>
     <script src="admin-panel.js"></script>
-    <script src="public/mobile-enhancements.js"></script>
-    <script src="public/validation-system.js"></script>
     
-    <!-- Enhanced Admin Panel Script -->
-    <script>
-        // Initialize AOS animations
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true,
-            mirror: false
-        });
-
-        // Initialize Bootstrap tooltips
-        document.addEventListener('DOMContentLoaded', function() {
-            // Enable all tooltips
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-tooltip], [data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl, {
-                    title: tooltipTriggerEl.getAttribute('data-tooltip') || tooltipTriggerEl.getAttribute('title'),
-                    placement: 'top',
-                    trigger: 'hover focus'
-                });
-            });
-
-            // Enhanced navigation system
-            const navItems = document.querySelectorAll('.admin-nav-item');
-            const sections = document.querySelectorAll('.admin-section');
-            const sectionTitle = document.getElementById('current-section-title');
-
-            navItems.forEach((item, index) => {
-                item.addEventListener('click', function() {
-                    const targetSection = this.getAttribute('data-section');
-                    
-                    // Update active nav item with animation
-                    navItems.forEach(nav => {
-                        nav.classList.remove('active');
-                        nav.style.transform = 'translateX(0)';
-                    });
-                    this.classList.add('active');
-                    this.style.transform = 'translateX(5px)';
-                    
-                    // Update sections with fade animation
-                    sections.forEach(section => {
-                        section.style.opacity = '0';
-                        section.style.transform = 'translateY(20px)';
-                        setTimeout(() => {
-                            section.classList.remove('active');
-                        }, 200);
-                    });
-                    
-                    setTimeout(() => {
-                        const targetEl = document.getElementById(targetSection);
-                        if (targetEl) {
-                            targetEl.classList.add('active');
-                            targetEl.style.opacity = '1';
-                            targetEl.style.transform = 'translateY(0)';
-                            
-                            // Update section title
-                            const titles = {
-                                'dashboard': 'Dashboard',
-                                'campaigns': 'Gerenciar Campanhas',
-                                'images': 'Gerenciar Imagens',
-                                'site-control': 'Controle do Site',
-                                'users': 'Usuários',
-                                'logs': 'Logs do Sistema'
-                            };
-                            sectionTitle.textContent = titles[targetSection] || 'Dashboard';
-                            
-                            // Re-initialize AOS for new content
-                            AOS.refresh();
-                        }
-                    }, 250);
-                });
-            });
-
-            // Enhanced mobile menu
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const sidebar = document.getElementById('admin-sidebar');
-            
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    sidebar.classList.toggle('open');
-                    this.classList.toggle('active');
-                    
-                    // Animate hamburger icon
-                    const icon = this.querySelector('i');
-                    if (sidebar.classList.contains('open')) {
-                        icon.classList.remove('fa-bars');
-                        icon.classList.add('fa-times');
-                    } else {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                });
-            }
-
-            // Enhanced search functionality
-            const searchInput = document.getElementById('search-input');
-            if (searchInput) {
-                let searchTimeout;
-                searchInput.addEventListener('input', function() {
-                    clearTimeout(searchTimeout);
-                    const query = this.value.toLowerCase();
-                    
-                    // Add loading state
-                    this.classList.add('loading');
-                    
-                    searchTimeout = setTimeout(() => {
-                        // Simulate search (you can integrate with your actual search logic)
-                        this.classList.remove('loading');
-                        
-                        // Visual feedback
-                        if (query.length > 0) {
-                            this.classList.add('has-results');
-                        } else {
-                            this.classList.remove('has-results');
-                        }
-                    }, 500);
-                });
-            }
-
-            // Enhanced stats counter animation
-            function animateCounter(element, target, duration = 2000) {
-                let start = 0;
-                const increment = target / (duration / 16);
-                
-                function updateCounter() {
-                    start += increment;
-                    if (start < target) {
-                        element.textContent = Math.floor(start).toLocaleString();
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        element.textContent = target.toLocaleString();
-                    }
-                }
-                updateCounter();
-            }
-
-            // Animate stat numbers on page load
-            const statNumbers = document.querySelectorAll('.stat-number');
-            statNumbers.forEach(stat => {
-                const target = parseInt(stat.textContent.replace(/,/g, '')) || 0;
-                stat.textContent = '0';
-                setTimeout(() => {
-                    animateCounter(stat, target);
-                }, 500);
-            });
-
-            // Enhanced image upload with drag & drop
-            const uploadArea = document.getElementById('image-upload-area');
-            const fileInput = document.getElementById('image-input');
-            const uploadProgress = document.getElementById('upload-progress');
-
-            if (uploadArea && fileInput) {
-                // Click to upload
-                uploadArea.addEventListener('click', () => fileInput.click());
-
-                // Drag and drop functionality
-                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                    uploadArea.addEventListener(eventName, preventDefaults, false);
-                });
-
-                function preventDefaults(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-
-                ['dragenter', 'dragover'].forEach(eventName => {
-                    uploadArea.addEventListener(eventName, highlight, false);
-                });
-
-                ['dragleave', 'drop'].forEach(eventName => {
-                    uploadArea.addEventListener(eventName, unhighlight, false);
-                });
-
-                function highlight(e) {
-                    uploadArea.classList.add('dragover');
-                    uploadArea.style.transform = 'scale(1.02)';
-                }
-
-                function unhighlight(e) {
-                    uploadArea.classList.remove('dragover');
-                    uploadArea.style.transform = 'scale(1)';
-                }
-
-                uploadArea.addEventListener('drop', handleDrop, false);
-
-                function handleDrop(e) {
-                    const dt = e.dataTransfer;
-                    const files = dt.files;
-                    handleFiles(files);
-                }
-
-                fileInput.addEventListener('change', function() {
-                    handleFiles(this.files);
-                });
-
-                function handleFiles(files) {
-                    if (files.length > 0) {
-                        showUploadProgress();
-                        // Simulate upload progress
-                        simulateUpload();
-                    }
-                }
-
-                function showUploadProgress() {
-                    if (uploadProgress) {
-                        uploadProgress.classList.remove('d-none');
-                        const progressBar = uploadProgress.querySelector('.progress-bar');
-                        const percentage = uploadProgress.querySelector('#upload-percentage');
-                        
-                        let progress = 0;
-                        const interval = setInterval(() => {
-                            progress += Math.random() * 15;
-                            if (progress > 100) progress = 100;
-                            
-                            progressBar.style.width = progress + '%';
-                            percentage.textContent = Math.floor(progress) + '%';
-                            
-                            if (progress >= 100) {
-                                clearInterval(interval);
-                                setTimeout(() => {
-                                    uploadProgress.classList.add('d-none');
-                                    showSuccessMessage();
-                                }, 500);
-                            }
-                        }, 200);
-                    }
-                }
-
-                function simulateUpload() {
-                    // This would be replaced with actual upload logic
-                    console.log('Simulating file upload...');
-                }
-
-                function showSuccessMessage() {
-                    // Create toast notification
-                    const toast = document.createElement('div');
-                    toast.className = 'toast-notification bg-success text-white p-3 rounded shadow-lg';
-                    toast.style.cssText = `
-                        position: fixed;
-                        top: 20px;
-                        right: 20px;
-                        z-index: 9999;
-                        animation: slideInRight 0.3s ease-out;
-                    `;
-                    toast.innerHTML = `
-                        <i class="fas fa-check-circle me-2"></i>
-                        Upload realizado com sucesso!
-                    `;
-                    
-                    document.body.appendChild(toast);
-                    
-                    setTimeout(() => {
-                        toast.style.animation = 'slideOutRight 0.3s ease-out';
-                        setTimeout(() => {
-                            document.body.removeChild(toast);
-                        }, 300);
-                    }, 3000);
-                }
-            }
-
-            // Enhanced table interactions
-            const tableRows = document.querySelectorAll('.campaigns-table tbody tr');
-            tableRows.forEach(row => {
-                row.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.01)';
-                    this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
-                });
-                
-                row.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1)';
-                    this.style.boxShadow = 'none';
-                });
-            });
-
-            // Add CSS animations for toasts
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideInRight {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-                @keyframes slideOutRight {
-                    from { transform: translateX(0); opacity: 1; }
-                    to { transform: translateX(100%); opacity: 0; }
-                }
-                .has-results { border-color: var(--success-color) !important; }
-            `;
-            document.head.appendChild(style);
-
-            // Initialize admin panel if available
-            if (typeof AdminPanel !== 'undefined') {
-                window.adminPanel = new AdminPanel();
-            }
-        });
-
-        // Global functions for maintaining compatibility
-        window.approveCampaign = (id) => window.adminPanel?.approveCampaign(id);
-        window.rejectCampaign = (id) => window.adminPanel?.rejectCampaign(id);
-        window.editCampaign = (id) => window.adminPanel?.editCampaign(id);
-        window.editImage = (id) => window.adminPanel?.editImage(id);
-        window.deleteImage = (id) => window.adminPanel?.deleteImage(id);
-        window.editUser = (id) => window.adminPanel?.editUser(id);
-        window.blockUser = (id) => window.adminPanel?.blockUser(id);
-        window.loadCampaigns = () => window.adminPanel?.loadCampaigns();
-        window.saveSettings = () => window.adminPanel?.saveSettings();
-        window.backupData = () => window.adminPanel?.backupData();
-        window.clearCache = () => window.adminPanel?.clearCache();
-        window.changeStatus = (id, status) => window.adminPanel?.changeStatus(id, status);
-        window.openCampaignModal = (id) => window.adminPanel?.openCampaignModal(id);
-        window.viewCampaignDetails = (id) => window.adminPanel?.viewCampaignDetails(id);
-        window.changeCampaignCategory = (id) => window.adminPanel?.changeCampaignCategory(id);
-        window.saveCategoryChange = (id) => window.adminPanel?.saveCategoryChange(id);
-    </script>
+    <!-- Melhorias Mobile -->
+    <script src="public/mobile-enhancements.js"></script>
+    
+    <!-- Sistema de Validação Dupla -->
+    <script src="public/validation-system.js"></script>
 </body>
 </html>
