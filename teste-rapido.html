@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Rápido - HemoByte</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .test-header {
+            background: linear-gradient(135deg, #e60000, #cc0000);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .campaign-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .campaign-card h3 {
+            color: #e60000;
+            margin: 0 0 1rem;
+        }
+        
+        .participate-button {
+            background: #e60000;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .participate-button:hover {
+            background: #cc0000;
+        }
+        
+        .participate-button.participating {
+            background: #28a745;
+        }
+        
+        .test-buttons {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            justify-content: center;
+        }
+        
+        .test-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .login-btn {
+            background: #28a745;
+            color: white;
+        }
+        
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .perfil-btn {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1><i class="fas fa-flask"></i> Teste Rápido - HemoByte</h1>
+            <p>Verificação das funcionalidades principais</p>
+        </div>
+        
+        <div class="test-buttons">
+            <button class="test-btn login-btn" onclick="simularLogin()">
+                <i class="fas fa-sign-in-alt"></i> Simular Login
+            </button>
+            <button class="test-btn logout-btn" onclick="simularLogout()">
+                <i class="fas fa-sign-out-alt"></i> Simular Logout
+            </button>
+            <button class="test-btn perfil-btn" onclick="irParaPerfil()">
+                <i class="fas fa-user"></i> Ir para Perfil
+            </button>
+        </div>
+        
+        <div class="campaign-card">
+            <h3>Doação A+ - Feira VI</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Feira VI, Feira de Santana</p>
+            <p><i class="fas fa-calendar"></i> Hoje</p>
+            <p><i class="fas fa-clock"></i> 14:00 - 18:00</p>
+            <p><i class="fas fa-tint"></i> Tipo Sanguíneo: A+</p>
+            <button class="participate-button">Participar</button>
+        </div>
+        
+        <div class="campaign-card">
+            <h3>Doação O- - Tomba</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Tomba, Feira de Santana</p>
+            <p><i class="fas fa-calendar"></i> Amanhã</p>
+            <p><i class="fas fa-clock"></i> 09:00 - 16:00</p>
+            <p><i class="fas fa-tint"></i> Tipo Sanguíneo: O-</p>
+            <button class="participate-button">Participar</button>
+        </div>
+        
+        <div class="campaign-card">
+            <h3>Doação AB+ - Centro</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Centro, Feira de Santana</p>
+            <p><i class="fas fa-calendar"></i> Próxima semana</p>
+            <p><i class="fas fa-clock"></i> 13:00 - 18:00</p>
+            <p><i class="fas fa-tint"></i> Tipo Sanguíneo: AB+</p>
+            <button class="participate-button">Participar</button>
+        </div>
+    </div>
+
+    <!-- Scripts necessários -->
+    <script src="public/campaign-participation.js"></script>
+    
+    <script>
+        function simularLogin() {
+            const usuario = {
+                nome: "João Silva",
+                email: "joao@email.com",
+                isLoggedIn: true,
+                dataNascimento: "15/03/1990",
+                telefone: "(75) 99999-9999",
+                endereco: "Rua das Flores, 123",
+                tipoSanguineo: "A+"
+            };
+            
+            localStorage.setItem('usuario', JSON.stringify(usuario));
+            alert('✅ Login simulado com sucesso!\n\nUsuário: João Silva\nEmail: joao@email.com\n\nAgora você pode testar as participações!');
+        }
+        
+        function simularLogout() {
+            localStorage.removeItem('usuario');
+            if (window.campaignParticipationManager) {
+                window.campaignParticipationManager.clearAllParticipations();
+            }
+            alert('✅ Logout realizado!\n\nUsuário deslogado e participações limpas.');
+        }
+        
+        function irParaPerfil() {
+            window.location.href = 'public/perfil.html';
+        }
+        
+        // Verifica status do login
+        function verificarStatus() {
+            const usuario = JSON.parse(localStorage.getItem('usuario') || 'null');
+            if (usuario && usuario.isLoggedIn) {
+                console.log('✅ Usuário logado:', usuario.nome);
+            } else {
+                console.log('❌ Usuário não logado');
+            }
+        }
+        
+        // Verifica status quando a página carrega
+        document.addEventListener('DOMContentLoaded', () => {
+            verificarStatus();
+        });
+    </script>
+</body>
+</html>

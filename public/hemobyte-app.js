@@ -407,6 +407,12 @@ class HemoByteSystem {
         
         this.clearSession();
         this.updateNavigationForLoggedOut();
+        
+        // Limpa participações se o sistema estiver disponível
+        if (window.campaignParticipationManager) {
+            window.campaignParticipationManager.clearAllParticipations();
+        }
+        
         this.showNotification('Logout realizado com sucesso', 'info');
         
         // Redireciona se necessário
@@ -1123,6 +1129,13 @@ class HemoByteSystem {
         
         // Inicializa sistema de filtros existente
         this.enhanceExistingFilters();
+        
+        // Aguarda um pouco para garantir que o sistema de participação esteja carregado
+        setTimeout(() => {
+            if (window.campaignParticipationManager) {
+                window.campaignParticipationManager.setupParticipationButtons();
+            }
+        }, 100);
     }
 
     /**

@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="public/ux-fixes.css">
   <link rel="stylesheet" href="public/responsive-improvements.css">
   <link rel="stylesheet" href="header-fix.css">
+  <link rel="stylesheet" href="public/navigation-styles.css">
+  <link rel="stylesheet" href="public/campaigns-filters-styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -256,6 +258,43 @@
                     </div>
                     <a href="login.html" class="participate-button">Participar</a>
                 </div>
+
+                <!-- Campanhas extras para demonstrar filtros -->
+                <div class="campaign-card">
+                    <div class="campaign-status active">Ativa</div>
+                    <h3>Doação AB+ - Centro</h3>
+                    <div class="campaign-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Centro, Feira de Santana</p>
+                        <p><i class="fas fa-calendar"></i> Hoje</p>
+                        <p><i class="fas fa-clock"></i> 13:00 - 18:00</p>
+                        <p><i class="fas fa-tint"></i> Tipo Sanguíneo: AB+</p>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 40%"></div>
+                        </div>
+                        <span class="progress-text">4/10 doadores</span>
+                    </div>
+                    <a href="login.html" class="participate-button">Participar</a>
+                </div>
+
+                <div class="campaign-card">
+                    <div class="campaign-status urgent">Urgente</div>
+                    <h3>Emergência UEFS - B-</h3>
+                    <div class="campaign-info">
+                        <p><i class="fas fa-map-marker-alt"></i> UEFS, Feira de Santana</p>
+                        <p><i class="fas fa-calendar"></i> Amanhã</p>
+                        <p><i class="fas fa-clock"></i> 10:00 - 16:00</p>
+                        <p><i class="fas fa-tint"></i> Tipo Sanguíneo: B-</p>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 15%"></div>
+                        </div>
+                        <span class="progress-text">3/20 doadores</span>
+                    </div>
+                    <a href="login.html" class="participate-button">Participar</a>
+                </div>
             </div>
         </section>
     </main>
@@ -277,5 +316,8 @@
     <!-- ✅ SCRIPTS OTIMIZADOS - Apenas necessários para campanhas-ativas.html -->
     <!-- ✅ SISTEMA LIMPO -->
     <script src="public/auth-system.js"></script>
+    <script src="public/page-protection.js"></script>
+    <script src="public/campaign-participation.js"></script>
+    <script src="public/campaigns-filters.js"></script>
 </body>
 </html> 

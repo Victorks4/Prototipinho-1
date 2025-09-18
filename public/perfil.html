@@ -6,6 +6,7 @@
     <title>Perfil - HemoByte</title>
     <link rel="stylesheet" href="../styles-fixed.css">
     <link rel="stylesheet" href="../header-fix.css">
+    <link rel="stylesheet" href="navigation-styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -27,13 +28,26 @@
             </ul>
         </nav>
         <div class="nav-links">
+            <!-- Login/Profile Navigation -->
+            <div id="nav-login" class="nav-item">
+                <a href="../login.html" title="Fazer Login">
+                    <i class="fas fa-sign-in-alt"></i>
+                </a>
+            </div>
+            <div id="nav-profile" class="nav-item" style="display: none;">
+                <a href="#" class="profile-link" title="Meu Perfil">
+                    <i class="fas fa-user"></i>
+                    <span class="user-name">Usuário</span>
+                </a>
+            </div>
+            <div id="nav-logout" class="nav-item" style="display: none;">
+                <button id="btn-sair" class="btn-sair">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
             <button id="btn-config" class="btn-config">
                 <i class="fas fa-cog"></i>
                 Configurações
-            </button>
-            <button id="btn-sair" class="btn-sair">
-                <i class="fas fa-sign-out-alt"></i>
-                Sair
             </button>
         </div>
     </nav>
@@ -106,6 +120,12 @@
                             <span>Doação Realizada</span>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <div id="participations-section">
+                    <!-- Participações serão carregadas aqui pelo JavaScript -->
                 </div>
             </div>
         </div>
@@ -426,6 +446,7 @@
     <!-- ✅ SISTEMA LIMPO PARA PERFIL -->
     <script src="auth-system.js"></script>
     <script src="page-protection.js"></script>
+    <script src="campaign-participation.js"></script>
     <script>
         // Função para carregar os dados do usuário
         function carregarDadosUsuario() {
@@ -492,6 +513,13 @@
                 localStorage.removeItem('usuario');
                 window.location.href = '../login.html';
             });
+
+            // Carregar participações após um pequeno delay para garantir que o sistema esteja pronto
+            setTimeout(() => {
+                if (window.campaignParticipationManager) {
+                    window.campaignParticipationManager.renderParticipationsInProfile();
+                }
+            }, 500);
         });
     </script>
 </body>

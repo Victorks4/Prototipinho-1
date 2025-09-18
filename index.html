@@ -13,7 +13,75 @@
   <link rel="stylesheet" href="public/ux-fixes.css">
   <link rel="stylesheet" href="public/responsive-improvements.css">
   <link rel="stylesheet" href="header-fix.css">
+  <link rel="stylesheet" href="public/navigation-styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Estilos para botões "EM BREVE APP" */
+    .app-buttons-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 2rem 0;
+    }
+    
+    .app-button.coming-soon {
+      background: #333;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      min-width: 180px;
+      justify-content: flex-start;
+      border: 2px solid #555;
+    }
+    
+    .app-button.coming-soon:hover {
+      background: #555;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    
+    .app-button.coming-soon i {
+      font-size: 1.5rem;
+      opacity: 0.8;
+    }
+    
+    .app-button.coming-soon .button-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .app-button.coming-soon .button-text span {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      line-height: 1;
+    }
+    
+    .app-button.coming-soon .button-text strong {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+    
+    @media (max-width: 768px) {
+      .app-buttons-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .app-button.coming-soon {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Skip link para acessibilidade -->
@@ -216,22 +284,15 @@
         </div>
       </div>
       
-      <!-- App Download Buttons -->
+      <!-- App Coming Soon -->
       <div class="app-buttons-container">
-        <a href="#" class="app-button google-play">
-          <i class="fab fa-google-play"></i>
+        <div class="app-button coming-soon">
+          <i class="fas fa-mobile-alt"></i>
           <div class="button-text">
-            <span>BAIXE NO</span>
-            <strong>Google Play</strong>
+            <span>EM BREVE</span>
+            <strong>APP</strong>
           </div>
-        </a>
-        <a href="#" class="app-button app-store">
-          <i class="fab fa-apple"></i>
-          <div class="button-text">
-            <span>DISPONÍVEL NA</span>
-            <strong>App Store</strong>
-          </div>
-        </a>
+        </div>
       </div>
     </div>
   </section>
@@ -263,6 +324,7 @@
 
   <!-- ✅ SISTEMA LIMPO E OTIMIZADO -->
   <script src="public/auth-system.js"></script>
+  <script src="public/campaign-participation.js"></script>
   <script src="public/page-protection.js"></script>
   
 </body>

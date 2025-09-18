@@ -52,12 +52,12 @@ class AuthSystem {
         if (this.currentUser) {
             // USUÁRIO LOGADO - Mostrar perfil e logout, esconder login
             if (navLogin) navLogin.style.display = 'none';
-            if (navProfile) navProfile.style.display = 'block';
-            if (navLogout) navLogout.style.display = 'block';
+            if (navProfile) navProfile.style.display = 'flex';
+            if (navLogout) navLogout.style.display = 'flex';
             if (userName) userName.textContent = this.currentUser.nome.split(' ')[0];
         } else {
             // USUÁRIO NÃO LOGADO - Mostrar login, esconder perfil e logout
-            if (navLogin) navLogin.style.display = 'block';
+            if (navLogin) navLogin.style.display = 'flex';
             if (navProfile) navProfile.style.display = 'none';
             if (navLogout) navLogout.style.display = 'none';
         }
@@ -83,6 +83,15 @@ class AuthSystem {
                 this.updateNavigation();
             }
         });
+    }
+
+    /**
+     * Função global para atualizar navegação
+     */
+    static updateGlobalNavigation() {
+        const authSystem = window.authSystem || new AuthSystem();
+        authSystem.checkUserSession();
+        authSystem.updateNavigation();
     }
 
     /**
